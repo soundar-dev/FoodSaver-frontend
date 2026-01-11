@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food Saver | Available Food</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+<script>
+const token = localStorage.getItem("token");
+const role  = localStorage.getItem("role");
+const email = localStorage.getItem("email");
+
+if (!token || role !== "USER") {
+  window.location.href = "../login.html";
+}
+</script>
+
+<div class="app">
+  <aside class="sidebar">
+    <h2 class="logo">FoodSaver</h2>
+    <nav>
+      <a data-page="user-dashboard.html">Dashboard</a>
+      <a class="active">Available Food</a>
+      <a data-page="settings.html">Settings</a>
+      <a id="logoutBtn">Logout</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <h1>Available Food</h1>
+      <div class="top-actions">
+        <input id="searchInput" placeholder="Search food / location / hall" />
+        <div class="avatar">NGO</div>
+      </div>
+    </header>
+
+    <section class="surplus-grid" id="grid"></section>
+  </main>
+</div>
+
+<script>
+function authHeaders() {
+  return { Authorization: "Bearer " + token };
+}
+
+let allFood = [];
+
+/* ================= RENDER ================= */
+function render(data) {
+  grid.innerHTML = "";
+
+  if (!data.length) {
+    grid.innerHTML = "<p>No food available.</p>";
+    return;
+  }
+
+  data.forEach(item => {
+    grid.innerHTML += `
+      <div class="surplus-card"
+           data-created="${item.createdAt}"
+           data-expiry="${item.expiryHours}">
+        <h3>${item.foodName}</h3>
+        <p>📍 ${item.location}</p>
+        <p>👥 Serves: ${item.quantity}</p>
+        <p>🏢 Posted by: <b>${item.postedBy}</b></p>
+        <p>⏳ Expires in <span class="expiry-time">--</span></p>
+
+        ${
+          item.status === "ACCEPTED"
+          ? `<button disabled class="primary-btn small" style="opacity:.6">
+               Accepted ✔
+             </button>`
+          : `<button class="primary-btn small"
+               onclick="acceptFood(${item.id})">
+               Accept
+             </button>`
+        }
+      </div>
+    `;
+  });
+
+  startExpiryTimers();
+}
+
+/* ================= LOAD ================= */
+function loadFood() {
+  fetch("http://localhost:8080/api/user/surplus", { headers: authHeaders() })
+    .then(res => res.ok ? res.json() : [])
+    .then(data => {
+      allFood = data;
+      render(allFood);
+      enableSearch(allFood, render);
+    });
+}
+
+/* ================= SEARCH ================= */
+function enableSearch(source, renderFn) {
+  searchInput.addEventListener("input", e => {
+    const q = e.target.value.toLowerCase().trim();
+
+    if (!q) {
+      renderFn(source);
+      return;
+    }
+
+    renderFn(
+      source.filter(i =>
+        i.foodName.toLowerCase().includes(q) ||
+        i.location.toLowerCase().includes(q) ||
+        i.postedBy.toLowerCase().includes(q)
+      )
+    );
+  });
+}
+
+/* ================= ACCEPT ================= */
+function acceptFood(id) {
+  fetch(`http://localhost:8080/api/surplus/${id}/accept?email=${email}`, {
+    method: "PUT",
+    headers: authHeaders()
+  }).then(() => {
+    const item = allFood.find(f => f.id === id);
+    if (item) item.status = "ACCEPTED";
+    render(allFood);
+  });
+}
+
+/* ================= TIMER ================= */
+function startExpiryTimers() {
+  document.querySelectorAll(".surplus-card").forEach(card => {
+    const el = card.querySelector(".expiry-time");
+
+    setInterval(() => {
+      const created = new Date(card.dataset.created).getTime();
+      const expiry  = created + card.dataset.expiry * 3600000;
+      const diff    = expiry - Date.now();
+
+      if (diff <= 0) {
+        el.textContent = "Expired";
+        el.style.color = "red";
+        return;
+      }
+
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      el.textContent = `${h}h ${m}m ${s}s`;
+    }, 1000);
+  });
+}
+
+loadFood();
+
+logoutBtn.onclick = () => {
+  localStorage.clear();
+  window.location.href = "../login.html";
+};
+</script>
+
+<script src="../js/app.js"></script>
+</body>
+</html>

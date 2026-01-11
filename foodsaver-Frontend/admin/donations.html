@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Food Saver | Donations</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2 class="logo">FoodSaver</h2>
+
+<nav>
+  <a data-page="dashboard.html">Dashboard</a>
+  <a data-page="surplus.html">Surplus Food</a>
+  <a data-page="redistribution.html">Food Pickup & Delivery</a>
+  <a data-page="donations.html">Donations</a>
+  <a data-page="reports.html">Reports</a>
+  <a data-page="settings.html">Settings</a>
+  <a id="logoutBtn">Logout</a>
+</nav>
+
+
+    <div class="sidebar-footer">
+      <span>Zero Waste 🌱</span>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+      <button id="themeToggle" class="outline-btn">🌙</button>  
+      <h1>Donations</h1>
+
+      <div class="top-actions">
+        <input type="search" placeholder="Search by recipient" />
+        <button class="primary-btn">Export</button>
+        <div class="avatar">Admin</div>
+      </div>
+    </header>
+
+    <!-- SUMMARY CARDS -->
+    <section class="cards">
+      <div class="card">
+        <p>Total Donations</p>
+        <h2>₹ 7,820</h2>
+        <span class="positive">↑ This Month</span>
+      </div>
+
+      <div class="card">
+        <p>Meals Delivered</p>
+        <h2>1,250</h2>
+        <span class="positive">Impact Created</span>
+      </div>
+
+      <div class="card">
+        <p>Pending Deliveries</p>
+        <h2>3</h2>
+        <span class="negative">Action Needed</span>
+      </div>
+    </section>
+
+    <!-- FILTER BAR -->
+    <section class="filters">
+      <button class="filter active">All</button>
+      <button class="filter">Completed</button>
+      <button class="filter">Pending</button>
+    </section>
+
+    <!-- DONATIONS TABLE -->
+    <section class="panel">
+      <h3>Donation History</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Recipient</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Meals</th>
+            <th>Value</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>12-05-2025</td>
+            <td>Local Shelter</td>
+            <td>Anna Nagar</td>
+            <td><span class="tag success">Completed</span></td>
+            <td>120</td>
+            <td>₹ 2400</td>
+            <td class="link">View</td>
+          </tr>
+
+          <tr>
+            <td>12-05-2025</td>
+            <td>Food Bank</td>
+            <td>T Nagar</td>
+            <td><span class="tag pending">Pending</span></td>
+            <td>80</td>
+            <td>₹ 1280</td>
+            <td class="link">View</td>
+          </tr>
+
+          <tr>
+            <td>12-05-2025</td>
+            <td>Community Kitchen</td>
+            <td>Velachery</td>
+            <td><span class="tag success">Completed</span></td>
+            <td>200</td>
+            <td>₹ 2300</td>
+            <td class="link">View</td>
+          </tr>
+
+          <tr>
+            <td>12-05-2025</td>
+            <td>Orphanage Trust</td>
+            <td>Tambaram</td>
+            <td><span class="tag pending">Pending</span></td>
+            <td>60</td>
+            <td>₹ 840</td>
+            <td class="link">View</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+<script>
+function toggleSidebar() {
+  const sidebar = document.querySelector(".sidebar");
+  let overlay = document.querySelector(".sidebar-overlay");
+
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.className = "sidebar-overlay";
+    overlay.onclick = toggleSidebar;
+    document.body.appendChild(overlay);
+  }
+
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("show");
+}
+</script>
+
+<script>
+const DONATION_API = "http://localhost:8080/api/donations";
+
+/* SUMMARY */
+function loadDonationSummary() {
+  fetch(`${DONATION_API}/summary`)
+    .then(res => res.json())
+    .then(d => {
+      document.querySelector(".card:nth-child(1) h2").textContent = "₹ " + d.totalValue;
+      document.querySelector(".card:nth-child(2) h2").textContent = d.mealsDelivered;
+      document.querySelector(".card:nth-child(3) h2").textContent = d.pending;
+    });
+}
+
+/* TABLE */
+function loadDonationTable(status = "ALL", search = "") {
+  fetch(`${DONATION_API}/list?status=${status}&search=${search}`)
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector("table tbody");
+      tbody.innerHTML = "";
+
+      data.forEach(d => {
+        const tagClass = d.status === "COMPLETED" ? "success" : "pending";
+
+        tbody.innerHTML += `
+          <tr>
+            <td>${d.date}</td>
+            <td>${d.recipient}</td>
+            <td>${d.location}</td>
+            <td><span class="tag ${tagClass}">${d.status}</span></td>
+            <td>${d.meals}</td>
+            <td>₹ ${d.value}</td>
+            <td class="link">View</td>
+          </tr>
+        `;
+      });
+    });
+}
+
+/* FILTER BUTTONS */
+document.querySelectorAll(".filters .filter").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filters .filter").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    loadDonationTable(btn.textContent.toUpperCase());
+  });
+});
+
+/* SEARCH */
+document.querySelector("input[type='search']").addEventListener("input", e => {
+  loadDonationTable("ALL", e.target.value);
+});
+
+/* EXPORT CSV */
+document.querySelector(".primary-btn")?.addEventListener("click", () => {
+  fetch(`${DONATION_API}/list`)
+    .then(res => res.json())
+    .then(data => {
+      let csv = "Date,Recipient,Location,Status,Meals,Value\n";
+      data.forEach(d => {
+        csv += `${d.date},${d.recipient},${d.location},${d.status},${d.meals},${d.value}\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "donations.csv";
+      a.click();
+    });
+});
+
+/* INIT */
+loadDonationSummary();
+loadDonationTable();
+setInterval(loadDonationSummary, 5000);
+</script>
+
+<script src="../js/app.js"></script>
+</body>
+</html>

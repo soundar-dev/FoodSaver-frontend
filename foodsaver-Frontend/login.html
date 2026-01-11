@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FoodSaver | Login</title>
+  <link rel="stylesheet" href="./css/dashboard.css">
+
+  <style>
+    .login-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100vh;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    .login-left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: slideInLeft 0.8s ease forwards;
+    }
+
+    .login-card {
+      width: 360px;
+      background: var(--panel);
+      padding: 32px;
+      border-radius: 18px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+
+    .login-card h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 24px;
+    }
+
+    .login-card input {
+      width: 100%;
+      margin-bottom: 14px;
+    }
+
+    .login-card button {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .login-error {
+      color: red;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    .login-hint {
+      margin-top: 14px;
+      font-size: 12px;
+      opacity: 0.7;
+      text-align: center;
+    }
+
+    .login-right {
+      background: linear-gradient(135deg, #064e3b, #0f766e);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .illustration {
+      text-align: center;
+      max-width: 420px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .food-icons {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-80px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .login-container { grid-template-columns: 1fr; }
+      .login-right { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+  <!-- LEFT -->
+  <div class="login-left">
+    <div class="login-card">
+      <h2>FoodSaver Login</h2>
+
+      <form id="loginForm">
+        <input type="email" id="email" placeholder="Email address" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button class="primary-btn" id="loginBtn" type="submit">Login</button>
+      </form>
+
+      <p id="loginError" class="login-error">
+        Invalid email or password
+      </p>
+
+      <p class="login-hint">
+        Secure access for registered organizations.<br>
+        <span>Contact admin for account access.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="login-right">
+    <div class="illustration">
+      <div class="food-icons">🍱🥗🍛</div>
+      <h1>Reduce Food Waste</h1>
+      <p>
+        Connecting surplus food with trusts and orphanages in real time.
+        Every meal saved is a life helped.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const form = document.getElementById("loginForm");
+const errorEl = document.getElementById("loginError");
+const btn = document.getElementById("loginBtn");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  errorEl.style.display = "none";
+  btn.disabled = true;
+  btn.textContent = "Logging in...";
+
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const password = document.getElementById("password").value;
+
+  try {
+    const res = await fetch("http://localhost:8080/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    if (res.status === 403 || res.status === 401) {
+      errorEl.textContent = "Invalid email or password";
+      errorEl.style.display = "block";
+      return;
+    }
+
+    if (!res.ok) {
+      errorEl.textContent = "Server error. Try again later.";
+      errorEl.style.display = "block";
+      return;
+    }
+
+    const data = await res.json();
+
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("email", data.email);
+    localStorage.setItem("role", data.role);
+
+    if (data.role.toUpperCase() === "ADMIN") {
+  window.location.href = "./admin/dashboard.html";
+} else {
+  window.location.href = "./user/user-dashboard.html";
+}
+
+
+  } catch (err) {
+    errorEl.textContent = "Server not reachable.";
+    errorEl.style.display = "block";
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Login";
+  }
+});
+
+// clear error while typing
+document.getElementById("email").addEventListener("input", () => errorEl.style.display = "none");
+document.getElementById("password").addEventListener("input", () => errorEl.style.display = "none");
+</script>
+
+</body>
+</html>

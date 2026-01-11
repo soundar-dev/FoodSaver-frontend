@@ -1,0 +1,494 @@
+/* ---------- THEME VARIABLES ---------- */
+:root {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --text: #0f172a;
+  --sidebar: #064e3b;
+  --border: #e5e7eb;
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ---------- BASE ---------- */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar {
+  width: 240px;
+  background-color: var(--sidebar);
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  margin-bottom: 30px;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: #0f766e;
+}
+
+.sidebar nav a.active::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 70%;
+  background: #10b981;
+  border-radius: 4px;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  opacity: 0.7;
+}
+
+/* ---------- CONTENT ---------- */
+.content {
+  flex: 1;
+  background-color: var(--bg);
+  padding: 24px;
+  animation: fadeUp 0.6s ease-in-out;
+}
+
+/* ---------- TOPBAR ---------- */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.top-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.top-actions input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background-color: var(--panel);
+  color: var(--text);
+}
+
+.avatar {
+  background: #0f766e;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+/* ---------- BUTTONS ---------- */
+.primary-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(16,185,129,0.3);
+}
+
+.outline-btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.outline-btn:hover {
+  background: #f1f5f9;
+}
+
+.outline-btn.danger {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.outline-btn.danger:hover {
+  background: #fee2e2;
+}
+
+/* ---------- CARDS ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background-color: var(--panel);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.card h2 {
+  margin: 10px 0;
+}
+
+.positive { color: green; }
+.negative { color: crimson; }
+
+/* ---------- PANELS ---------- */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.panel {
+  background-color: var(--panel);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 16px;
+}
+
+/* ---------- TABLE ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+thead {
+  background-color: var(--border);
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.success {
+  background: #dcfce7;
+  color: green;
+}
+
+.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* ---------- SURPLUS ---------- */
+.surplus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.surplus-card {
+  background-color: var(--panel);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 16px;
+}
+
+/* ---------- FILTERS ---------- */
+.filters {
+  margin-bottom: 20px;
+}
+
+.filter {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #cbd5e1;
+  background: var(--panel);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.filter.active,
+.filter:hover {
+  background: #0f766e;
+  color: white;
+  border-color: #0f766e;
+}
+
+/* ---------- INPUTS (✅ FIX HERE) ---------- */
+input[type="text"],
+input[type="email"],
+input[type="password"] {   /* ← ADDED */
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background-color: var(--panel);
+  color: var(--text);
+}
+
+input:focus {
+  border-color: #10b981;
+  outline: none;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card,
+.panel,
+.surplus-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover,
+.panel:hover,
+.surplus-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+/* ---------- DARK MODE ---------- */
+body.dark {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --text: #e5e7eb;
+  --sidebar: #020617;
+  --border: #334155;
+}
+
+body.dark thead {
+  background-color: #1e293b;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE DESIGN
+   FOR ADMIN & USER DASHBOARDS
+   =============================== */
+
+/* ---------- TABLETS & BELOW ---------- */
+@media (max-width: 1024px) {
+
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100vh;
+    width: 260px;
+    z-index: 1000;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .top-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* ---------- MOBILE PHONES ---------- */
+@media (max-width: 768px) {
+
+  /* Cards stack */
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  /* Dashboard grids */
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Forms */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Buttons */
+  .primary-btn,
+  .outline-btn {
+    width: 100%;
+  }
+
+  /* Surplus cards */
+  .surplus-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .surplus-card {
+    padding: 14px;
+  }
+
+  /* Tables */
+  table {
+    font-size: 13px;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody tr {
+    display: block;
+    margin-bottom: 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+  }
+
+  /* Chatbot mobile */
+  #chatbot {
+    width: 95%;
+    right: 2.5%;
+    bottom: 80px;
+  }
+
+  #chatbot-logo {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* ---------- VERY SMALL PHONES ---------- */
+@media (max-width: 480px) {
+
+  h1 {
+    font-size: 18px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .avatar {
+    display: none;
+  }
+
+  .sidebar-footer {
+    font-size: 12px;
+  }
+}
+
+/* ===============================
+   MOBILE SLIDING SIDEBAR
+   =============================== */
+
+.menu-btn {
+  display: none;
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Tablet & Mobile */
+@media (max-width: 1024px) {
+
+  .menu-btn {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    height: 100vh;
+    width: 260px;
+    z-index: 1200;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .content {
+    margin-left: 0 !important;
+  }
+}
+
+/* Overlay (optional but clean UX) */
+.sidebar-overlay {
+  display: none;
+}
+
+.sidebar-overlay.show {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1100;
+}

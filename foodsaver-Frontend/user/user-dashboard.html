@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food Saver | User Dashboard</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/chatbot.css">
+</head>
+<body>
+
+<script>
+const token = localStorage.getItem("token");
+const role  = localStorage.getItem("role");
+const email = localStorage.getItem("email");
+
+if (!token || role !== "USER") {
+  localStorage.clear();
+  window.location.href = "../login.html";
+}
+</script>
+
+<div class="app">
+  <aside class="sidebar">
+    <h2 class="logo">FoodSaver</h2>
+    <nav>
+      <a class="active">Dashboard</a>
+      <a data-page="user-surplus.html">Available Food</a>
+      <a data-page="settings.html">Settings</a>
+      <a id="logoutBtn">Logout</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <h1 id="welcomeText">Welcome</h1>
+      <div class="top-actions">
+        <button id="themeToggle" class="outline-btn">🌙</button>
+        <div class="avatar">NGO</div>
+      </div>
+    </header>
+
+    <section class="cards">
+      <div class="card">
+        <p>Food Available</p>
+        <h2 id="availableFood">0</h2>
+      </div>
+
+      <div class="card">
+        <p>Expiring Soon</p>
+        <h2 id="expiringSoon">0</h2>
+      </div>
+
+      <div class="card">
+        <p>Accepted</p>
+        <h2 id="acceptedFood">0</h2>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- CHATBOT -->
+<div id="chatbot-logo">💬</div>
+<div id="chatbot" class="hidden">
+  <div id="chatbot-header">Chat <span id="chatbot-close">✖</span></div>
+  <div id="chatbot-body"></div>
+  <input id="chatbot-input" placeholder="Ask me anything..." />
+</div>
+
+<script>
+function authHeaders() {
+  return { Authorization: "Bearer " + token };
+}
+
+/* ✅ USER SAFE ENDPOINT */
+fetch("http://localhost:8080/api/surplus/available", {
+  headers: authHeaders()
+})
+.then(res => {
+  if (!res.ok) return null;
+  return res.json();
+})
+.then(data => {
+  if (!data) return;
+
+  availableFood.textContent =
+    data.filter(i => i.status === "AVAILABLE").length;
+
+  acceptedFood.textContent =
+    data.filter(i => i.acceptedBy === email).length;
+
+  expiringSoon.textContent =
+    data.filter(i => i.expiryHours <= 2).length;
+});
+
+/* USER NAME */
+fetch(`http://localhost:8080/api/settings?email=${email}`, {
+  headers: authHeaders()
+})
+.then(res => res.ok ? res.json() : null)
+.then(d => {
+  if (d?.organizationName) {
+    welcomeText.textContent = `Welcome, ${d.organizationName}`;
+  }
+});
+
+logoutBtn.onclick = () => {
+  localStorage.clear();
+  window.location.href = "../login.html";
+};
+</script>
+
+<script src="../js/chatbot.js"></script>
+<script src="../js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Food Saver | Food Pickup & Delivery</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2 class="logo">FoodSaver</h2>
+
+    <nav>
+      <a data-page="dashboard.html">Dashboard</a>
+      <a data-page="surplus.html">Surplus Food</a>
+      <a data-page="redistribution.html" class="active">Food Pickup & Delivery</a>
+      <!-- <a data-page="donations.html">Donations</a>
+      <a data-page="reports.html">Reports</a> -->
+      <a data-page="settings.html">Settings</a>
+      <a id="logoutBtn">Logout</a>
+    </nav>
+
+    <div class="sidebar-footer">Zero Waste 🌱</div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="content">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+      <button id="themeToggle" class="outline-btn">🌙</button>  
+      <h1>Food Pickup & Delivery</h1>
+      <div class="avatar">ADMIN</div>
+    </header>
+
+    <!-- SUMMARY -->
+    <section class="cards">
+      <div class="card">
+        <p>Accepted</p>
+        <h2 id="acceptedCount">0</h2>
+        <span class="positive">Ready for pickup</span>
+      </div>
+
+      <div class="card">
+        <p>In Progress</p>
+        <h2 id="inProgressCount">0</h2>
+        <span class="positive">On the way</span>
+      </div>
+
+      <div class="card">
+        <p>Completed</p>
+        <h2 id="completedCount">0</h2>
+        <span class="positive">Successfully delivered</span>
+      </div>
+    </section>
+
+    <!-- FILTERS -->
+    <section class="filters">
+      <button class="filter active" data-filter="ALL">All</button>
+      <button class="filter" data-filter="ACCEPTED">Accepted</button>
+      <button class="filter" data-filter="IN_PROGRESS">In Progress</button>
+      <button class="filter" data-filter="COMPLETED">Completed</button>
+    </section>
+
+    <!-- TABLE -->
+    <section class="panel">
+      <h3>Pickup & Delivery Status</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Food Item</th>
+            <th>Donor Location</th>
+            <th>Quantity</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="pickupTable"></tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* 🔐 AUTH GUARD */
+const token = localStorage.getItem("token");
+
+if (!token) {
+  localStorage.clear();
+  window.location.href = "../login.html";
+}
+
+/* COMMON AUTH HEADERS */
+function authHeaders() {
+  return {
+    Authorization: "Bearer " + token
+  };
+}
+
+/* ===== LOAD PICKUP SUMMARY ===== */
+function loadPickupSummary() {
+  fetch("http://localhost:8080/api/pickup/summary", { headers: authHeaders() })
+    .then(res => {
+      // ✅ logout ONLY on 401
+      if (res.status === 401) {
+        localStorage.clear();
+        window.location.href = "../login.html";
+        return null;
+      }
+      return res.ok ? res.json() : null;
+    })
+    .then(data => {
+      if (!data) return;
+
+      acceptedCount.textContent   = data.accepted;
+      inProgressCount.textContent = data.accepted;
+      completedCount.textContent  = data.completed;
+    })
+    .catch(err => console.error("Pickup summary error:", err));
+}
+
+/* ===== LOAD PICKUP TABLE ===== */
+function loadPickupTable() {
+  fetch("http://localhost:8080/api/surplus/all", { headers: authHeaders() })
+    .then(res => {
+      // ✅ logout ONLY on 401
+      if (res.status === 401) {
+        localStorage.clear();
+        window.location.href = "../login.html";
+        return null;
+      }
+      return res.ok ? res.json() : null;
+    })
+    .then(data => {
+      if (!data) return;
+
+      pickupTable.innerHTML = "";
+
+      data
+        .filter(i => i.status !== "AVAILABLE")
+        .forEach(item => {
+          pickupTable.innerHTML += `
+            <tr>
+              <td>${item.foodName}</td>
+              <td>${item.location}</td>
+              <td>${item.quantity}</td>
+              <td>
+                <span class="tag success">${item.status}</span>
+              </td>
+            </tr>
+          `;
+        });
+    })
+    .catch(err => console.error("Pickup table error:", err));
+}
+
+/* INIT */
+loadPickupSummary();
+loadPickupTable();
+</script>
+
+
+<script src="../js/app.js"></script>
+</body>
+</html>

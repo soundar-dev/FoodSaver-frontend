@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Food Saver | Reports</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2 class="logo">FoodSaver</h2>
+
+<nav>
+  <a data-page="dashboard.html">Dashboard</a>
+  <a data-page="surplus.html">Surplus Food</a>
+  <a data-page="redistribution.html">Food Pickup & Delivery</a>
+  <!-- <a data-page="donations.html">Donations</a>
+  <a data-page="reports.html">Reports</a> -->
+  <a data-page="settings.html">Settings</a>
+  <a id="logoutBtn">Logout</a>
+</nav>
+
+
+    <div class="sidebar-footer">
+      <span>Zero Waste 🌱</span>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+      <button id="themeToggle" class="outline-btn">🌙</button>  
+      <h1>Reports & Analytics</h1>
+
+      <div class="top-actions">
+        <button class="primary-btn">Download Report</button>
+        <div class="avatar">NGO</div>
+      </div>
+    </header>
+
+    <!-- KPI SUMMARY -->
+    <section class="cards">
+      <div class="card">
+        <p>Total Food Saved</p>
+        <h2>2,480 kg</h2>
+        <span class="positive">↑ Since last quarter</span>
+      </div>
+
+      <div class="card">
+        <p>Total Meals Served</p>
+        <h2>3,200</h2>
+        <span class="positive">High impact</span>
+      </div>
+
+      <div class="card">
+        <p>Waste Prevented</p>
+        <h2>78%</h2>
+        <span class="positive">Efficiency improved</span>
+      </div>
+    </section>
+
+    <!-- CHARTS -->
+    <section class="grid-2">
+
+      <div class="panel">
+        <h3>Monthly Surplus Trend</h3>
+        <p class="sub">Last 6 months</p>
+        <div class="chart-placeholder">Line Chart</div>
+      </div>
+
+      <div class="panel">
+        <h3>Distribution Breakdown</h3>
+        <p class="sub">By category</p>
+        <div class="chart-placeholder">Pie Chart</div>
+      </div>
+
+    </section>
+
+    <!-- INSIGHTS -->
+    <section class="panel">
+      <h3>Key Insights</h3>
+
+      <ul style="margin-top:12px; line-height:1.8;">
+        <li>📈 Surplus collection increased significantly during weekends.</li>
+        <li>🍱 Cooked meals form the highest contribution.</li>
+        <li>🚚 Faster pickups reduce food waste drastically.</li>
+        <li>📍 Urban zones show higher donation density.</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+<script>
+function toggleSidebar() {
+  const sidebar = document.querySelector(".sidebar");
+  let overlay = document.querySelector(".sidebar-overlay");
+
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.className = "sidebar-overlay";
+    overlay.onclick = toggleSidebar;
+    document.body.appendChild(overlay);
+  }
+
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("show");
+}
+</script>
+<script src="../js/app.js"></script>
+</body>
+</html>
