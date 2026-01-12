@@ -190,6 +190,18 @@ function deleteSurplus(id) {
   .catch(err => console.error("Delete error:", err));
 }
 
+function markPicked(id) {
+  fetch(`${API_BASE}/${id}/status?status=PICKED`, {
+    method: "PUT",
+    headers: authHeaders()
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Update failed");
+    loadSurplus();
+  })
+  .catch(err => console.error("Pick error:", err));
+}  
+
 /* ===== RENDER ===== */
 function renderAdmin(data) {
   const grid = document.getElementById("adminGrid");
@@ -254,6 +266,7 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
