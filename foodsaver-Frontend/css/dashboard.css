@@ -225,3 +225,71 @@ body {
     transform: translateY(0);
   }
 }
+
+/* ===============================
+   DASHBOARD PAGE FIXES (SAFE)
+   =============================== */
+
+/* Fix topbar alignment */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Dashboard title spacing */
+.topbar h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Menu button (desktop hidden, mobile visible) */
+.menu-btn {
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+
+/* Show menu button only on tablet/mobile */
+@media (max-width: 1024px) {
+  .menu-btn {
+    display: block;
+  }
+}
+
+/* Sidebar footer fix */
+.sidebar-footer {
+  margin-top: auto;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* Dashboard cards spacing */
+.cards {
+  margin-top: 24px;
+}
+
+/* Ensure cards stay aligned */
+.card {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Avatar alignment */
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Prevent dashboard shifting */
+.content {
+  overflow-x: hidden;
+}
+
