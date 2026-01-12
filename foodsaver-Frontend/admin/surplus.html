@@ -8,8 +8,8 @@
 
 <body>
 
-<!-- 🔐 ADMIN AUTH GUARD -->
 <script>
+/* 🔐 ADMIN AUTH GUARD */
 const token = localStorage.getItem("token");
 const role  = localStorage.getItem("role");
 
@@ -40,17 +40,13 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
     <header class="topbar">
       <h1>Surplus Food</h1>
       <div class="top-actions">
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="Search food / location / NGO"
-        />
+        <input type="search" id="searchInput" placeholder="Search food / location / NGO" />
         <button class="primary-btn" onclick="toggleForm()">+ Add Surplus</button>
         <div class="avatar">ADMIN</div>
       </div>
     </header>
 
-    <!-- ✅ ADD SURPLUS FORM (RESTORED) -->
+    <!-- ✅ ADD SURPLUS FORM -->
     <section id="surplusForm" class="panel hidden">
       <h3>Add Surplus Food</h3>
 
@@ -74,7 +70,7 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
 </div>
 
 <script>
-/* ================= CONFIG ================= */
+/* ===== BACKEND ===== */
 const BASE_URL = "https://foodsaver-backend-d964.onrender.com";
 const API_BASE = `${BASE_URL}/api/surplus`;
 
@@ -85,24 +81,14 @@ function authHeaders() {
   };
 }
 
-/* ================= DOM REFS ================= */
-const adminGrid        = document.getElementById("adminGrid");
-const searchInput      = document.getElementById("searchInput");
-const foodNameInput    = document.getElementById("foodName");
-const locationInput    = document.getElementById("location");
-const quantityInput    = document.getElementById("quantity");
-const expiryHoursInput = document.getElementById("expiryHours");
-const surplusForm      = document.getElementById("surplusForm");
-const logoutBtn        = document.getElementById("logoutBtn");
-
 let adminData = [];
 
-/* ================= TOGGLE FORM ================= */
+/* ===== TOGGLE FORM ===== */
 function toggleForm() {
-  surplusForm.classList.toggle("hidden");
+  document.getElementById("surplusForm").classList.toggle("hidden");
 }
 
-/* ================= SUBMIT SURPLUS ================= */
+/* ===== SUBMIT SURPLUS ===== */
 function submitSurplus() {
   const foodName = foodNameInput.value.trim();
   const location = locationInput.value.trim();
@@ -130,34 +116,23 @@ function submitSurplus() {
   })
   .then(() => {
     toggleForm();
-    foodNameInput.value = "";
-    locationInput.value = "";
-    quantityInput.value = "";
-    expiryHoursInput.value = "";
     loadSurplus();
   })
   .catch(err => alert(err.message));
 }
 
-/* ================= LOAD SURPLUS ================= */
+/* ===== LOAD SURPLUS ===== */
 function loadSurplus() {
   fetch(`${API_BASE}/admin/cards`, { headers: authHeaders() })
-    .then(res => {
-      if (res.status === 401) {
-        localStorage.clear();
-        window.location.href = "../index.html";
-        return [];
-      }
-      return res.ok ? res.json() : [];
-    })
+    .then(res => res.ok ? res.json() : [])
     .then(data => {
       adminData = data;
       renderAdmin(adminData);
-    })
-    .catch(err => console.error("Load surplus error:", err));
+      enableSearch(adminData, renderAdmin);
+    });
 }
 
-/* ================= RENDER ================= */
+/* ===== RENDER ===== */
 function renderAdmin(data) {
   adminGrid.innerHTML = "";
 
@@ -176,41 +151,51 @@ function renderAdmin(data) {
         <h3>${item.foodName}</h3>
         <p>📍 ${item.location}</p>
         <p>👥 Serves: ${item.quantity}</p>
+        <p>⏱ Expires in: <b>${item.expiryHours} hrs</b></p>
         <p>🏢 Posted by: <b>${item.postedBy}</b></p>
+
         ${
           item.acceptedByOrg
             ? `<p>🤝 Accepted by: <b>${item.acceptedByOrg}</b></p>`
             : ""
         }
+
         <span class="tag ${statusClass}">${item.status}</span>
       </div>
     `;
   });
 }
 
-/* ================= SEARCH ================= */
-searchInput.oninput = e => {
-  const q = e.target.value.toLowerCase().trim();
-  if (!q) return renderAdmin(adminData);
+/* ===== SEARCH ===== */
+function enableSearch(source, renderFn) {
+  searchInput.oninput = e => {
+    const q = e.target.value.toLowerCase().trim();
+    if (!q) return renderFn(source);
 
-  renderAdmin(
-    adminData.filter(i =>
-      i.foodName?.toLowerCase().includes(q) ||
-      i.location?.toLowerCase().includes(q) ||
-      i.postedBy?.toLowerCase().includes(q) ||
-      i.acceptedByOrg?.toLowerCase().includes(q)
-    )
-  );
-};
+    renderFn(
+      source.filter(i =>
+        i.foodName?.toLowerCase().includes(q) ||
+        i.location?.toLowerCase().includes(q) ||
+        i.postedBy?.toLowerCase().includes(q) ||
+        i.acceptedByOrg?.toLowerCase().includes(q)
+      )
+    );
+  };
+}
 
-/* ================= LOGOUT ================= */
+/* ===== INIT ===== */
+const foodNameInput    = document.getElementById("foodName");
+const locationInput    = document.getElementById("location");
+const quantityInput    = document.getElementById("quantity");
+const expiryHoursInput = document.getElementById("expiryHours");
+
+loadSurplus();
+
+/* LOGOUT */
 logoutBtn.onclick = () => {
   localStorage.clear();
   window.location.href = "../index.html";
 };
-
-/* ================= INIT ================= */
-loadSurplus();
 </script>
 
 <script src="../js/app.js"></script>
