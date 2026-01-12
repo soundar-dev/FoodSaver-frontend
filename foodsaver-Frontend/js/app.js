@@ -1,4 +1,4 @@
-.document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- PAGE NAVIGATION ---------- */
   const navLinks = document.querySelectorAll(".sidebar nav a");
@@ -44,8 +44,7 @@
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.clear();
-      // ✅ hosted frontend entry point
-      window.location.href = "../index.html";
+      window.location.href = "/index.html"; // ✅ Netlify-safe
     });
   }
 
