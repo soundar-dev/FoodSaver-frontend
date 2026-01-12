@@ -139,7 +139,7 @@ function loadSurplus() {
 
 /* ===== DELETE ===== */
 function deleteSurplus(id) {
-  fetch(`${API_BASE}/admin/delete/${id}`, {
+  fetch(`${API_BASE}/delete/${id}`, {
     method: "DELETE",
     headers: authHeaders()
   })
@@ -185,6 +185,7 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
