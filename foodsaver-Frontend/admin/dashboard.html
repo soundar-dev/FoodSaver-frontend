@@ -70,6 +70,9 @@ if (!token || role !== "ADMIN") {
 </div>
 
 <script>
+/* ===== BASE URL (RENDER BACKEND) ===== */
+const BASE_URL = "https://foodsaver-backend-d964.onrender.com";
+
 /* ===== AUTH HEADERS ===== */
 function authHeaders() {
   return {
@@ -79,9 +82,9 @@ function authHeaders() {
 </script>
 
 <script>
-/* ===== ADMIN DASHBOARD (CORRECT API) ===== */
+/* ===== ADMIN DASHBOARD ===== */
 function loadAdminDashboard() {
-  fetch("http://localhost:8080/api/dashboard/admin", {
+  fetch(`${BASE_URL}/api/dashboard/admin`, {
     headers: authHeaders()
   })
   .then(res => {
@@ -108,7 +111,7 @@ setInterval(loadAdminDashboard, 5000);
 
 <script>
 /* ===== ADMIN NAME ===== */
-const SETTINGS_API = "http://localhost:8080/api/settings";
+const SETTINGS_API = `${BASE_URL}/api/settings`;
 const email = localStorage.getItem("email");
 
 if (email) {
@@ -142,4 +145,3 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
-
