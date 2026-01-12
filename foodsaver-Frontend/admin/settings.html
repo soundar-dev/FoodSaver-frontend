@@ -7,6 +7,18 @@
 </head>
 <body>
 
+<script>
+/* 🔐 ADMIN AUTH GUARD */
+const token = localStorage.getItem("token");
+const role  = localStorage.getItem("role");
+const email = localStorage.getItem("email");
+
+if (!token || role !== "ADMIN" || !email) {
+  localStorage.clear();
+  window.location.href = "../index.html";
+}
+</script>
+
 <div class="app">
 
   <aside class="sidebar">
@@ -15,8 +27,6 @@
       <a data-page="dashboard.html">Dashboard</a>
       <a data-page="surplus.html">Surplus Food</a>
       <a data-page="redistribution.html">Food Pickup & Delivery</a>
-      <!-- <a data-page="donations.html">Donations</a>
-      <a data-page="reports.html">Reports</a> -->
       <a class="active">Settings</a>
       <a id="logoutBtn">Logout</a>
     </nav>
@@ -29,9 +39,10 @@
       <button class="menu-btn" onclick="toggleSidebar()">☰</button>
       <button id="themeToggle" class="outline-btn">🌙</button>
       <h1>Settings</h1>
-      <div class="avatar">NGO</div>
+      <div class="avatar">ADMIN</div>
     </header>
 
+    <!-- ORGANIZATION PROFILE -->
     <section class="panel">
       <h3>Organization Profile</h3>
 
@@ -51,12 +62,12 @@
         Save Changes
       </button>
 
-      <!-- inline success (NO alerts) -->
       <p id="saveMsg" style="display:none;color:green;margin-top:8px;">
         Settings saved successfully
       </p>
     </section>
 
+    <!-- PREFERENCES -->
     <section class="panel">
       <h3>Preferences</h3>
 
@@ -80,16 +91,10 @@
 </div>
 
 <script>
-/* 🔐 AUTH GUARD */
-const token = localStorage.getItem("token");
-const email = localStorage.getItem("email");
+/* ===== BASE URL (RENDER BACKEND) ===== */
+const BASE_URL = "https://foodsaver-backend-d964.onrender.com";
 
-if (!token || !email) {
-  localStorage.clear();
-  window.location.href = "../index.html";
-}
-
-/* COMMON AUTH HEADERS */
+/* ===== AUTH HEADERS ===== */
 function authHeaders() {
   return {
     "Content-Type": "application/json",
@@ -98,11 +103,10 @@ function authHeaders() {
 }
 
 /* ===== LOAD SETTINGS ===== */
-fetch(`http://localhost:8080/api/settings?email=${email}`, {
+fetch(`${BASE_URL}/api/settings?email=${email}`, {
   headers: authHeaders()
 })
 .then(res => {
-  // ✅ logout ONLY on 401
   if (res.status === 401) {
     localStorage.clear();
     window.location.href = "../index.html";
@@ -115,15 +119,15 @@ fetch(`http://localhost:8080/api/settings?email=${email}`, {
 
   orgName.value = data.organizationName || "";
   contact.value = data.contactNumber || "";
-  emailNotif.checked = !!data.emailNotifications;
-  expiryNotif.checked = !!data.expiryNotifications;
+  emailNotif.checked   = !!data.emailNotifications;
+  expiryNotif.checked  = !!data.expiryNotifications;
   weeklyReport.checked = !!data.weeklyReports;
 })
 .catch(err => console.error("Settings load error:", err));
 
 /* ===== SAVE SETTINGS ===== */
 function saveSettings() {
-  fetch(`http://localhost:8080/api/settings?email=${email}`, {
+  fetch(`${BASE_URL}/api/settings?email=${email}`, {
     method: "PUT",
     headers: authHeaders(),
     body: JSON.stringify({
@@ -135,7 +139,6 @@ function saveSettings() {
     })
   })
   .then(res => {
-    // ✅ logout ONLY on 401
     if (res.status === 401) {
       localStorage.clear();
       window.location.href = "../index.html";
@@ -149,10 +152,18 @@ function saveSettings() {
   })
   .catch(err => console.error("Settings save error:", err));
 }
-</script>
 
+/* LOGOUT */
+logoutBtn.onclick = () => {
+  localStorage.clear();
+  window.location.href = "../index.html";
+};
+
+function toggleSidebar() {
+  document.querySelector(".sidebar").classList.toggle("open");
+}
+</script>
 
 <script src="../js/app.js"></script>
 </body>
 </html>
-
