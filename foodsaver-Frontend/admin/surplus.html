@@ -47,6 +47,11 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
       </div>
     </header>
 
+    <!-- 🔽 FORM PLACEHOLDER (can be empty for now) -->
+    <section id="surplusForm" class="hidden">
+      <!-- future add-surplus form goes here -->
+    </section>
+
     <section class="surplus-grid" id="adminGrid"></section>
   </main>
 </div>
@@ -64,6 +69,13 @@ function authHeaders() {
 }
 
 let adminData = [];
+
+/* ================= TOGGLE FORM (FIX) ================= */
+function toggleForm() {
+  const form = document.getElementById("surplusForm");
+  if (!form) return;
+  form.classList.toggle("hidden");
+}
 
 /* ================= RENDER ================= */
 function renderAdmin(data) {
@@ -123,6 +135,8 @@ function loadSurplus() {
 function enableSearch(source, renderFn) {
   const searchBox = document.getElementById("searchInput");
 
+  if (!searchBox) return;
+
   searchBox.addEventListener("input", e => {
     const q = e.target.value.toLowerCase().trim();
 
@@ -145,14 +159,16 @@ function enableSearch(source, renderFn) {
 /* INIT */
 loadSurplus();
 
-/* LOGOUT */
-logoutBtn.onclick = () => {
-  localStorage.clear();
-  window.location.href = "../index.html";
-};
+/* LOGOUT (SAFE) */
+const logoutBtn = document.getElementById("logoutBtn");
+if (logoutBtn) {
+  logoutBtn.onclick = () => {
+    localStorage.clear();
+    window.location.href = "../index.html";
+  };
+}
 </script>
 
 <script src="../js/app.js"></script>
 </body>
 </html>
-
