@@ -7,7 +7,7 @@
   --border: #e5e7eb;
 }
 
-/* ========= DARK MODE VARIABLES (FIX) ========= */
+/* ========= DARK MODE VARIABLES ========= */
 body.dark {
   --bg: #0f172a;
   --panel: #1e293b;
@@ -101,7 +101,6 @@ body {
 
 .topbar h1 {
   font-size: 24px;
-  margin: 0;
 }
 
 .top-actions {
@@ -110,23 +109,12 @@ body {
   align-items: center;
 }
 
-.top-actions input {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background-color: var(--panel);
-  color: var(--text);
-}
-
 .avatar {
   background: #0f766e;
   color: white;
   padding: 10px;
   border-radius: 50%;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* ---------- BUTTONS ---------- */
@@ -139,18 +127,13 @@ body {
   cursor: pointer;
 }
 
-.primary-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(16,185,129,0.3);
-}
-
 .outline-btn {
   background: var(--panel);
   border: 1px solid var(--border);
   padding: 8px 16px;
   border-radius: 8px;
-  cursor: pointer;
   color: var(--text);
+  cursor: pointer;
 }
 
 /* ---------- DASHBOARD CARDS ---------- */
@@ -158,7 +141,6 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-top: 24px;
 }
 
 .card {
@@ -166,14 +148,6 @@ body {
   border: 1px solid var(--border);
   padding: 20px;
   border-radius: 16px;
-  min-height: 120px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.positive {
-  color: green;
 }
 
 /* ---------- PANEL ---------- */
@@ -182,6 +156,28 @@ body {
   border: 1px solid var(--border);
   padding: 20px;
   border-radius: 16px;
+}
+
+/* ---------- HOVER EFFECT (GLOBAL) ---------- */
+.card,
+.panel,
+.surplus-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover,
+.panel:hover,
+.surplus-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+/* ==================================================
+   🚫 DISABLE HOVER FOR SURPLUS FORM ONLY
+   ================================================== */
+#surplusForm:hover {
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 /* ---------- SURPLUS GRID ---------- */
@@ -212,10 +208,6 @@ body {
   cursor: pointer;
 }
 
-.surplus-card .delete-btn:hover {
-  transform: scale(1.2);
-}
-
 /* ---------- TAG ---------- */
 .tag {
   padding: 4px 10px;
@@ -223,19 +215,75 @@ body {
   font-size: 12px;
 }
 
-.success {
-  background: #dcfce7;
-  color: green;
+/* ---------- SURPLUS FORM (FINAL, CLEAN) ---------- */
+#surplusForm {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  margin-bottom: 32px;
+  grid-column: 1 / -1;
 }
 
-.pending {
-  background: #fef3c7;
-  color: #92400e;
+/* Grid layout */
+#surplusForm .form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
-/* ---------- UTIL ---------- */
-.hidden {
-  display: none !important;
+/* ✅ PROPER INPUT STYLE */
+#surplusForm input {
+  width: 100%;
+  height: 44px;
+  padding: 10px 12px;
+  border-radius: 10px;   /* ✅ rounded corners */
+  border: 1px solid var(--border);
+  background-color: var(--panel);
+  color: var(--text);
+  outline: none;
+}
+
+/* Focus */
+#surplusForm input:focus {
+  border-color: #10b981;
+}
+
+/* Buttons row */
+#surplusForm > div {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* ---------- MOBILE ---------- */
+.menu-btn {
+  display: none;
+  font-size: 22px;
+  background: none;
+  border: none;
+}
+
+@media (max-width: 1024px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100vh;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  #surplusForm .form-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- ANIMATION ---------- */
@@ -249,110 +297,3 @@ body {
     transform: translateY(0);
   }
 }
-
-/* ---------- MOBILE ---------- */
-.menu-btn {
-  display: none;
-  font-size: 22px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-@media (max-width: 1024px) {
-  .menu-btn {
-    display: block;
-  }
-
-  .sidebar {
-    position: fixed;
-    left: -260px;
-    top: 0;
-    height: 100vh;
-    z-index: 1200;
-    transition: left 0.3s ease;
-  }
-
-  .sidebar.open {
-    left: 0;
-  }
-}
-
-/* ===============================
-   🔥 SURPLUS FORM HARD FIX (FINAL)
-   =============================== */
-
-/* Ensure form is NOT treated like a grid item */
-#surplusForm {
-  width: 100%;
-  max-width: 100%;
-  display: block;
-  margin-bottom: 32px;
-}
-
-/* Force full row above cards */
-#surplusForm {
-  grid-column: 1 / -1;
-}
-
-/* Clean 2-column layout */
-#surplusForm .form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-/* Inputs stretch properly */
-#surplusForm input {
-  width: 100%;
-  height: 44px;
-}
-
-/* Buttons alignment */
-#surplusForm > div {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-/* Mobile fix */
-@media (max-width: 768px) {
-  #surplusForm .form-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-/* ==================================================
-   ✅ FINAL SURPLUS FORM LAYOUT FIX (ISOLATED)
-   ================================================== */
-
-/* Ensure surplus form is a clean block */
-#surplusForm {
-  width: 100%;
-  max-width: 100%;
-  display: block;
-}
-
-/* Kill inherited grid/flex effects */
-#surplusForm.panel {
-  display: block;
-}
-
-/* Proper 2-column grid ONLY for surplus form */
-#surplusForm .form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  width: 100%;
-}
-
-/* Force inputs to stretch */
-#surplusForm .form-grid input {
-  width: 100%;
-  min-width: 0;
-  height: 44px;
-  padding: 10px 12px;
-  border-radius:
-
-
