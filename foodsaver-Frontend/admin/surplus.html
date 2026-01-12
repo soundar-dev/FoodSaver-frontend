@@ -90,6 +90,21 @@ function submitSurplus() {
   const quantityEl = document.getElementById("quantity");
   const expiryEl   = document.getElementById("expiryHours");
 
+  if (!foodNameEl || !locationEl || !quantityEl || !expiryEl) {
+    console.error("Form inputs not found");
+    return;
+  }
+
+  if (
+    !foodNameEl.value.trim() ||
+    !locationEl.value.trim() ||
+    !quantityEl.value ||
+    !expiryEl.value
+  ) {
+    alert("Please fill all fields");
+    return;
+  }
+
   fetch(`${API_BASE}/add`, {
     method: "POST",
     headers: authHeaders(),
@@ -102,10 +117,16 @@ function submitSurplus() {
   })
   .then(res => {
     if (!res.ok) throw new Error("Add failed");
+    return res.json();
+  })
+  .then(() => {
     toggleForm();
     loadSurplus();
   })
-  .catch(err => console.error("Add surplus error:", err));
+  .catch(err => {
+    console.error("Add surplus error:", err);
+    alert("Failed to add surplus");
+  });
 }
 
 /* ===== LOAD SURPLUS ===== */
@@ -159,4 +180,5 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
