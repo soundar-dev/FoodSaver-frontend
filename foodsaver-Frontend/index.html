@@ -6,6 +6,19 @@
   <link rel="stylesheet" href="./css/login.css">
 
   <style>
+    /* ===== SPLIT SCREEN FIX ===== */
+      .login-container,
+      .login-left,
+      .login-right {
+        height: 100vh;
+      }
+      
+      .login-right {
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+    
     .login-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -209,4 +222,5 @@ document.getElementById("password").addEventListener("input", () => errorEl.styl
 
 </body>
 </html>
+
 
