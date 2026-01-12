@@ -11,9 +11,8 @@
 /* 🔐 ADMIN AUTH GUARD */
 const token = localStorage.getItem("token");
 const role  = localStorage.getItem("role");
-const email = localStorage.getItem("email");
 
-if (!token || role !== "ADMIN" || !email) {
+if (!token || role?.toUpperCase() !== "ADMIN") {
   localStorage.clear();
   window.location.href = "../index.html";
 }
@@ -167,3 +166,4 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
