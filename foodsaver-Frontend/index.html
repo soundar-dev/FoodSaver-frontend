@@ -139,6 +139,9 @@
 </div>
 
 <script>
+/* ✅ BACKEND BASE URL (PRODUCTION) */
+const BASE_URL = "https://foodsaver-backend-d964.onrender.com";
+
 const form = document.getElementById("loginForm");
 const errorEl = document.getElementById("loginError");
 const btn = document.getElementById("loginBtn");
@@ -154,15 +157,13 @@ form.addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value;
 
   try {
-    const res = await fetch("http://localhost:8080/api/auth/login", {
+    const res = await fetch(`${BASE_URL}/api/auth/login`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password })
     });
 
-    if (res.status === 403 || res.status === 401) {
+    if (res.status === 401 || res.status === 403) {
       errorEl.textContent = "Invalid email or password";
       errorEl.style.display = "block";
       return;
@@ -176,16 +177,21 @@ form.addEventListener("submit", async (e) => {
 
     const data = await res.json();
 
-    localStorage.setItem("token", data.token);
+    if (!data || !data.role) {
+      errorEl.textContent = "Invalid server response";
+      errorEl.style.display = "block";
+      return;
+    }
+
+    localStorage.setItem("token", data.token || "");
     localStorage.setItem("email", data.email);
     localStorage.setItem("role", data.role);
 
     if (data.role.toUpperCase() === "ADMIN") {
-  window.location.href = "./admin/dashboard.html";
-} else {
-  window.location.href = "./user/user-dashboard.html";
-}
-
+      window.location.href = "./admin/dashboard.html";
+    } else {
+      window.location.href = "./user/user-dashboard.html";
+    }
 
   } catch (err) {
     errorEl.textContent = "Server not reachable.";
@@ -196,7 +202,7 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-// clear error while typing
+/* clear error while typing */
 document.getElementById("email").addEventListener("input", () => errorEl.style.display = "none");
 document.getElementById("password").addEventListener("input", () => errorEl.style.display = "none");
 </script>
