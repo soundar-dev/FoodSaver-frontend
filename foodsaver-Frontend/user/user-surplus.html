@@ -7,12 +7,15 @@
 </head>
 
 <body>
+
 <script>
+/* 🔐 USER ACCESS GUARD */
 const token = localStorage.getItem("token");
 const role  = localStorage.getItem("role");
 const email = localStorage.getItem("email");
 
 if (!token || role !== "USER") {
+  localStorage.clear();
   window.location.href = "../index.html";
 }
 </script>
@@ -42,6 +45,10 @@ if (!token || role !== "USER") {
 </div>
 
 <script>
+/* ===== BASE URL (RENDER BACKEND) ===== */
+const BASE_URL = "https://foodsaver-backend-d964.onrender.com";
+
+/* ===== AUTH HEADERS ===== */
 function authHeaders() {
   return { Authorization: "Bearer " + token };
 }
@@ -70,13 +77,13 @@ function render(data) {
 
         ${
           item.status === "ACCEPTED"
-          ? `<button disabled class="primary-btn small" style="opacity:.6">
-               Accepted ✔
-             </button>`
-          : `<button class="primary-btn small"
-               onclick="acceptFood(${item.id})">
-               Accept
-             </button>`
+            ? `<button disabled class="primary-btn small" style="opacity:.6">
+                 Accepted ✔
+               </button>`
+            : `<button class="primary-btn small"
+                 onclick="acceptFood(${item.id})">
+                 Accept
+               </button>`
         }
       </div>
     `;
@@ -87,7 +94,7 @@ function render(data) {
 
 /* ================= LOAD ================= */
 function loadFood() {
-  fetch("http://localhost:8080/api/user/surplus", { headers: authHeaders() })
+  fetch(`${BASE_URL}/api/user/surplus`, { headers: authHeaders() })
     .then(res => res.ok ? res.json() : [])
     .then(data => {
       allFood = data;
@@ -118,7 +125,7 @@ function enableSearch(source, renderFn) {
 
 /* ================= ACCEPT ================= */
 function acceptFood(id) {
-  fetch(`http://localhost:8080/api/surplus/${id}/accept?email=${email}`, {
+  fetch(`${BASE_URL}/api/surplus/${id}/accept?email=${email}`, {
     method: "PUT",
     headers: authHeaders()
   }).then(() => {
@@ -128,7 +135,7 @@ function acceptFood(id) {
   });
 }
 
-/* ================= TIMER ================= */
+/* ================= LIVE EXPIRY TIMER ================= */
 function startExpiryTimers() {
   document.querySelectorAll(".surplus-card").forEach(card => {
     const el = card.querySelector(".expiry-time");
@@ -152,8 +159,10 @@ function startExpiryTimers() {
   });
 }
 
+/* INIT */
 loadFood();
 
+/* LOGOUT */
 logoutBtn.onclick = () => {
   localStorage.clear();
   window.location.href = "../index.html";
@@ -163,4 +172,3 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
-
