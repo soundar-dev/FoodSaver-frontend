@@ -144,10 +144,12 @@ function enableSearch(sourceData) {
     }
 
     const filtered = sourceData.filter(item =>
-      item.foodName?.toLowerCase().includes(q) ||
-      item.location?.toLowerCase().includes(q) ||
-      item.status?.toLowerCase().includes(q)
-    );
+  item.foodName?.toLowerCase().includes(q) ||
+  item.location?.toLowerCase().includes(q) ||
+  item.status?.toLowerCase().includes(q) ||
+  item.postedBy?.toLowerCase().includes(q) ||      // 🏢 who posted
+  item.acceptedBy?.toLowerCase().includes(q)       // 🤝 who accepted
+);
 
     renderAdmin(filtered);
   });
@@ -170,22 +172,38 @@ function deleteSurplus(id) {
 
 /* ===== RENDER ===== */
 function renderAdmin(data) {
-  adminGrid.innerHTML = "";
+  const grid = document.getElementById("adminGrid");
+  grid.innerHTML = "";
 
   if (!data.length) {
-    adminGrid.innerHTML = "<p>No surplus found.</p>";
+    grid.innerHTML = "<p>No surplus found.</p>";
     return;
   }
 
   data.forEach(item => {
-    adminGrid.innerHTML += `
+    let statusClass = "success";
+    if (item.status === "ACCEPTED") statusClass = "pending";
+    if (item.status === "PICKED") statusClass = "neutral";
+
+    // ✅ FRONTEND DERIVED ORG NAME
+    const acceptedOrg = item.acceptedBy
+      ? item.acceptedBy.split("@")[0]
+      : null;
+
+    grid.innerHTML += `
       <div class="surplus-card">
-        <button class="delete-btn" onclick="deleteSurplus(${item.id})">✕</button>
         <h3>${item.foodName}</h3>
         <p>📍 ${item.location}</p>
         <p>👥 Serves: ${item.quantity}</p>
-        <p>⏱ Expires in: <b>${item.expiryHours} hrs</b></p>
-        <span class="available">AVAILABLE</span>
+        <p>🏢 Posted by: <b>${item.postedBy}</b></p>
+
+        ${
+          acceptedOrg
+            ? `<p>🤝 Accepted by: <b>${acceptedOrg}</b></p>`
+            : ""
+        }
+
+        <span class="tag ${statusClass}">${item.status}</span>
       </div>
     `;
   });
@@ -203,6 +221,7 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
