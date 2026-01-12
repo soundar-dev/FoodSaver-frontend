@@ -21,23 +21,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ---------- DARK MODE ---------- */
+ 
+document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById("themeToggle");
-  const savedTheme = localStorage.getItem("theme");
 
+  if (!toggleBtn) return;
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     document.body.classList.add("dark");
-    if (toggleBtn) toggleBtn.textContent = "☀️";
+    toggleBtn.textContent = "☀️";
   } else {
-    if (toggleBtn) toggleBtn.textContent = "🌙";
+    toggleBtn.textContent = "🌙";
   }
 
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
-      const isDark = document.body.classList.toggle("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-      toggleBtn.textContent = isDark ? "☀️" : "🌙";
-    });
-  }
+  // Toggle theme
+  toggleBtn.addEventListener("click", () => {
+    const isDark = document.body.classList.toggle("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    toggleBtn.textContent = isDark ? "☀️" : "🌙";
+  });
+});
+
 
   /* ---------- LOGOUT ---------- */
   const logoutBtn = document.getElementById("logoutBtn");
@@ -49,3 +55,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
