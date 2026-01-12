@@ -292,6 +292,10 @@ input:focus {
   outline: none;
 }
 
+.hidden{
+  display:none;
+}
+
 /* ---------- MOBILE ---------- */
 .menu-btn {
   display: none;
@@ -334,5 +338,6 @@ input:focus {
     transform: translateY(0);
   }
 }
+
 
 
