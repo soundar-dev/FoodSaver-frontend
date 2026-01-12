@@ -217,40 +217,25 @@ function renderAdmin(data) {
     if (item.status === "ACCEPTED") statusClass = "pending";
     if (item.status === "PICKED") statusClass = "success";
 
-    grid.innerHTML += `
-      <div class="surplus-card">
+  grid.innerHTML += `
+  <div class="surplus-card">
+    <button class="delete-btn" onclick="deleteSurplus(${item.id})">✕</button>
 
-        ${
-          item.status === "AVAILABLE"
-            ? `<button class="delete-btn" onclick="deleteSurplus(${item.id})">✕</button>`
-            : ""
-        }
+    <h3>${item.foodName}</h3>
+    <p>📍 ${item.location}</p>
+    <p>👥 Serves: ${item.quantity}</p>
+    <p>🏢 Posted by: <b>${item.postedBy}</b></p>
 
-        <h3>${item.foodName}</h3>
-        <p>📍 ${item.location}</p>
-        <p>👥 Serves: ${item.quantity}</p>
-        
+    ${item.acceptedBy
+      ? `<p>🤝 Accepted by: <b>${item.acceptedBy}</b></p>`
+      : ""
+    }
 
-        ${
-          item.acceptedBy
-            ? `<p>🤝 Accepted by: <b>${item.acceptedBy}</b></p>`
-            : ""
-        }
+    <p>${getExpiryText(item.createdAt, item.expiryHours)}</p>
 
-        <p>${getExpiryText(item.createdAt, item.expiryHours)}</p>
-
-        <span class="tag ${statusClass}">${item.status}</span>
-
-        ${
-          item.status === "ACCEPTED"
-            ? `<button class="primary-btn small" onclick="markPicked(${item.id})">
-                 Mark as Picked
-               </button>`
-            : ""
-        }
-
-      </div>
-    `;
+    <span class="tag ${statusClass}">${item.status}</span>
+  </div>
+`;
   });
 }
 
@@ -266,6 +251,7 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
