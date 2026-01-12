@@ -229,7 +229,6 @@ body {
 #surplusForm {
   width: 100%;
   max-width: 100%;
-  display: block;
   margin-bottom: 32px;
   grid-column: 1 / -1;
 }
@@ -338,6 +337,7 @@ input:focus {
     transform: translateY(0);
   }
 }
+
 
 
 
