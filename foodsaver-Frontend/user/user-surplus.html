@@ -14,7 +14,7 @@ const token = localStorage.getItem("token");
 const role  = localStorage.getItem("role");
 const email = localStorage.getItem("email");
 
-if (!token || role !== "USER") {
+if (!token || role?.toUpperCase() !== "USER") {
   localStorage.clear();
   window.location.href = "../index.html";
 }
@@ -172,3 +172,4 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
