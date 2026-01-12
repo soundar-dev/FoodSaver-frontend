@@ -187,6 +187,28 @@ body {
   border-radius: 16px;
 }
 
+/* ---------- ADD SURPLUS PANEL FIX ---------- */
+#surplusForm {
+  max-width: 700px;
+  margin-bottom: 24px;
+}
+
+#surplusForm h3 {
+  margin-bottom: 12px;
+}
+
+/* ---------- FORM GRID (FINAL) ---------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.form-grid input {
+  width: 100%;
+}
+
 /* ---------- TABLE ---------- */
 table {
   width: 100%;
@@ -510,5 +532,6 @@ body.dark thead {
 .form-grid input {
   width: 100%;
 }
+
 
 
