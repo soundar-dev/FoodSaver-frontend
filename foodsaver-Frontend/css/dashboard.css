@@ -277,3 +277,47 @@ body {
     left: 0;
   }
 }
+
+/* ===============================
+   🔥 SURPLUS FORM HARD FIX (FINAL)
+   =============================== */
+
+/* Ensure form is NOT treated like a grid item */
+#surplusForm {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  margin-bottom: 32px;
+}
+
+/* Force full row above cards */
+#surplusForm {
+  grid-column: 1 / -1;
+}
+
+/* Clean 2-column layout */
+#surplusForm .form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Inputs stretch properly */
+#surplusForm input {
+  width: 100%;
+  height: 44px;
+}
+
+/* Buttons alignment */
+#surplusForm > div {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* Mobile fix */
+@media (max-width: 768px) {
+  #surplusForm .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
