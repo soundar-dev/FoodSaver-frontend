@@ -7,6 +7,17 @@
 </head>
 <body>
 
+<script>
+/* 🔐 ADMIN GUARD */
+const token = localStorage.getItem("token");
+const role  = localStorage.getItem("role");
+
+if (!token || role !== "ADMIN") {
+  localStorage.clear();
+  window.location.href = "../index.html";
+}
+</script>
+
 <div class="app">
 
   <!-- SIDEBAR -->
@@ -16,9 +27,7 @@
     <nav>
       <a data-page="dashboard.html">Dashboard</a>
       <a data-page="surplus.html">Surplus Food</a>
-      <a data-page="redistribution.html" class="active">Food Pickup & Delivery</a>
-      <!-- <a data-page="donations.html">Donations</a>
-      <a data-page="reports.html">Reports</a> -->
+      <a class="active">Food Pickup & Delivery</a>
       <a data-page="settings.html">Settings</a>
       <a id="logoutBtn">Logout</a>
     </nav>
@@ -58,14 +67,6 @@
       </div>
     </section>
 
-    <!-- FILTERS -->
-    <section class="filters">
-      <button class="filter active" data-filter="ALL">All</button>
-      <button class="filter" data-filter="ACCEPTED">Accepted</button>
-      <button class="filter" data-filter="IN_PROGRESS">In Progress</button>
-      <button class="filter" data-filter="COMPLETED">Completed</button>
-    </section>
-
     <!-- TABLE -->
     <section class="panel">
       <h3>Pickup & Delivery Status</h3>
@@ -87,15 +88,10 @@
 </div>
 
 <script>
-/* 🔐 AUTH GUARD */
-const token = localStorage.getItem("token");
+/* ===== BASE URL (RENDER BACKEND) ===== */
+const BASE_URL = "https://foodsaver-backend-d964.onrender.com";
 
-if (!token) {
-  localStorage.clear();
-  window.location.href = "../login.html";
-}
-
-/* COMMON AUTH HEADERS */
+/* ===== AUTH HEADERS ===== */
 function authHeaders() {
   return {
     Authorization: "Bearer " + token
@@ -104,12 +100,11 @@ function authHeaders() {
 
 /* ===== LOAD PICKUP SUMMARY ===== */
 function loadPickupSummary() {
-  fetch("http://localhost:8080/api/pickup/summary", { headers: authHeaders() })
+  fetch(`${BASE_URL}/api/dashboard/admin`, { headers: authHeaders() })
     .then(res => {
-      // ✅ logout ONLY on 401
       if (res.status === 401) {
         localStorage.clear();
-        window.location.href = "../login.html";
+        window.location.href = "../index.html";
         return null;
       }
       return res.ok ? res.json() : null;
@@ -117,21 +112,20 @@ function loadPickupSummary() {
     .then(data => {
       if (!data) return;
 
-      acceptedCount.textContent   = data.accepted;
-      inProgressCount.textContent = data.accepted;
-      completedCount.textContent  = data.completed;
+      acceptedCount.textContent   = data.awaitingPickup;
+      inProgressCount.textContent = data.awaitingPickup;
+      completedCount.textContent  = data.picked;
     })
     .catch(err => console.error("Pickup summary error:", err));
 }
 
 /* ===== LOAD PICKUP TABLE ===== */
 function loadPickupTable() {
-  fetch("http://localhost:8080/api/surplus/all", { headers: authHeaders() })
+  fetch(`${BASE_URL}/api/surplus/all`, { headers: authHeaders() })
     .then(res => {
-      // ✅ logout ONLY on 401
       if (res.status === 401) {
         localStorage.clear();
-        window.location.href = "../login.html";
+        window.location.href = "../index.html";
         return null;
       }
       return res.ok ? res.json() : null;
@@ -162,8 +156,17 @@ function loadPickupTable() {
 /* INIT */
 loadPickupSummary();
 loadPickupTable();
-</script>
 
+/* LOGOUT */
+logoutBtn.onclick = () => {
+  localStorage.clear();
+  window.location.href = "../index.html";
+};
+
+function toggleSidebar() {
+  document.querySelector(".sidebar").classList.toggle("open");
+}
+</script>
 
 <script src="../js/app.js"></script>
 </body>
