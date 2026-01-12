@@ -8,7 +8,7 @@
 <body>
 
 <script>
-/* 🔐 USER ACCESS GUARD — UNTOUCHED */
+/* 🔐 USER ACCESS GUARD */
 const token = localStorage.getItem("token");
 const role  = localStorage.getItem("role");
 const email = localStorage.getItem("email");
@@ -92,8 +92,70 @@ if (!token || role !== "USER") {
   </main>
 </div>
 
-<!-- ✅ GLOBAL CONFIG (MUST COME FIRST) -->
-<script src="../js/config.js"></script>
+<!-- ✅ chatbot.js (already exists in your project) -->
+<script src="../js/chatbot.js"></script>
+<script src="../js/app.js"></script>
 
 <script>
-/* =====
+/* ===== BASE URL (RENDER BACKEND) ===== */
+const BASE_URL = "https://foodsaver-backend-d964.onrender.com";
+
+/* ===== SETTINGS API ===== */
+const SETTINGS_API = `${BASE_URL}/api/settings`;
+
+/* ===== AUTH HEADERS ===== */
+function authHeaders() {
+  return {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + token
+  };
+}
+
+/* ===== LOAD SETTINGS ===== */
+fetch(`${SETTINGS_API}?email=${email}`, {
+  headers: authHeaders()
+})
+.then(res => res.ok ? res.json() : null)
+.then(data => {
+  if (!data) return;
+
+  orgName.value = data.organizationName || "";
+  contact.value = data.contactNumber || "";
+  emailNotif.checked = !!data.emailNotifications;
+  expiryNotif.checked = !!data.expiryNotifications;
+  weeklyReport.checked = !!data.weeklyReports;
+});
+</script>
+
+<script>
+/* ===== SAVE SETTINGS ===== */
+function saveSettings() {
+  fetch(`${SETTINGS_API}?email=${email}`, {
+    method: "PUT",
+    headers: authHeaders(),
+    body: JSON.stringify({
+      organizationName: orgName.value,
+      contactNumber: contact.value,
+      emailNotifications: emailNotif.checked,
+      expiryNotifications: expiryNotif.checked,
+      weeklyReports: weeklyReport.checked
+    })
+  })
+  .then(res => {
+    if (!res.ok) return;
+    saveMsg.style.display = "block";
+    setTimeout(() => saveMsg.style.display = "none", 2500);
+  });
+}
+</script>
+
+<script>
+/* LOGOUT */
+logoutBtn.onclick = () => {
+  localStorage.clear();
+  window.location.href = "../index.html";
+};
+</script>
+
+</body>
+</html>
