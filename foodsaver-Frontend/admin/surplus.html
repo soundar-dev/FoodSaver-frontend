@@ -181,25 +181,22 @@ function renderAdmin(data) {
   }
 
   data.forEach(item => {
-    let statusClass = "success";
+    let statusClass = "available";
     if (item.status === "ACCEPTED") statusClass = "pending";
-    if (item.status === "PICKED") statusClass = "neutral";
-
-    // ✅ FRONTEND DERIVED ORG NAME
-    const acceptedOrg = item.acceptedBy
-      ? item.acceptedBy.split("@")[0]
-      : null;
+    if (item.status === "PICKED") statusClass = "success";
 
     grid.innerHTML += `
       <div class="surplus-card">
+        <button class="delete-btn" onclick="deleteSurplus(${item.id})">✕</button>
+
         <h3>${item.foodName}</h3>
         <p>📍 ${item.location}</p>
         <p>👥 Serves: ${item.quantity}</p>
         <p>🏢 Posted by: <b>${item.postedBy}</b></p>
 
         ${
-          acceptedOrg
-            ? `<p>🤝 Accepted by: <b>${acceptedOrg}</b></p>`
+          item.acceptedBy
+            ? `<p>🤝 Accepted by: <b>${item.acceptedBy}</b></p>`
             : ""
         }
 
@@ -221,6 +218,7 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
