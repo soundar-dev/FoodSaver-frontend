@@ -255,6 +255,22 @@ body {
   margin-top: 16px;
 }
 
+/* ===== GLOBAL INPUT STYLE (SEARCH FIX) ===== */
+input[type="text"],
+input[type="number"],
+input[type="search"] {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background-color: var(--panel);
+  color: var(--text);
+}
+
+input:focus {
+  border-color: #10b981;
+  outline: none;
+}
+
 /* ---------- MOBILE ---------- */
 .menu-btn {
   display: none;
@@ -297,3 +313,4 @@ body {
     transform: translateY(0);
   }
 }
+
