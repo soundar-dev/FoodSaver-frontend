@@ -303,6 +303,57 @@ input:focus {
   border: none;
 }
 
+/* ==================================================
+   FOOD PICKUP & DELIVERY – TABLE ALIGNMENT FIX
+   ================================================== */
+
+.pickup-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-top: 12px;
+}
+
+/* Header */
+.pickup-table th {
+  text-align: left;
+  padding: 14px 16px;
+  font-weight: 600;
+  background-color: #f1f5f9;
+  border-bottom: 2px solid var(--border);
+}
+
+/* Dark mode header */
+body.dark .pickup-table th {
+  background-color: #020617;
+}
+
+/* Cells */
+.pickup-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+/* Row hover */
+.pickup-table tbody tr:hover {
+  background-color: rgba(16, 185, 129, 0.08);
+}
+
+/* Status badge alignment */
+.pickup-table .tag {
+  display: inline-block;
+  min-width: 90px;
+  text-align: center;
+}
+
+/* Prevent panel hover affecting table */
+.panel:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 @media (max-width: 1024px) {
   .menu-btn {
     display: block;
@@ -337,6 +388,7 @@ input:focus {
     transform: translateY(0);
   }
 }
+
 
 
 
