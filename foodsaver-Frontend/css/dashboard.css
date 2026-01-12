@@ -322,54 +322,37 @@ body {
   }
 }
 
-/* ===============================
-   🚑 SURPLUS INPUT WIDTH HARD FIX
-   =============================== */
 
-/* Force surplus page layout */
-.content {
-  display: block;
-}
+/* ==================================================
+   ✅ FINAL SURPLUS FORM LAYOUT FIX (ISOLATED)
+   ================================================== */
 
-/* Make form a full-width block */
+/* Ensure surplus form is a clean block */
 #surplusForm {
   width: 100%;
   max-width: 100%;
   display: block;
 }
 
-/* BREAK grid inheritance completely */
-#surplusForm * {
-  box-sizing: border-box;
+/* Kill inherited grid/flex effects */
+#surplusForm.panel {
+  display: block;
 }
 
-/* Proper 2-column grid */
+/* Proper 2-column grid ONLY for surplus form */
 #surplusForm .form-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
   width: 100%;
 }
 
-/* FORCE input stretch */
-#surplusForm input {
-  width: 100% !important;
+/* Force inputs to stretch */
+#surplusForm .form-grid input {
+  width: 100%;
   min-width: 0;
   height: 44px;
-  display: block;
-}
+  padding: 10px 12px;
+  border-radius:
 
-/* Buttons row */
-#surplusForm > div:last-child {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  #surplusForm .form-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
