@@ -1,4 +1,18 @@
 /* RESET */
+/* ===== LOGIN THEME VARIABLES (ISOLATED) ===== */
+:root {
+  --bg: #f6f7f8;
+  --panel: #ffffff;
+  --text: #0f172a;
+  --primary: #198754;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+
 * {
   margin: 0;
   padding: 0;
