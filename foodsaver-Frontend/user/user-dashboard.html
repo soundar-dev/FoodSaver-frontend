@@ -15,7 +15,7 @@ const email = localStorage.getItem("email");
 
 if (!token || role !== "USER") {
   localStorage.clear();
-  window.location.href = "../login.html";
+  window.location.href = "../index.html";
 }
 </script>
 
@@ -105,7 +105,7 @@ fetch(`http://localhost:8080/api/settings?email=${email}`, {
 
 logoutBtn.onclick = () => {
   localStorage.clear();
-  window.location.href = "../login.html";
+  window.location.href = "../index.html";
 };
 </script>
 
@@ -113,3 +113,4 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
