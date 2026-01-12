@@ -14,7 +14,7 @@ const role  = localStorage.getItem("role");
 
 if (!token || role !== "ADMIN") {
   localStorage.clear();
-  window.location.href = "../login.html";
+  window.location.href = "../index.html";
 }
 </script>
 
@@ -87,7 +87,7 @@ function loadAdminDashboard() {
   .then(res => {
     if (res.status === 401) {
       localStorage.clear();
-      window.location.href = "../login.html";
+      window.location.href = "../index.html";
       return null;
     }
     return res.json();
@@ -129,7 +129,7 @@ if (email) {
 /* LOGOUT */
 logoutBtn.onclick = () => {
   localStorage.clear();
-  window.location.href = "../login.html";
+  window.location.href = "../index.html";
 };
 </script>
 
@@ -142,3 +142,4 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
