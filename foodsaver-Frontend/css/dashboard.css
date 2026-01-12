@@ -563,5 +563,27 @@ body.dark thead {
   margin-bottom: 16px;
 }
 
+/* ===== HARD FIX: SURPLUS FORM LAYOUT ===== */
+#surplusForm {
+  width: 100%;
+  max-width: 720px;
+}
+
+/* Push cards below the form cleanly */
+#surplusForm + .surplus-grid {
+  margin-top: 24px;
+}
+
+/* Ensure form never enters grid calculation */
+#surplusForm {
+  grid-column: 1 / -1;
+}
+
+/* Fix stretched inputs */
+.form-grid input {
+  height: 44px;
+}
+
+
 
 
