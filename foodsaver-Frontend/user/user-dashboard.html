@@ -9,6 +9,7 @@
 <body>
 
 <script>
+/* 🔐 USER ACCESS GUARD */
 const token = localStorage.getItem("token");
 const role  = localStorage.getItem("role");
 const email = localStorage.getItem("email");
@@ -67,18 +68,21 @@ if (!token || role !== "USER") {
 </div>
 
 <script>
+/* ===== BASE URL (RENDER BACKEND) ===== */
+const BASE_URL = "https://foodsaver-backend-d964.onrender.com";
+
+/* ===== AUTH HEADERS ===== */
 function authHeaders() {
-  return { Authorization: "Bearer " + token };
+  return {
+    "Authorization": "Bearer " + token
+  };
 }
 
-/* ✅ USER SAFE ENDPOINT */
-fetch("http://localhost:8080/api/surplus/available", {
+/* ===== DASHBOARD COUNTS ===== */
+fetch(`${BASE_URL}/api/surplus/available`, {
   headers: authHeaders()
 })
-.then(res => {
-  if (!res.ok) return null;
-  return res.json();
-})
+.then(res => res.ok ? res.json() : null)
 .then(data => {
   if (!data) return;
 
@@ -92,8 +96,8 @@ fetch("http://localhost:8080/api/surplus/available", {
     data.filter(i => i.expiryHours <= 2).length;
 });
 
-/* USER NAME */
-fetch(`http://localhost:8080/api/settings?email=${email}`, {
+/* ===== USER NAME ===== */
+fetch(`${BASE_URL}/api/settings?email=${email}`, {
   headers: authHeaders()
 })
 .then(res => res.ok ? res.json() : null)
@@ -103,6 +107,7 @@ fetch(`http://localhost:8080/api/settings?email=${email}`, {
   }
 });
 
+/* ===== LOGOUT ===== */
 logoutBtn.onclick = () => {
   localStorage.clear();
   window.location.href = "../index.html";
@@ -113,4 +118,3 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
-
