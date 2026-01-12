@@ -300,3 +300,29 @@ body {
     left: 0;
   }
 }
+
+/* ===== DARK MODE HARD OVERRIDE FIX ===== */
+body.dark {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+body.dark .content,
+body.dark .panel,
+body.dark .card,
+body.dark .surplus-card {
+  background-color: var(--panel) !important;
+  color: var(--text) !important;
+}
+
+body.dark .sidebar {
+  background-color: var(--sidebar) !important;
+}
+
+body.dark input,
+body.dark button {
+  background-color: var(--panel) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
