@@ -86,7 +86,7 @@ const email = localStorage.getItem("email");
 
 if (!token || !email) {
   localStorage.clear();
-  window.location.href = "../login.html";
+  window.location.href = "../index.html";
 }
 
 /* COMMON AUTH HEADERS */
@@ -105,7 +105,7 @@ fetch(`http://localhost:8080/api/settings?email=${email}`, {
   // ✅ logout ONLY on 401
   if (res.status === 401) {
     localStorage.clear();
-    window.location.href = "../login.html";
+    window.location.href = "../index.html";
     return null;
   }
   return res.ok ? res.json() : null;
@@ -138,7 +138,7 @@ function saveSettings() {
     // ✅ logout ONLY on 401
     if (res.status === 401) {
       localStorage.clear();
-      window.location.href = "../login.html";
+      window.location.href = "../index.html";
       return;
     }
 
@@ -155,3 +155,4 @@ function saveSettings() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
