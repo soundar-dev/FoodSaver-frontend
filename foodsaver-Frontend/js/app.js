@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ---------- ACTIVE LINK HIGHLIGHT ---------- */
+  /* ---------- ACTIVE LINK ---------- */
   const currentPage = window.location.pathname.split("/").pop();
   navLinks.forEach(link => {
     if (link.getAttribute("data-page") === currentPage) {
@@ -24,8 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById("themeToggle");
 
   if (toggleBtn) {
+    // Load saved theme
     const savedTheme = localStorage.getItem("theme");
-
     if (savedTheme === "dark") {
       document.body.classList.add("dark");
       toggleBtn.textContent = "☀️";
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       toggleBtn.textContent = "🌙";
     }
 
+    // Toggle theme
     toggleBtn.addEventListener("click", () => {
       const isDark = document.body.classList.toggle("dark");
       localStorage.setItem("theme", isDark ? "dark" : "light");
@@ -45,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.clear();
-      window.location.href = "/index.html"; // Netlify-safe
+      window.location.href = "../index.html"; // Netlify safe
     });
   }
 
