@@ -85,14 +85,19 @@ function toggleForm() {
 
 /* ===== ADD SURPLUS ===== */
 function submitSurplus() {
+  const foodNameEl = document.getElementById("foodName");
+  const locationEl = document.getElementById("location");
+  const quantityEl = document.getElementById("quantity");
+  const expiryEl   = document.getElementById("expiryHours");
+
   fetch(`${API_BASE}/add`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({
-      foodName: foodName.value.trim(),
-      location: location.value.trim(),
-      quantity: Number(quantity.value),
-      expiryHours: Number(expiryHours.value)
+      foodName: foodNameEl.value.trim(),
+      location: locationEl.value.trim(),
+      quantity: Number(quantityEl.value),
+      expiryHours: Number(expiryEl.value)
     })
   })
   .then(res => {
@@ -154,3 +159,4 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
