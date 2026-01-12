@@ -118,13 +118,18 @@ function submitSurplus() {
   .catch(err => console.error("Add surplus error:", err));
 }
 /* ===== LOAD SURPLUS ===== */
+let adminData = [];
+
 function loadSurplus() {
   fetch(`${API_BASE}/admin/cards`, { headers: authHeaders() })
     .then(res => res.json())
-    .then(renderAdmin)
+    .then(data => {
+      adminData = data;
+      renderAdmin(adminData);
+      enableSearch(adminData); // ✅ attach search once
+    })
     .catch(err => console.error("Load error:", err));
 }
-
 function enableSearch(sourceData) {
   const searchInput = document.getElementById("searchInput");
 
@@ -198,6 +203,7 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
