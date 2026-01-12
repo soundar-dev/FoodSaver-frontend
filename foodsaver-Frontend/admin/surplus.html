@@ -46,7 +46,7 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
       </div>
     </header>
 
-    <!-- ✅ ADD SURPLUS FORM -->
+    <!-- ADD SURPLUS FORM -->
     <section id="surplusForm" class="panel hidden">
       <h3>Add Surplus Food</h3>
 
@@ -63,7 +63,7 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
       </div>
     </section>
 
-    <!-- SURPLUS CARDS -->
+    <!-- CARDS -->
     <section class="surplus-grid" id="adminGrid"></section>
 
   </main>
@@ -88,7 +88,7 @@ function toggleForm() {
   document.getElementById("surplusForm").classList.toggle("hidden");
 }
 
-/* ===== SUBMIT SURPLUS ===== */
+/* ===== SUBMIT ===== */
 function submitSurplus() {
   const foodName = foodNameInput.value.trim();
   const location = locationInput.value.trim();
@@ -103,32 +103,39 @@ function submitSurplus() {
   fetch(`${API_BASE}/add`, {
     method: "POST",
     headers: authHeaders(),
-    body: JSON.stringify({
-      foodName,
-      location,
-      quantity,
-      expiryHours: expiry
-    })
+    body: JSON.stringify({ foodName, location, quantity, expiryHours: expiry })
   })
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to add surplus");
-    return res.json();
-  })
+  .then(res => res.ok ? res.json() : Promise.reject())
   .then(() => {
     toggleForm();
     loadSurplus();
   })
-  .catch(err => alert(err.message));
+  .catch(() => alert("Failed to add surplus"));
 }
 
-/* ===== LOAD SURPLUS ===== */
+/* ===== DELETE SURPLUS ===== */
+function deleteSurplus(id) {
+  if (!confirm("Delete this surplus?")) return;
+
+  fetch(`${API_BASE}/${id}`, {
+    method: "DELETE",
+    headers: authHeaders()
+  })
+  .then(res => {
+    if (!res.ok) throw new Error();
+    loadSurplus();
+  })
+  .catch(() => alert("Delete failed"));
+}
+
+/* ===== LOAD ===== */
 function loadSurplus() {
   fetch(`${API_BASE}/admin/cards`, { headers: authHeaders() })
     .then(res => res.ok ? res.json() : [])
     .then(data => {
       adminData = data;
       renderAdmin(adminData);
-      enableSearch(adminData, renderAdmin);
+      enableSearch(adminData);
     });
 }
 
@@ -142,48 +149,38 @@ function renderAdmin(data) {
   }
 
   data.forEach(item => {
-    let statusClass = "success";
-    if (item.status === "ACCEPTED") statusClass = "pending";
-    if (item.status === "PICKED") statusClass = "neutral";
-
     adminGrid.innerHTML += `
       <div class="surplus-card">
+        <button class="delete-btn" onclick="deleteSurplus(${item.id})">✖</button>
+
         <h3>${item.foodName}</h3>
         <p>📍 ${item.location}</p>
         <p>👥 Serves: ${item.quantity}</p>
         <p>⏱ Expires in: <b>${item.expiryHours} hrs</b></p>
         <p>🏢 Posted by: <b>${item.postedBy}</b></p>
 
-        ${
-          item.acceptedByOrg
-            ? `<p>🤝 Accepted by: <b>${item.acceptedByOrg}</b></p>`
-            : ""
-        }
-
-        <span class="tag ${statusClass}">${item.status}</span>
+        <span class="tag success">${item.status}</span>
       </div>
     `;
   });
 }
 
 /* ===== SEARCH ===== */
-function enableSearch(source, renderFn) {
+function enableSearch(source) {
   searchInput.oninput = e => {
     const q = e.target.value.toLowerCase().trim();
-    if (!q) return renderFn(source);
+    if (!q) return renderAdmin(source);
 
-    renderFn(
+    renderAdmin(
       source.filter(i =>
         i.foodName?.toLowerCase().includes(q) ||
-        i.location?.toLowerCase().includes(q) ||
-        i.postedBy?.toLowerCase().includes(q) ||
-        i.acceptedByOrg?.toLowerCase().includes(q)
+        i.location?.toLowerCase().includes(q)
       )
     );
   };
 }
 
-/* ===== INIT ===== */
+/* INIT */
 const foodNameInput    = document.getElementById("foodName");
 const locationInput    = document.getElementById("location");
 const quantityInput    = document.getElementById("quantity");
