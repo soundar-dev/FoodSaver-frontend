@@ -1,22 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const logo  = document.getElementById("chatbot-logo");
-  const bot   = document.getElementById("chatbot");
+
+  // ❌ HARD STOP if chatbot disabled
+  if (!window.APP_CONFIG || !window.APP_CONFIG.CHATBOT_ENABLED) {
+    console.log("Chatbot disabled");
+    return;
+  }
+
+  const logo = document.getElementById("chatbot-logo");
+  const bot = document.getElementById("chatbot");
   const close = document.getElementById("chatbot-close");
   const input = document.getElementById("chatbot-input");
-  const body  = document.getElementById("chatbot-body");
+  const body = document.getElementById("chatbot-body");
 
   if (!logo || !bot || !close || !input || !body) return;
-
-  /* ===============================
-     CHATBOT API (RENDER BACKEND)
-     =============================== */
-  const CHATBOT_API =
-    "https://foodsaver-backend-d964.onrender.com/chat";
 
   logo.onclick = () => {
     logo.classList.add("hidden");
     bot.classList.remove("hidden");
-    body.innerHTML = `<p><b>Bot:</b> Hi! 😊 How can I help you?</p>`;
+    body.innerHTML = "<p><b>Bot:</b> Hi! 😊</p>";
   };
 
   close.onclick = () => {
@@ -24,9 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
     logo.classList.remove("hidden");
   };
 
-  input.addEventListener("keypress", async (e) => {
+  input.addEventListener("keypress", async e => {
     if (e.key !== "Enter") return;
-
     const msg = input.value.trim();
     if (!msg) return;
 
@@ -34,23 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
     input.value = "";
 
     try {
-      const res = await fetch(CHATBOT_API, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ message: msg })
-      });
+      const r = await fetch(
+        `${window.APP_CONFIG.API_BASE_URL}/chat`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: msg })
+        }
+      );
 
-      if (!res.ok) {
-        throw new Error("Chatbot error");
-      }
-
-      const data = await res.json();
-      body.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
-    } catch (err) {
-      body.innerHTML +=
-        `<p><b>Bot:</b> ⚠️ Chatbot service unavailable</p>`;
+      const d = await r.json();
+      body.innerHTML += `<p><b>Bot:</b> ${d.reply}</p>`;
+    } catch {
+      body.innerHTML += `<p><b>Bot:</b> Server not available</p>`;
     }
   });
 });
