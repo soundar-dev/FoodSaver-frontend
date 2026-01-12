@@ -12,7 +12,7 @@
 const token = localStorage.getItem("token");
 const role  = localStorage.getItem("role");
 
-if (!token || role !== "ADMIN") {
+if (!token || role?.toUpperCase() !== "ADMIN") {
   localStorage.clear();
   window.location.href = "../index.html";
 }
@@ -145,3 +145,4 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
