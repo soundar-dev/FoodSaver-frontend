@@ -8,8 +8,8 @@
 
 <body>
 
+<!-- 🔐 ADMIN AUTH GUARD -->
 <script>
-/* 🔐 ADMIN AUTH GUARD */
 const token = localStorage.getItem("token");
 const role  = localStorage.getItem("role");
 
@@ -50,7 +50,7 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
       </div>
     </header>
 
-    <!-- ✅ ADD SURPLUS FORM -->
+    <!-- ✅ ADD SURPLUS FORM (RESTORED) -->
     <section id="surplusForm" class="panel hidden">
       <h3>Add Surplus Food</h3>
 
@@ -74,7 +74,7 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
 </div>
 
 <script>
-/* ===== BASE URL ===== */
+/* ================= CONFIG ================= */
 const BASE_URL = "https://foodsaver-backend-d964.onrender.com";
 const API_BASE = `${BASE_URL}/api/surplus`;
 
@@ -85,15 +85,24 @@ function authHeaders() {
   };
 }
 
+/* ================= DOM REFS ================= */
+const adminGrid        = document.getElementById("adminGrid");
+const searchInput      = document.getElementById("searchInput");
+const foodNameInput    = document.getElementById("foodName");
+const locationInput    = document.getElementById("location");
+const quantityInput    = document.getElementById("quantity");
+const expiryHoursInput = document.getElementById("expiryHours");
+const surplusForm      = document.getElementById("surplusForm");
+const logoutBtn        = document.getElementById("logoutBtn");
+
 let adminData = [];
 
-/* ===== TOGGLE FORM ===== */
+/* ================= TOGGLE FORM ================= */
 function toggleForm() {
-  const form = document.getElementById("surplusForm");
-  form.classList.toggle("hidden");
+  surplusForm.classList.toggle("hidden");
 }
 
-/* ===== SUBMIT SURPLUS ===== */
+/* ================= SUBMIT SURPLUS ================= */
 function submitSurplus() {
   const foodName = foodNameInput.value.trim();
   const location = locationInput.value.trim();
@@ -121,23 +130,34 @@ function submitSurplus() {
   })
   .then(() => {
     toggleForm();
+    foodNameInput.value = "";
+    locationInput.value = "";
+    quantityInput.value = "";
+    expiryHoursInput.value = "";
     loadSurplus();
   })
   .catch(err => alert(err.message));
 }
 
-/* ===== LOAD SURPLUS ===== */
+/* ================= LOAD SURPLUS ================= */
 function loadSurplus() {
   fetch(`${API_BASE}/admin/cards`, { headers: authHeaders() })
-    .then(res => res.ok ? res.json() : [])
+    .then(res => {
+      if (res.status === 401) {
+        localStorage.clear();
+        window.location.href = "../index.html";
+        return [];
+      }
+      return res.ok ? res.json() : [];
+    })
     .then(data => {
       adminData = data;
       renderAdmin(adminData);
-      enableSearch(adminData, renderAdmin);
-    });
+    })
+    .catch(err => console.error("Load surplus error:", err));
 }
 
-/* ===== RENDER ===== */
+/* ================= RENDER ================= */
 function renderAdmin(data) {
   adminGrid.innerHTML = "";
 
@@ -168,36 +188,29 @@ function renderAdmin(data) {
   });
 }
 
-/* ===== SEARCH ===== */
-function enableSearch(source, renderFn) {
-  searchInput.oninput = e => {
-    const q = e.target.value.toLowerCase().trim();
-    if (!q) return renderFn(source);
+/* ================= SEARCH ================= */
+searchInput.oninput = e => {
+  const q = e.target.value.toLowerCase().trim();
+  if (!q) return renderAdmin(adminData);
 
-    renderFn(
-      source.filter(i =>
-        i.foodName?.toLowerCase().includes(q) ||
-        i.location?.toLowerCase().includes(q) ||
-        i.postedBy?.toLowerCase().includes(q) ||
-        i.acceptedByOrg?.toLowerCase().includes(q)
-      )
-    );
-  };
-}
+  renderAdmin(
+    adminData.filter(i =>
+      i.foodName?.toLowerCase().includes(q) ||
+      i.location?.toLowerCase().includes(q) ||
+      i.postedBy?.toLowerCase().includes(q) ||
+      i.acceptedByOrg?.toLowerCase().includes(q)
+    )
+  );
+};
 
-/* ===== INIT ===== */
-const foodNameInput   = document.getElementById("foodName");
-const locationInput   = document.getElementById("location");
-const quantityInput   = document.getElementById("quantity");
-const expiryHoursInput= document.getElementById("expiryHours");
-
-loadSurplus();
-
-/* LOGOUT */
+/* ================= LOGOUT ================= */
 logoutBtn.onclick = () => {
   localStorage.clear();
   window.location.href = "../index.html";
 };
+
+/* ================= INIT ================= */
+loadSurplus();
 </script>
 
 <script src="../js/app.js"></script>
