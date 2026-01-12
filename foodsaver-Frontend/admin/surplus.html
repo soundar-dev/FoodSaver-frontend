@@ -41,7 +41,7 @@ const role  = localStorage.getItem("role");
 
 if (!token || role !== "ADMIN") {
   localStorage.clear();
-  window.location.href = "../login.html";
+  window.location.href = "../index.html";
 }
 
 const API_BASE = "http://localhost:8080/api/surplus";
@@ -125,10 +125,11 @@ loadSurplus();
 
 logoutBtn.onclick = () => {
   localStorage.clear();
-  window.location.href = "../login.html";
+  window.location.href = "../index.html";
 };
 </script>
 
 <script src="../js/app.js"></script>
 </body>
 </html>
+
