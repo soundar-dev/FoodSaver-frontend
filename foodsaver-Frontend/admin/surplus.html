@@ -9,6 +9,7 @@
 <body>
 
 <script>
+/* 🔐 ADMIN GUARD */
 const token = localStorage.getItem("token");
 const role  = localStorage.getItem("role");
 
@@ -37,35 +38,36 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
       <h1>Surplus Food</h1>
       <div class="top-actions">
         <input type="search" id="searchInput" placeholder="Search food / location / NGO" />
-        <button class="primary-btn" onclick="toggleForm()">+ Add Surplus</button>
+        <button class="primary-btn" type="button" onclick="toggleForm()">+ Add Surplus</button>
         <div class="avatar">ADMIN</div>
       </div>
     </header>
 
-    <!-- ADD FORM -->
+    <!-- ✅ ADD SURPLUS FORM -->
     <section id="surplusForm" class="panel hidden">
       <h3>Add Surplus Food</h3>
 
       <div class="form-grid">
-        <input id="foodName" placeholder="Food name" />
-        <input id="location" placeholder="Location" />
+        <input type="text" id="foodName" placeholder="Food name" />
+        <input type="text" id="location" placeholder="Location" />
         <input type="number" id="quantity" placeholder="Serves (quantity)" />
         <input type="number" id="expiryHours" placeholder="Expiry (hours)" />
       </div>
 
       <div style="margin-top:16px; display:flex; gap:12px;">
-        <button class="primary-btn" onclick="submitSurplus()">Submit</button>
-        <button class="outline-btn" onclick="toggleForm()">Cancel</button>
+        <button type="button" class="primary-btn" onclick="submitSurplus()">Submit</button>
+        <button type="button" class="outline-btn" onclick="toggleForm()">Cancel</button>
       </div>
     </section>
 
-    <!-- CARDS -->
+    <!-- ✅ SURPLUS CARDS -->
     <section class="surplus-grid" id="adminGrid"></section>
 
   </main>
 </div>
 
 <script>
+/* ===== BACKEND (RENDER) ===== */
 const BASE_URL = "https://foodsaver-backend-d964.onrender.com";
 const API_BASE = `${BASE_URL}/api/surplus`;
 
@@ -76,32 +78,40 @@ function authHeaders() {
   };
 }
 
+/* ===== TOGGLE FORM ===== */
 function toggleForm() {
   document.getElementById("surplusForm").classList.toggle("hidden");
 }
 
+/* ===== ADD SURPLUS ===== */
 function submitSurplus() {
   fetch(`${API_BASE}/add`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({
-      foodName: foodName.value,
-      location: location.value,
-      quantity: quantity.value,
-      expiryHours: expiryHours.value
+      foodName: foodName.value.trim(),
+      location: location.value.trim(),
+      quantity: Number(quantity.value),
+      expiryHours: Number(expiryHours.value)
     })
-  }).then(() => {
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Add failed");
     toggleForm();
     loadSurplus();
-  });
+  })
+  .catch(err => console.error("Add surplus error:", err));
 }
 
+/* ===== LOAD SURPLUS ===== */
 function loadSurplus() {
   fetch(`${API_BASE}/admin/cards`, { headers: authHeaders() })
-    .then(r => r.json())
-    .then(renderAdmin);
+    .then(res => res.json())
+    .then(renderAdmin)
+    .catch(err => console.error("Load error:", err));
 }
 
+/* ===== DELETE ===== */
 function deleteSurplus(id) {
   fetch(`${API_BASE}/admin/delete/${id}`, {
     method: "DELETE",
@@ -109,8 +119,15 @@ function deleteSurplus(id) {
   }).then(loadSurplus);
 }
 
+/* ===== RENDER ===== */
 function renderAdmin(data) {
   adminGrid.innerHTML = "";
+
+  if (!data.length) {
+    adminGrid.innerHTML = "<p>No surplus found.</p>";
+    return;
+  }
+
   data.forEach(item => {
     adminGrid.innerHTML += `
       <div class="surplus-card">
@@ -119,7 +136,7 @@ function renderAdmin(data) {
         <p>📍 ${item.location}</p>
         <p>👥 Serves: ${item.quantity}</p>
         <p>⏱ Expires in: <b>${item.expiryHours} hrs</b></p>
-        <span class="tag success">${item.status}</span>
+        <span class="available">AVAILABLE</span>
       </div>
     `;
   });
@@ -127,6 +144,7 @@ function renderAdmin(data) {
 
 loadSurplus();
 
+/* ===== LOGOUT ===== */
 logoutBtn.onclick = () => {
   localStorage.clear();
   window.location.href = "../index.html";
