@@ -172,6 +172,16 @@ body {
   box-shadow: 0 10px 20px rgba(0,0,0,0.12);
 }
 
+/* ===== SURPLUS FORM PANEL HOVER ===== */
+#surplusForm.panel {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+#surplusForm.panel:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
 /* ==================================================
    🚫 DISABLE HOVER FOR SURPLUS FORM ONLY
    ================================================== */
@@ -241,6 +251,17 @@ body {
   background-color: var(--panel);
   color: var(--text);
   outline: none;
+}
+
+/* ===== AVAILABLE STATUS BADGE ===== */
+.available {
+  background-color: #dcfce7;
+  color: #166534;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
 }
 
 /* Focus */
@@ -313,4 +334,5 @@ input:focus {
     transform: translateY(0);
   }
 }
+
 
