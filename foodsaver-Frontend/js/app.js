@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+.document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- PAGE NAVIGATION ---------- */
   const navLinks = document.querySelectorAll(".sidebar nav a");
@@ -44,7 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.clear();
-      window.location.href = "../login.html";
+      // ✅ hosted frontend entry point
+      window.location.href = "../index.html";
     });
   }
 
