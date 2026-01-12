@@ -20,39 +20,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ---------- DARK MODE ---------- */
- 
-document.addEventListener("DOMContentLoaded", () => {
+  /* ---------- DARK MODE (FIXED) ---------- */
   const toggleBtn = document.getElementById("themeToggle");
 
-  if (!toggleBtn) return;
+  if (toggleBtn) {
+    const savedTheme = localStorage.getItem("theme");
 
-  // Load saved theme
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark");
-    toggleBtn.textContent = "☀️";
-  } else {
-    toggleBtn.textContent = "🌙";
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+      toggleBtn.textContent = "☀️";
+    } else {
+      toggleBtn.textContent = "🌙";
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      const isDark = document.body.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      toggleBtn.textContent = isDark ? "☀️" : "🌙";
+    });
   }
-
-  // Toggle theme
-  toggleBtn.addEventListener("click", () => {
-    const isDark = document.body.classList.toggle("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-    toggleBtn.textContent = isDark ? "☀️" : "🌙";
-  });
-});
-
 
   /* ---------- LOGOUT ---------- */
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.clear();
-      window.location.href = "/index.html"; // ✅ Netlify-safe
+      window.location.href = "/index.html"; // Netlify-safe
     });
   }
 
 });
-
