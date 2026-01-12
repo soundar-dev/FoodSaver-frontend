@@ -498,3 +498,17 @@ body.dark thead {
   display: none !important;
 }
 
+/* ---------- ADD SURPLUS FORM GRID (FIX) ---------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Make inputs full-width inside grid */
+.form-grid input {
+  width: 100%;
+}
+
+
