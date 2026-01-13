@@ -375,17 +375,6 @@ MOBILE UI – FINAL & CLEAN
 ========================= */
 @media (max-width: 768px) {
 
-  /* 🔥 Kill ghost back arrow ONLY on redistribution page */
-  .redistribution-topbar::before,
-  .redistribution-topbar::after,
-  .redistribution-topbar h1::before,
-  .redistribution-topbar h1::after {
-    content: none !important;
-    display: none !important;
-  }
-
-
-
   /* ===== Header base ===== */
 
   /* Sidebar close button (❌) */
@@ -405,10 +394,12 @@ MOBILE UI – FINAL & CLEAN
 
 
 
+
   .sidebar {
-    top: 56px;
-    height: calc(100% - 56px);
+    top: 64px;
+    height: calc(100% - 64px);
   }
+
 
 
 
@@ -663,6 +654,7 @@ REDISTRIBUTION – MOBILE ONLY
 
 
 }
+
 
 
 
