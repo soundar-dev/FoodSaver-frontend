@@ -64,6 +64,22 @@ SIDEBAR
   display: block;
 }
 
+/* Sidebar spacing fix */
+.sidebar .logo {
+  margin-bottom: 32px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar nav a {
+  padding: 12px 14px;
+  font-size: 15px;
+}
+
 .sidebar nav a.active,
 .sidebar nav a:hover {
   background: #0f766e;
@@ -85,7 +101,6 @@ TOPBAR – DESKTOP (LOCKED)
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
   margin-bottom: 24px;
 }
 
@@ -354,5 +369,19 @@ MOBILE ONLY (SAFE & ISOLATED)
     grid-template-columns: 1fr;
   }
 }
+
+/* Desktop: place Add Surplus under welcome text */
+@media (min-width: 769px) {
+
+  .mobile-add-btn {
+    margin-top: -12px;   /* pulls it upward */
+    margin-bottom: 20px;
+  }
+
+  .mobile-add-btn .primary-btn {
+    padding: 8px 18px;
+  }
+}
+
 
 
