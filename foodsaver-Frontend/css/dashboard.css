@@ -90,9 +90,9 @@ SIDEBAR
   opacity: 0.8;
 }
 
-.sidebar-close {
+/*.sidebar-close {
   display: none;
-}
+}*?
 
 /* =========================
 TOPBAR – DESKTOP (LOCKED)
@@ -405,6 +405,24 @@ MOBILE UI – FINAL & CLEAN
     gap: 10px;
   }
 
+  /* Sidebar close button (❌) */
+  .sidebar-close {
+    display: block;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1100;
+  }
+
+  .sidebar-close:active {
+  transform: scale(0.9);
+}
+
   /* Title – center */
   .topbar h1 {
     margin: 0;
@@ -468,6 +486,7 @@ MOBILE UI – FINAL & CLEAN
     box-shadow: none;
   }
 }
+
 
 
 
