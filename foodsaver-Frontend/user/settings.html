@@ -152,6 +152,12 @@ function saveSettings() {
 </script>
 
 <script>
+function toggleSidebar() {
+  document.querySelector(".sidebar").classList.toggle("open");
+}
+</script>  
+
+<script>
 /* LOGOUT */
 logoutBtn.onclick = () => {
   localStorage.clear();
@@ -161,5 +167,6 @@ logoutBtn.onclick = () => {
 
 </body>
 </html>
+
 
 
