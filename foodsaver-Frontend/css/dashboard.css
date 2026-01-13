@@ -82,11 +82,14 @@ SIDEBAR
 TOPBAR – DESKTOP (LOCKED)
 ========================= */
 .topbar {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   margin-bottom: 24px;
 }
+
+
 
 /* Center title properly */
 .topbar h1 {
@@ -351,4 +354,5 @@ MOBILE ONLY (SAFE & ISOLATED)
     grid-template-columns: 1fr;
   }
 }
+
 
