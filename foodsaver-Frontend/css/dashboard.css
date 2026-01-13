@@ -781,18 +781,59 @@ SURPLUS PAGE – MOBILE LAYOUT FIX
   }
 }
 
-/* =========================================
-SURPLUS PAGE – FIX ADMIN BADGE ALIGNMENT
-========================================= */
+/* =====================================================
+ADMIN SURPLUS TOPBAR FIX (SAFE)
+===================================================== */
+
+/* ---------- BASE LAYOUT ---------- */
+.surplus-topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Title */
+.surplus-topbar h1 {
+  text-align: center;
+  font-size: 24px;
+}
+
+/* Theme toggle */
+#themeToggle {
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+/* Avatar */
+.avatar {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* Actions row */
+.surplus-topbar .top-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Search input */
+.surplus-topbar input[type="search"] {
+  flex: 1;
+}
+
+/* =====================================================
+MOBILE FIX
+===================================================== */
 @media (max-width: 768px) {
 
-  /* Topbar grid */
-  .topbar {
-    display: grid;
+  .surplus-topbar {
     grid-template-columns: auto 1fr auto;
     grid-template-rows: auto auto auto;
     gap: 12px;
-    align-items: center;
   }
 
   /* Menu */
@@ -801,38 +842,38 @@ SURPLUS PAGE – FIX ADMIN BADGE ALIGNMENT
     grid-row: 1;
   }
 
+  /* Theme + Admin together (RIGHT) */
+  #themeToggle {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .avatar {
+    grid-column: 3;
+    grid-row: 1;
+    margin-left: 8px;
+  }
+
   /* Title */
-  .topbar h1 {
+  .surplus-topbar h1 {
     grid-column: 1 / -1;
     grid-row: 2;
     text-align: center;
+    font-size: 1.4rem;
   }
 
-  /* Theme + Admin together (TOP RIGHT) */
-  .top-right {
-    grid-column: 3;
-    grid-row: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  /* Search bar */
-  .topbar input[type="search"] {
+  /* Actions stack */
+  .surplus-topbar .top-actions {
     grid-column: 1 / -1;
     grid-row: 3;
-    width: 100%;
-  }
-
-  /* Action buttons row */
-  .top-actions {
-    grid-column: 1 / -1;
-    display: flex;
+    flex-direction: column;
     gap: 10px;
   }
 
-  .top-actions .primary-btn {
-    flex: 1;
+  /* Full-width buttons */
+  .surplus-topbar .primary-btn {
+    width: 100%;
+    padding: 14px;
   }
 }
 /* ---------- ANIMATION ---------- */
@@ -846,6 +887,7 @@ opacity: 1;
 transform: translateY(0);
 }
 }
+
 
 
 
