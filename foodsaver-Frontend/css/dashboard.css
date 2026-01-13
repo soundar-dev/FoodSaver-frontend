@@ -876,6 +876,102 @@ MOBILE FIX
     padding: 14px;
   }
 }
+
+/* =====================================================
+ADMIN SURPLUS TOPBAR FIX (SAFE)
+===================================================== */
+
+/* ---------- BASE LAYOUT ---------- */
+.surplus-topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Title */
+.surplus-topbar h1 {
+  text-align: center;
+  font-size: 24px;
+}
+
+/* Theme toggle */
+#themeToggle {
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+/* Avatar */
+.avatar {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* Actions row */
+.surplus-topbar .top-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Search input */
+.surplus-topbar input[type="search"] {
+  flex: 1;
+}
+
+/* =====================================================
+MOBILE FIX
+===================================================== */
+@media (max-width: 768px) {
+
+  .surplus-topbar {
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto auto;
+    gap: 12px;
+  }
+
+  /* Menu */
+  .menu-btn {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* Theme + Admin together (RIGHT) */
+  #themeToggle {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .avatar {
+    grid-column: 3;
+    grid-row: 1;
+    margin-left: 8px;
+  }
+
+  /* Title */
+  .surplus-topbar h1 {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    text-align: center;
+    font-size: 1.4rem;
+  }
+
+  /* Actions stack */
+  .surplus-topbar .top-actions {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Full-width buttons */
+  .surplus-topbar .primary-btn {
+    width: 100%;
+    padding: 14px;
+  }
+}
 /* ---------- ANIMATION ---------- */
 @keyframes fadeUp {
 from {
@@ -887,6 +983,7 @@ opacity: 1;
 transform: translateY(0);
 }
 }
+
 
 
 
