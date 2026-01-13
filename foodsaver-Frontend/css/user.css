@@ -2,26 +2,45 @@
    USER DASHBOARD ONLY
    ========================= */
 
-/* ---- Topbar (User) ---- */
+/* ---------- Topbar reset ---------- */
 .topbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   margin-bottom: 20px;
 }
 
-.topbar h1 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  text-align: center;
-  flex: 1;
+/* Menu button */
+.topbar .menu-btn {
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-/* Right icons */
+/* Welcome text */
+.topbar h1 {
+  flex: 1;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  white-space: normal;
+}
+
+/* Right actions */
 .top-actions {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: auto;           /* 🔥 stop stretching */
+}
+
+/* Theme toggle (fix stretch) */
+#themeToggle {
+  padding: 10px 12px;
+  width: auto;           /* 🔥 important */
+  min-width: unset;
 }
 
 /* Avatar */
@@ -33,15 +52,11 @@
   font-weight: 600;
 }
 
-/* ---- Cards ---- */
+/* ---------- Cards ---------- */
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-}
-
-.card {
-  text-align: left;
 }
 
 .card h2 {
@@ -56,14 +71,32 @@
 
   /* Topbar layout */
   .topbar {
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: row;     /* 🔥 override admin column */
+    align-items: center;
   }
 
+  /* Menu stays left */
+  .menu-btn {
+    order: 1;
+  }
+
+  /* Welcome stays center */
   .topbar h1 {
-    font-size: 1.3rem;
+    order: 2;
+    font-size: 1.25rem;
     text-align: center;
-    white-space: normal;
+    padding: 0 6px;
+  }
+
+  /* Icons stay right */
+  .top-actions {
+    order: 3;
+    flex: none;
+  }
+
+  /* Stop button stretching */
+  .top-actions button {
+    flex: none !important;
   }
 
   /* Cards stack */
@@ -80,7 +113,6 @@
     font-size: 2.2rem;
   }
 
-  /* Better spacing */
   .content {
     padding: 16px;
   }
