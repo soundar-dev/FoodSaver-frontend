@@ -41,6 +41,7 @@ LAYOUT
 .content {
   flex: 1;
   padding: 24px;
+  overflow-x: hidden;
 }
 
 /* =========================
@@ -60,6 +61,7 @@ SIDEBAR
   border-radius: 8px;
   margin-bottom: 8px;
   cursor: pointer;
+  display: block;
 }
 
 .sidebar nav a.active,
@@ -72,8 +74,12 @@ SIDEBAR
   opacity: 0.8;
 }
 
+.sidebar-close {
+  display: none;
+}
+
 /* =========================
-TOPBAR – DESKTOP (ALL PAGES)
+TOPBAR – DESKTOP (LOCKED)
 ========================= */
 .topbar {
   display: flex;
@@ -92,9 +98,9 @@ TOPBAR – DESKTOP (ALL PAGES)
   background: none;
   border: none;
   font-size: 22px;
+  cursor: pointer;
 }
 
-/* Right side (dashboard header) */
 .top-right {
   display: flex;
   align-items: center;
@@ -116,6 +122,7 @@ AVATAR + BUTTONS
   padding: 6px 12px;
   border-radius: 999px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .primary-btn {
@@ -133,6 +140,7 @@ AVATAR + BUTTONS
   padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
+  color: var(--text);
 }
 
 #themeToggle {
@@ -251,7 +259,7 @@ TABLE
 }
 
 /* =========================
-MOBILE (ONLY ONE QUERY)
+MOBILE ONLY (SAFE & ISOLATED)
 ========================= */
 @media (max-width: 768px) {
 
@@ -259,6 +267,7 @@ MOBILE (ONLY ONE QUERY)
     display: block;
   }
 
+  /* Sidebar */
   .sidebar {
     position: fixed;
     left: -260px;
@@ -272,12 +281,24 @@ MOBILE (ONLY ONE QUERY)
     left: 0;
   }
 
-  /* Topbar stack */
+  .sidebar-close {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 22px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  /* Topbar – mobile layout ONLY */
   .topbar {
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-template-rows: auto auto;
-    row-gap: 12px;
+    gap: 10px;
   }
 
   .topbar h1 {
@@ -286,19 +307,19 @@ MOBILE (ONLY ONE QUERY)
     font-size: 1.3rem;
   }
 
-  .top-actions,
   .top-right {
-    grid-column: 1 / -1;
-    justify-content: center;
-    flex-wrap: wrap;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
   }
 
+  /* Buttons */
   .primary-btn {
     width: 100%;
     padding: 14px;
   }
 
-  /* Cards stack */
+  /* Cards */
   .cards {
     grid-template-columns: 1fr;
   }
