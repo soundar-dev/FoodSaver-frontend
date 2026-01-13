@@ -82,11 +82,28 @@ SIDEBAR
 TOPBAR – DESKTOP (LOCKED)
 ========================= */
 .topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* Center title properly */
+.topbar h1 {
+  text-align: center;
+  font-size: 24px;
+}
+
+/* Right side spacing (Add Surplus + Avatar) */
+.top-right {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 12px;
+}
+
+/* Dashboard Add Surplus button spacing */
+.top-right .primary-btn {
+  padding: 8px 18px;
 }
 
 .topbar h1 {
@@ -334,3 +351,4 @@ MOBILE ONLY (SAFE & ISOLATED)
     grid-template-columns: 1fr;
   }
 }
+
