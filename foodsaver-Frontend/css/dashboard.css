@@ -407,6 +407,25 @@ MOBILE ONLY (SAFE & ISOLATED)
   }
 }
 
+/* FIX Add Surplus breaking into two lines */
+@media (min-width: 769px) {
+  .surplus-topbar .top-actions {
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  .surplus-topbar .primary-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .surplus-topbar input[type="search"] {
+    flex: 1;
+    min-width: 220px;
+  }
+}
+
+
 
 
 
