@@ -156,7 +156,10 @@ body {
   border: 1px solid var(--border);
   padding: 20px;
   border-radius: 16px;
+  margin-top: 32px;
 }
+
+
 
 /* ---------- HOVER EFFECT (GLOBAL) ---------- */
 .card,
@@ -416,6 +419,7 @@ body.dark .pickup-table th {
     transform: translateY(0);
   }
 }
+
 
 
 
