@@ -715,6 +715,20 @@ ADMIN – ADD SURPLUS MOBILE FIX
     border-radius: 12px;
   }
 }
+
+/* =========================
+ADMIN – ADD SURPLUS SPACING FIX
+========================= */
+@media (max-width: 768px) {
+
+  .primary-btn {
+    margin-bottom: 16px;   /* 👈 creates gap from cards */
+  }
+
+  .cards {
+    margin-top: 8px;       /* 👈 extra breathing space */
+  }
+}
 /* ---------- ANIMATION ---------- */
 @keyframes fadeUp {
 from {
@@ -726,6 +740,7 @@ opacity: 1;
 transform: translateY(0);
 }
 }
+
 
 
 
