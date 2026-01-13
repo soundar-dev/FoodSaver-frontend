@@ -727,7 +727,19 @@ SETTINGS TOPBAR – MOBILE
   line-height: 1.4;
 }
 
+ 
+.panel h3 {
+  margin-bottom: 10px;
 }
+
+.panel label {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+}
+
 
 
 
