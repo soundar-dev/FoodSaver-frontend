@@ -233,6 +233,14 @@ function renderAdmin(data) {
 
     <p>${getExpiryText(item.createdAt, item.expiryHours)}</p>
 
+    ${item.status === "ACCEPTED"
+  ? `<button class="primary-btn small"
+       onclick="markPicked(${item.id})">
+       Mark as Picked
+     </button>`
+  : ""
+}
+
     <span class="tag ${statusClass}">${item.status}</span>
   </div>
 `;
@@ -251,4 +259,5 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
