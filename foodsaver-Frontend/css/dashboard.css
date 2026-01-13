@@ -370,6 +370,21 @@ MOBILE UI – FINAL & CLEAN
 @media (max-width: 768px) {
 
   /* ===== Header base ===== */
+
+  /* Sidebar close button (❌) */
+  .sidebar-close {
+    display: block;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1100;
+  }
+  
   .menu-btn {
     display: block;
   }
@@ -405,19 +420,7 @@ MOBILE UI – FINAL & CLEAN
     gap: 10px;
   }
 
-  /* Sidebar close button (❌) */
-  .sidebar-close {
-    display: block;
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 1100;
-  }
+  
 
   .sidebar-close:active {
   transform: scale(0.9);
@@ -625,6 +628,7 @@ REDISTRIBUTION – MOBILE ONLY
 
 
 }
+
 
 
 
