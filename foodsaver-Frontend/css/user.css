@@ -1,8 +1,8 @@
-/* =========================
-   USER DASHBOARD ONLY
-   ========================= */
+/* =================================================
+   USER PAGES ONLY (Dashboard + Available Food)
+   ================================================= */
 
-/* ---------- Topbar reset ---------- */
+/* ---------- TOPBAR (USER) ---------- */
 .topbar {
   display: flex;
   align-items: center;
@@ -11,36 +11,28 @@
   margin-bottom: 20px;
 }
 
-/* Menu button */
-.topbar .menu-btn {
-  font-size: 22px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* Welcome text */
+/* Title */
 .topbar h1 {
-  flex: 1;
-  text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 600;
-  white-space: normal;
+  white-space: nowrap;
 }
 
-/* Right actions */
+/* Right side */
 .top-actions {
   display: flex;
   align-items: center;
   gap: 10px;
-  width: auto;           /* 🔥 stop stretching */
 }
 
-/* Theme toggle (fix stretch) */
-#themeToggle {
-  padding: 10px 12px;
-  width: auto;           /* 🔥 important */
-  min-width: unset;
+/* Search input */
+.top-actions input[type="search"] {
+  height: 42px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  font-size: 0.95rem;
+  width: 220px;
 }
 
 /* Avatar */
@@ -52,68 +44,85 @@
   font-weight: 600;
 }
 
-/* ---------- Cards ---------- */
-.cards {
+/* =================================================
+   SURPLUS CARDS (USER)
+   ================================================= */
+.surplus-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
 }
 
-.card h2 {
-  font-size: 2rem;
-  margin-top: 6px;
+.surplus-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
 }
 
-/* =========================
+.surplus-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.surplus-card p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+}
+
+/* Accept button */
+.surplus-card .primary-btn {
+  margin-top: 12px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+}
+
+/* =================================================
    MOBILE FIX (USER ONLY)
-   ========================= */
+   ================================================= */
 @media (max-width: 768px) {
 
-  /* Topbar layout */
+  /* ---------- TOPBAR ---------- */
   .topbar {
-    flex-direction: row;     /* 🔥 override admin column */
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
   }
 
-  /* Menu stays left */
-  .menu-btn {
-    order: 1;
-  }
-
-  /* Welcome stays center */
+  /* Center title */
   .topbar h1 {
-    order: 2;
-    font-size: 1.25rem;
     text-align: center;
-    padding: 0 6px;
+    font-size: 1.4rem;
   }
 
-  /* Icons stay right */
+  /* Search + NGO badge row */
   .top-actions {
-    order: 3;
-    flex: none;
+    display: flex;
+    gap: 10px;
   }
 
-  /* Stop button stretching */
-  .top-actions button {
-    flex: none !important;
+  /* Search full width */
+  .top-actions input[type="search"] {
+    flex: 1;
+    width: 100%;
   }
 
-  /* Cards stack */
-  .cards {
+  /* Avatar fixed size */
+  .avatar {
+    padding: 10px 16px;
+    white-space: nowrap;
+  }
+
+  /* ---------- SURPLUS GRID ---------- */
+  .surplus-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
   }
 
-  .card {
-    padding: 18px;
-  }
-
-  .card h2 {
-    font-size: 2.2rem;
-  }
-
-  .content {
+  .surplus-card {
     padding: 16px;
+  }
+
+  .surplus-card h3 {
+    font-size: 1.15rem;
   }
 }
