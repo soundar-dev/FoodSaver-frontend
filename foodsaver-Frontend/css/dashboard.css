@@ -401,6 +401,29 @@ MOBILE ONLY (SAFE & ISOLATED)
   }
 }
 
+/* =========================
+SURPLUS PAGE – TOP RIGHT FIX
+========================= */
+
+/* Keep search on left, buttons grouped on right */
+.surplus-topbar .top-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Group Add Surplus + Avatar neatly */
+.surplus-topbar .top-actions .primary-btn {
+  margin-left: 0;
+}
+
+/* Ensure button aligns with theme toggle */
+.surplus-topbar .top-right,
+.surplus-topbar .top-actions {
+  align-items: center;
+}
+
+
 
 
 
