@@ -37,6 +37,9 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
   <main class="content">
 
     <header class="topbar surplus-topbar">
+      <div class="mobile-add-btn">
+          <button class="primary-btn" type="button" onclick="toggleForm()">+ Add Surplus</button>
+      </div>
        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
         <button id="themeToggle" class="outline-btn">🌙</button>
       <h1>Surplus Food</h1>
@@ -269,6 +272,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
