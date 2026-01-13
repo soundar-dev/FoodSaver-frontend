@@ -371,15 +371,25 @@ MOBILE ONLY (SAFE & ISOLATED)
 }
 
 /* Desktop: place Add Surplus under welcome text */
+/* Desktop: hide mobile add button */
+@media (min-width: 769px) {
+  .mobile-add-btn {
+    display: none;
+  }
+}
+
+/* Desktop: align top-right buttons properly */
 @media (min-width: 769px) {
 
-  .mobile-add-btn {
-    margin-top: -12px;   /* pulls it upward */
-    margin-bottom: 20px;
+  .top-right {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* spacing between 🌙, +Add, avatar */
   }
 
-  .mobile-add-btn .primary-btn {
+  .top-right .primary-btn {
     padding: 8px 18px;
+    font-size: 14px;
   }
 }
 
