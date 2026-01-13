@@ -535,7 +535,61 @@ SURPLUS TOPBAR – MOBILE FIX
     display: none;
   }
 
+  /* =========================
+REDISTRIBUTION – MOBILE ONLY
+========================= */
+
+
+  .redistribution-topbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 12px;
+  }
+
+  /* Hamburger – left */
+  .redistribution-topbar .menu-btn {
+    display: block;
+    position: absolute;
+    left: 12px;
+    font-size: 22px;
+    z-index: 1100;
+  }
+
+  /* Title – center */
+  .redistribution-topbar h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  /* Right controls */
+  .redistribution-topbar .top-right {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Cards stack */
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Disable hover on mobile */
+  .card:hover,
+  .panel:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+
 }
+
 
 
 
