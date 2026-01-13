@@ -694,6 +694,27 @@ ADMIN TOPBAR – FORCE FIX
   }
 }
 
+/* =========================
+ADMIN – ADD SURPLUS MOBILE FIX
+========================= */
+@media (max-width: 768px) {
+
+  /* Wrap Add Surplus button */
+  .content > .primary-btn,
+  .mobile-add-btn,
+  .add-surplus-btn {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* Actual button */
+  .primary-btn {
+    align-self: flex-end;
+    padding: 12px 18px;
+    font-size: 1rem;
+    border-radius: 12px;
+  }
+}
 /* ---------- ANIMATION ---------- */
 @keyframes fadeUp {
 from {
@@ -705,6 +726,7 @@ opacity: 1;
 transform: translateY(0);
 }
 }
+
 
 
 
