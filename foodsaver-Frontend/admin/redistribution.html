@@ -133,7 +133,7 @@ function statusClass(status) {
 
 /* ===== LOAD PICKUP TABLE ===== */
 function loadPickupTable() {
-  fetch(`${BASE_URL}/api/surplus/all`, { headers: authHeaders() })
+  fetch(`${BASE_URL}/api/surplus/admin/cards`, { headers: authHeaders() })
     .then(res => {
       if (res.status === 401) {
         localStorage.clear();
@@ -156,7 +156,9 @@ function loadPickupTable() {
               <td>${item.location}</td>
               <td>${item.quantity}</td>
               <td>
-               <span class="tag ${statusClass(item.status)}">${mapStatus(item.status)}</span>
+                <span class="tag ${statusClass(item.status)}">
+                  ${mapStatus(item.status)}
+                </span>
               </td>
             </tr>
           `;
@@ -183,6 +185,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
