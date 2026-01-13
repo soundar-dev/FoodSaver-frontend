@@ -646,9 +646,52 @@ REDISTRIBUTION – MOBILE ONLY
     opacity: 0.8;
   }
 
+  /* =========================
+SETTINGS TOPBAR – MOBILE
+========================= */
+
+.settings-topbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 0;
+}
+
+/* Hamburger – LEFT */
+.settings-topbar .menu-btn {
+  display: block;
+  position: absolute;
+  left: 12px;
+  font-size: 22px;
+  z-index: 900;
+}
+
+/* Title – CENTER */
+.settings-topbar h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+/* Right side – theme + admin */
+.settings-topbar .top-right {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Hide any accidental buttons */
+.settings-topbar .primary-btn {
+  display: none;
+}
+
 
 
 }
+
 
 
 
