@@ -629,14 +629,17 @@ body.dark .pickup-table th {
 
   /* Centered Welcome text */
   .top-title {
-    justify-self: center;
-    font-size: 1.15rem;
-    font-weight: 600;
-    white-space: nowrap;        /* ❌ no wrapping */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-  }
+      justify-self: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+    
+      /* 🔥 THIS IS THE FIX */
+      max-width: calc(100vw - 140px);
+    }
 
   /* Right-side icons */
   .top-actions {
@@ -651,6 +654,7 @@ body.dark .pickup-table th {
     display: none;
   }
 }
+
 
 
 
