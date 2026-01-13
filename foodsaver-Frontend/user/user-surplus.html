@@ -97,7 +97,14 @@ function loadFood() {
   fetch(`${BASE_URL}/api/user/surplus`, { headers: authHeaders() })
     .then(res => res.ok ? res.json() : [])
     .then(data => {
-      allFood = data;
+
+      // ✅ REMOVE EXPIRED BEFORE STORING
+      allFood = data.filter(item => {
+        const created = new Date(item.createdAt).getTime();
+        const expiry  = created + item.expiryHours * 3600000;
+        return expiry > Date.now();
+      });
+
       render(allFood);
       enableSearch(allFood, render);
     });
@@ -174,5 +181,6 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
