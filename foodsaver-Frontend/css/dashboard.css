@@ -412,6 +412,7 @@ MOBILE UI – FINAL & CLEAN
     text-align: center;
     padding:0 72px;
     transform: translateX(-45px);
+    pointer-events: none;
   }
 
   
@@ -467,6 +468,7 @@ MOBILE UI – FINAL & CLEAN
     box-shadow: none;
   }
 }
+
 
 
 
