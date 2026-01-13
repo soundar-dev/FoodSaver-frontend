@@ -83,7 +83,7 @@ function authHeaders() {
 /* ===== TOGGLE FORM ===== */
 function toggleForm() {
   document.getElementById("surplusForm").classList.toggle("hidden");
-}
+}  
 
 /* ===== ADD SURPLUS ===== */
 function submitSurplus() {
@@ -258,9 +258,16 @@ logoutBtn.onclick = () => {
 };
 </script>
 
+  <script>
+function toggleSidebar() {
+  document.querySelector(".sidebar").classList.toggle("open");
+}
+</script>
+
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
