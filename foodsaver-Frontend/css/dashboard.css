@@ -688,9 +688,47 @@ SETTINGS TOPBAR – MOBILE
   display: none;
 }
 
+  /* ===== Settings form spacing ===== */
 
+.settings-topbar + .panel label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.settings-topbar + .panel input {
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 15px;
+}
+
+.settings-topbar + .panel .form-grid {
+  gap: 18px;
+}
+
+  /* ===== Preferences toggles ===== */
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.toggle input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.toggle span {
+  font-size: 15px;
+  line-height: 1.4;
+}
 
 }
+
 
 
 
