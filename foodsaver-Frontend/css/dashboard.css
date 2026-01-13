@@ -90,9 +90,9 @@ SIDEBAR
   opacity: 0.8;
 }
 
-/*.sidebar-close {
+.sidebar-close {
   display: none;
-}*?
+}
 
 /* =========================
 TOPBAR – DESKTOP (LOCKED)
@@ -587,8 +587,45 @@ REDISTRIBUTION – MOBILE ONLY
     box-shadow: none;
   }
 
+  
+
+  .pickup-table thead {
+    display: none;
+  }
+
+  .pickup-table,
+  .pickup-table tbody,
+  .pickup-table tr,
+  .pickup-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .pickup-table tr {
+    background: var(--panel);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+  }
+
+  .pickup-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border: none;
+  }
+
+  .pickup-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+
 
 }
+
 
 
 
