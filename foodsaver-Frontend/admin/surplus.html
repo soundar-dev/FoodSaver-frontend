@@ -226,7 +226,7 @@ function renderAdmin(data) {
     <p>👥 Serves: ${item.quantity}</p>
    
 
-    ${item.acceptedBy
+    ${item.acceptedByOrg
       ? `<p>🤝 Accepted by: <b>${item.acceptedByOrg}</b></p>`
       : ""
     }
@@ -251,3 +251,4 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
