@@ -300,6 +300,21 @@ TABLE
 }
 
 /* =========================
+CARD & PANEL HOVER EFFECTS
+========================= */
+.card,
+.panel,
+.surplus-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover,
+.panel:hover,
+.surplus-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+/* =========================
 MOBILE ONLY (SAFE & ISOLATED)
 ========================= */
 @media (max-width: 768px) {
@@ -424,6 +439,7 @@ MOBILE ONLY (SAFE & ISOLATED)
     min-width: 220px;
   }
 }
+
 
 
 
