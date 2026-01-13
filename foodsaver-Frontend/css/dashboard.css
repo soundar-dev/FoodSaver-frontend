@@ -317,7 +317,7 @@ CARD & PANEL HOVER EFFECTS
 
 /* Desktop: place Add Surplus under welcome text */
 /* Desktop: hide mobile add button */
-@media (min-width: 769px) {
+/*@media (min-width: 769px) {
   .mobile-add-btn {
     display: none;
   }
@@ -453,6 +453,7 @@ MOBILE UI – FINAL & CLEAN
     box-shadow: none;
   }
 }
+
 
 
 
