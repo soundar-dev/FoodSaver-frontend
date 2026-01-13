@@ -690,6 +690,53 @@ body.dark .pickup-table th {
 }
 
 
+/* =========================
+   SURPLUS PAGE – MOBILE TOPBAR FIX
+   ========================= */
+@media (max-width: 768px) {
+
+  .surplus-topbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ☰ menu */
+  .surplus-topbar .menu-btn {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* Title */
+  .surplus-topbar h1 {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  /* 🔥 SHOW top-actions again */
+  .surplus-topbar .top-actions {
+    display: flex;
+    grid-column: 3;
+    grid-row: 1;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Search input */
+  .surplus-topbar input[type="search"] {
+    display: none; /* hide search on mobile to avoid crowding */
+  }
+
+  /* Add button */
+  .surplus-topbar .primary-btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
 
 
 
