@@ -323,33 +323,6 @@ MOBILE ONLY (SAFE & ISOLATED)
     display: block;
   }
 
-  /* Sidebar */
-  .sidebar {
-    position: fixed;
-    left: -260px;
-    top: 0;
-    height: 100%;
-    z-index: 1000;
-    transition: left 0.3s ease;
-  }
-
-  .sidebar.open {
-    left: 0;
-  }
-
-  .sidebar-close {
-    display: block;
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    font-size: 22px;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-  }
-
-  /* Topbar – mobile layout ONLY */
   .topbar {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -369,26 +342,45 @@ MOBILE ONLY (SAFE & ISOLATED)
     justify-self: end;
   }
 
-  /* Buttons */
-  .primary-btn {
+
+  .mobile-add-btn {
+    display: block;
+    margin: 12px 0;
+  }
+
+  .mobile-add-btn .primary-btn {
     width: 100%;
     padding: 14px;
   }
 
-  /* Cards */
+
   .cards {
     grid-template-columns: 1fr;
   }
 
-  /* Surplus cards */
   .surplus-grid {
     grid-template-columns: 1fr;
   }
 
-  /* Forms */
-  .form-grid {
-    grid-template-columns: 1fr;
+  .card,
+  .surplus-card {
+    padding: 16px;
   }
+
+ 
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100%;
+    z-index: 1000;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
 }
 
 /* Desktop: place Add Surplus under welcome text */
@@ -439,6 +431,7 @@ MOBILE ONLY (SAFE & ISOLATED)
     min-width: 220px;
   }
 }
+
 
 
 
