@@ -43,7 +43,7 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
       </div>
     </header>
 
-    <!-- ADD SURPLUS FORM -->
+    <!-- ✅ ADD SURPLUS FORM -->
     <section id="surplusForm" class="panel hidden">
       <h3>Add Surplus Food</h3>
 
@@ -60,14 +60,14 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
       </div>
     </section>
 
-    <!-- SURPLUS CARDS -->
+    <!-- ✅ SURPLUS CARDS -->
     <section class="surplus-grid" id="adminGrid"></section>
 
   </main>
 </div>
 
 <script>
-/* ===== BACKEND ===== */
+/* ===== BACKEND (RENDER) ===== */
 const BASE_URL = "https://foodsaver-backend-d964.onrender.com";
 const API_BASE = `${BASE_URL}/api/surplus`;
 
@@ -78,33 +78,46 @@ function authHeaders() {
   };
 }
 
-/* TOGGLE FORM */
+/* ===== TOGGLE FORM ===== */
 function toggleForm() {
   document.getElementById("surplusForm").classList.toggle("hidden");
 }
 
-/* ADD SURPLUS */
+/* ===== ADD SURPLUS ===== */
 function submitSurplus() {
+  const foodNameEl = document.getElementById("foodName");
+  const locationEl = document.getElementById("location");
+  const quantityEl = document.getElementById("quantity");
+  const expiryEl   = document.getElementById("expiryHours");
+
   fetch(`${API_BASE}/add`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({
-      foodName: foodName.value.trim(),
-      location: location.value.trim(),
-      quantity: Number(quantity.value),
-      expiryHours: Number(expiryHours.value)
+      foodName: foodNameEl.value.trim(),
+      location: locationEl.value.trim(),
+      quantity: Number(quantityEl.value),
+      expiryHours: Number(expiryEl.value)
     })
-  }).then(() => {
-    foodName.value = "";
-    location.value = "";
-    quantity.value = "";
-    expiryHours.value = "";
-    toggleForm();
-    loadSurplus();
-  });
-}
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Add failed");
 
-/* LOAD SURPLUS */
+    // ✅ CLEAR INPUTS
+    foodNameEl.value = "";
+    locationEl.value = "";
+    quantityEl.value = "";
+    expiryEl.value = "";
+
+    // ✅ HIDE FORM
+    document.getElementById("surplusForm").classList.add("hidden");
+
+    // ✅ REFRESH CARDS
+    loadSurplus();
+  })
+  .catch(err => console.error("Add surplus error:", err));
+}
+/* ===== LOAD SURPLUS ===== */
 let adminData = [];
 
 function loadSurplus() {
@@ -113,42 +126,89 @@ function loadSurplus() {
     .then(data => {
       adminData = data;
       renderAdmin(adminData);
-      enableSearch(adminData);
-    });
+      enableSearch(adminData); // ✅ attach search once
+    })
+    .catch(err => console.error("Load error:", err));
 }
-
-/* SEARCH */
 function enableSearch(sourceData) {
+  const searchInput = document.getElementById("searchInput");
+
+  if (!searchInput) return;
+
   searchInput.addEventListener("input", () => {
     const q = searchInput.value.toLowerCase().trim();
-    if (!q) return renderAdmin(sourceData);
 
-    renderAdmin(
-      sourceData.filter(item =>
-        item.foodName?.toLowerCase().includes(q) ||
-        item.location?.toLowerCase().includes(q) ||
-        item.status?.toLowerCase().includes(q) ||
-        item.postedBy?.toLowerCase().includes(q) ||
-        item.acceptedByOrg?.toLowerCase().includes(q)
-      )
-    );
+    if (!q) {
+      renderAdmin(sourceData);
+      return;
+    }
+
+    const filtered = sourceData.filter(item =>
+  item.foodName?.toLowerCase().includes(q) ||
+  item.location?.toLowerCase().includes(q) ||
+  item.status?.toLowerCase().includes(q) ||
+  item.postedBy?.toLowerCase().includes(q) ||      // 🏢 who posted
+  item.acceptedByOrg?.toLowerCase().includes(q)       // 🤝 who accepted
+);
+
+    renderAdmin(filtered);
   });
-}
+}  
 
-/* DELETE */
+function getExpiryText(createdAt, expiryHours) {
+  if (!expiryHours) return "";
+
+  // If backend sends createdAt
+  if (createdAt) {
+    const created = new Date(createdAt);
+    const expiry = new Date(created.getTime() + expiryHours * 60 * 60 * 1000);
+    const now = new Date();
+
+    const diffMs = expiry - now;
+    const diffHours = Math.ceil(diffMs / (1000 * 60 * 60));
+
+    if (diffHours <= 0) return "❌ Expired";
+    return `⏱ Expires in ${diffHours} hrs`;
+  }
+
+  // Fallback when createdAt is missing
+  return `⏱ Expires in ${expiryHours} hrs`;
+}  
+
+/* ===== DELETE ===== */
 function deleteSurplus(id) {
   fetch(`${API_BASE}/${id}`, {
     method: "DELETE",
     headers: authHeaders()
-  }).then(loadSurplus);
+  })
+  .then(res => {
+    if (!res.ok) {
+      throw new Error("Delete failed");
+    }
+    loadSurplus(); // refresh cards
+  })
+  .catch(err => console.error("Delete error:", err));
 }
 
-/* RENDER */
+function markPicked(id) {
+  fetch(`${API_BASE}/${id}/picked`, {
+    method: "PUT",
+    headers: authHeaders()
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Update failed");
+    loadSurplus(); // refresh admin cards
+  })
+  .catch(err => console.error("Pick error:", err));
+}
+
+/* ===== RENDER ===== */
 function renderAdmin(data) {
-  adminGrid.innerHTML = "";
+  const grid = document.getElementById("adminGrid");
+  grid.innerHTML = "";
 
   if (!data.length) {
-    adminGrid.innerHTML = "<p>No surplus found.</p>";
+    grid.innerHTML = "<p>No surplus found.</p>";
     return;
   }
 
@@ -157,29 +217,31 @@ function renderAdmin(data) {
     if (item.status === "ACCEPTED") statusClass = "pending";
     if (item.status === "PICKED") statusClass = "success";
 
-    adminGrid.innerHTML += `
-      <div class="surplus-card">
-        <button class="delete-btn" onclick="deleteSurplus(${item.id})">✕</button>
+  grid.innerHTML += `
+  <div class="surplus-card">
+    <button class="delete-btn" onclick="deleteSurplus(${item.id})">✕</button>
 
-        <h3>${item.foodName}</h3>
-        <p>📍 ${item.location}</p>
-        <p>👥 Serves: ${item.quantity}</p>
+    <h3>${item.foodName}</h3>
+    <p>📍 ${item.location}</p>
+    <p>👥 Serves: ${item.quantity}</p>
+   
 
-        ${item.acceptedByOrg
-          ? `<p>🤝 Accepted by: <b>${item.acceptedByOrg}</b></p>`
-          : ""
-        }
+    ${item.acceptedBy
+      ? `<p>🤝 Accepted by: <b>${item.acceptedByOrg}</b></p>`
+      : ""
+    }
 
-        <span class="tag ${statusClass}">${item.status}</span>
-      </div>
-    `;
+    <p>${getExpiryText(item.createdAt, item.expiryHours)}</p>
+
+    <span class="tag ${statusClass}">${item.status}</span>
+  </div>
+`;
   });
 }
 
-/* INIT */
 loadSurplus();
 
-/* LOGOUT */
+/* ===== LOGOUT ===== */
 logoutBtn.onclick = () => {
   localStorage.clear();
   window.location.href = "../index.html";
