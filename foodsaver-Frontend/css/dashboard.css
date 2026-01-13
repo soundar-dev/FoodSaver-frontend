@@ -497,6 +497,47 @@ body.dark .pickup-table th {
   }
 }
 
+/* =========================
+   MOBILE TOPBAR FIX
+   ========================= */
+@media (max-width: 768px) {
+
+  .topbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .top-title {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .top-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Hide desktop actions on mobile */
+  .top-actions {
+    display: none;
+  }
+
+  /* Mobile Add Surplus button */
+  .mobile-add-btn {
+    margin: 12px 0 20px;
+  }
+
+  .mobile-add-btn .primary-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 14px;
+  }
+}
+
 
 /* MOBILE SIDEBAR */
 @media (max-width: 768px) {
@@ -568,6 +609,7 @@ body.dark .pickup-table th {
     transform: translateY(0);
   }
 }
+
 
 
 
