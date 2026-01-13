@@ -493,7 +493,7 @@ MOBILE UI – FINAL & CLEAN
   position: fixed;
   left: -260px;
   top: 0px;                       /* ✅ below topbar */
-  height: calc(100% - 64px);       /* ✅ no overlap */
+  height: 100%;       /* ✅ no overlap */
   z-index: 1000;
   transition: left 0.3s ease;
 }
@@ -649,6 +649,7 @@ REDISTRIBUTION – MOBILE ONLY
 
 
 }
+
 
 
 
