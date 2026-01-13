@@ -597,15 +597,18 @@ body.dark .pickup-table th {
   }
 
   /* ✅ Welcome text gets full width */
-  .top-title {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    text-align: center;
-    font-size: 1.25rem;
-    font-weight: 600;
-    white-space: normal;
-  }
-
+  /* ✅ Welcome text – FULLY VISIBLE */
+.top-title {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  white-space: normal;     /* allow wrapping */
+  overflow: visible;       /* no cutting */
+  word-break: break-word;  /* long names safe */
+  line-height: 1.3;
+}
   
 }
 
@@ -644,50 +647,8 @@ body.dark .pickup-table th {
   }
 }
 
-/* =========================
-   MOBILE TOPBAR – FINAL FIX
-   ========================= */
-@media (max-width: 768px) {
 
-  .topbar {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 10px;
-  }
 
-  /* Menu button (☰) */
-  .menu-btn {
-    justify-self: start;
-  }
-
-  /* Centered Welcome text */
-  .top-title {
-      justify-self: center;
-      font-size: 1.1rem;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: center;
-    
-      /* 🔥 THIS IS THE FIX */
-      max-width: calc(100vw - 140px);
-    }
-
-  /* Right-side icons */
-  .top-actions {
-    justify-self: end;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  /* Hide Add Surplus in topbar (already below) */
-  .top-actions .primary-btn {
-    display: none;
-  }
-}
 
 
 
