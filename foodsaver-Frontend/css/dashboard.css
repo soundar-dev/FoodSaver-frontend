@@ -485,7 +485,58 @@ MOBILE UI – FINAL & CLEAN
     transform: none;
     box-shadow: none;
   }
+
+  /* =========================
+SURPLUS TOPBAR – MOBILE FIX
+========================= */
+
+
+  /* Make surplus topbar single row */
+  .surplus-topbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  /* Hamburger always left */
+  .surplus-topbar .menu-btn {
+    display: block;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  /* Hide page title on surplus (no welcome here) */
+  .surplus-topbar h1 {
+    display: none;
+  }
+
+  /* Search should stretch */
+  .surplus-topbar .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .surplus-topbar input[type="search"] {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Keep theme + admin on right */
+  .surplus-topbar #themeToggle,
+  .surplus-topbar .avatar {
+    flex-shrink: 0;
+  }
+
+  /* Hide Add button from topbar (keep only below cards if needed) */
+  .surplus-topbar .primary-btn {
+    display: none;
+  }
+
 }
+
 
 
 
