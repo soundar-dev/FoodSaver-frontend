@@ -492,7 +492,7 @@ MOBILE UI – FINAL & CLEAN
   .sidebar {
   position: fixed;
   left: -260px;
-  top: 64px;                       /* ✅ below topbar */
+  top: 0px;                       /* ✅ below topbar */
   height: calc(100% - 64px);       /* ✅ no overlap */
   z-index: 1000;
   transition: left 0.3s ease;
@@ -649,6 +649,7 @@ REDISTRIBUTION – MOBILE ONLY
 
 
 }
+
 
 
 
