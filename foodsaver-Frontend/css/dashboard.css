@@ -647,6 +647,48 @@ body.dark .pickup-table th {
   }
 }
 
+/* =========================
+   MOBILE TOPBAR – FINAL FIX
+   ========================= */
+@media (max-width: 768px) {
+
+  .topbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    row-gap: 10px;
+  }
+
+  /* ☰ menu button – left */
+  .menu-btn {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  /* 🌙 + avatar – right corner */
+  .top-right {
+    grid-column: 3;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-self: end;
+  }
+
+  /* ✅ Welcome text – full width, visible */
+  .top-title {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    white-space: normal;     /* allow wrapping */
+    line-height: 1.3;
+  }
+}
+
 
 
 
