@@ -378,6 +378,14 @@ MOBILE ONLY (SAFE & ISOLATED)
   }
 }
 
+/* Mobile: show Add Surplus button */
+@media (max-width: 768px) {
+  .mobile-add-btn {
+    display: block;
+    margin-bottom: 16px;
+  }
+}
+
 /* Desktop: align top-right buttons properly */
 @media (min-width: 769px) {
 
@@ -392,6 +400,7 @@ MOBILE ONLY (SAFE & ISOLATED)
     font-size: 14px;
   }
 }
+
 
 
 
