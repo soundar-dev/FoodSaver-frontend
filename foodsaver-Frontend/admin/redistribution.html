@@ -125,6 +125,12 @@ function mapStatus(status) {
   return status;
 }  
 
+function statusClass(status) {
+  if (status === "ACCEPTED") return "pending";   // yellow
+  if (status === "PICKED") return "success";    // blue
+  return "available";                            // fallback
+}  
+
 /* ===== LOAD PICKUP TABLE ===== */
 function loadPickupTable() {
   fetch(`${BASE_URL}/api/surplus/all`, { headers: authHeaders() })
@@ -177,6 +183,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
