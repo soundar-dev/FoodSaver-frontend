@@ -389,21 +389,7 @@ MOBILE UI – FINAL & CLEAN
     font-size: 24px;
     cursor: pointer;
     z-index: 1100;
-  }
-
-
-
-
-
-  .sidebar {
-    top: 64px;
-    height: calc(100% - 64px);
-  }
-
-
-
-
-  
+  } 
   /*.menu-btn {
     display: block;
     position: absolute;
@@ -494,14 +480,23 @@ MOBILE UI – FINAL & CLEAN
   }
 
   /* ===== Sidebar overlay ===== */
-  .sidebar {
+  /*.sidebar {
     position: fixed;
     left: -260px;
     top: 0;
     height: 100%;
     z-index: 1000;
     transition: left 0.3s ease;
-  }
+  }*/
+
+  .sidebar {
+  position: fixed;
+  left: -260px;
+  top: 64px;                       /* ✅ below topbar */
+  height: calc(100% - 64px);       /* ✅ no overlap */
+  z-index: 1000;
+  transition: left 0.3s ease;
+}
 
   .sidebar.open {
     left: 0;
@@ -654,6 +649,7 @@ REDISTRIBUTION – MOBILE ONLY
 
 
 }
+
 
 
 
