@@ -314,74 +314,6 @@ CARD & PANEL HOVER EFFECTS
   transform: translateY(-6px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.12);
 }
-/* =========================
-MOBILE ONLY (SAFE & ISOLATED)
-========================= */
-@media (max-width: 768px) {
-
-  .menu-btn {
-    display: block;
-  }
-
-  .topbar {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto;
-    gap: 10px;
-  }
-
-  .topbar h1 {
-    grid-column: 1 / -1;
-    text-align: center;
-    font-size: 1.3rem;
-  }
-
-  .top-right {
-    grid-column: 3;
-    grid-row: 1;
-    justify-self: end;
-  }
-
-
-  .mobile-add-btn {
-    display: block;
-    margin: 12px 0;
-  }
-
-  .mobile-add-btn .primary-btn {
-    width: 100%;
-    padding: 14px;
-  }
-
-
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
-  .surplus-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card,
-  .surplus-card {
-    padding: 16px;
-  }
-
- 
-  .sidebar {
-    position: fixed;
-    left: -260px;
-    top: 0;
-    height: 100%;
-    z-index: 1000;
-    transition: left 0.3s ease;
-  }
-
-  .sidebar.open {
-    left: 0;
-  }
-
-}
 
 /* Desktop: place Add Surplus under welcome text */
 /* Desktop: hide mobile add button */
@@ -391,13 +323,13 @@ MOBILE ONLY (SAFE & ISOLATED)
   }
 }
 
-/* Mobile: show Add Surplus button */
-@media (max-width: 768px) {
+/* Mobile: show Add Surplus button 
+/*@media (max-width: 768px) {
   .mobile-add-btn {
     display: block;
     margin-bottom: 16px;
   }
-}
+}*/
 
 /* Desktop: align top-right buttons properly */
 @media (min-width: 769px) {
@@ -429,6 +361,96 @@ MOBILE ONLY (SAFE & ISOLATED)
   .surplus-topbar input[type="search"] {
     flex: 1;
     min-width: 220px;
+  }
+}
+
+/* =========================
+MOBILE UI – FINAL & CLEAN
+========================= */
+@media (max-width: 768px) {
+
+  /* Show hamburger */
+  .menu-btn {
+    display: block;
+  }
+
+  /* Sidebar overlay */
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100%;
+    z-index: 1000;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  /* Topbar layout */
+  .topbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Title centered */
+  .topbar h1 {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.4rem;
+  }
+
+  /* Right icons (🌙 + ADMIN) */
+  .top-right,
+  .top-actions {
+    justify-self: end;
+    gap: 10px;
+  }
+
+  /* Stack search + buttons neatly (Surplus page) */
+  .surplus-topbar .top-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .surplus-topbar input[type="search"] {
+    width: 100%;
+  }
+
+  .surplus-topbar .primary-btn {
+    width: 100%;
+    white-space: nowrap;
+  }
+
+  /* Cards – single column */
+  .cards,
+  .surplus-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Card spacing */
+  .card,
+  .surplus-card,
+  .panel {
+    padding: 16px;
+  }
+
+  /* Forms */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Remove hover animation on mobile */
+  .card:hover,
+  .panel:hover,
+  .surplus-card:hover {
+    transform: none;
+    box-shadow: none;
   }
 }
 
