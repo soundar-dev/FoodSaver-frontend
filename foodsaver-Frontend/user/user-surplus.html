@@ -98,18 +98,23 @@ function loadFood() {
     .then(res => res.ok ? res.json() : [])
     .then(data => {
 
-      // ✅ REMOVE EXPIRED BEFORE STORING
       allFood = data.filter(item => {
         const created = new Date(item.createdAt).getTime();
         const expiry  = created + item.expiryHours * 3600000;
-        return expiry > Date.now();
+
+        // ✅ REMOVE IF ADMIN PICKED
+        if (item.status === "PICKED") return false;
+
+        // ✅ REMOVE IF EXPIRED
+        if (expiry <= Date.now()) return false;
+
+        return true;
       });
 
       render(allFood);
       enableSearch(allFood, render);
     });
 }
-
 /* ================= SEARCH ================= */
 function enableSearch(source, renderFn) {
   searchInput.addEventListener("input", e => {
@@ -152,17 +157,15 @@ function startExpiryTimers() {
       const expiry  = created + card.dataset.expiry * 3600000;
       const diff    = expiry - Date.now();
 
-      // ✅ REMOVE CARD WHEN EXPIRED
       if (diff <= 0) {
         clearInterval(interval);
-        card.remove();
+        card.remove(); // ✅ REMOVE AFTER EXPIRY
         return;
       }
 
       const h = Math.floor(diff / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
-
       el.textContent = `${h}h ${m}m ${s}s`;
     }, 1000);
   });
@@ -181,6 +184,7 @@ logoutBtn.onclick = () => {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
