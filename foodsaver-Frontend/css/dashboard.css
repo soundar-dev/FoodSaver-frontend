@@ -472,6 +472,43 @@ body.dark .pickup-table th {
   }
 }
 
+
+/* MOBILE SIDEBAR */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    width: 260px;
+    height: 100%;
+    z-index: 1000;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .menu-btn {
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .sidebar-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+  }
+}
+
 @media (max-width: 1024px) {
   .menu-btn {
     display: block;
@@ -506,6 +543,7 @@ body.dark .pickup-table th {
     transform: translateY(0);
   }
 }
+
 
 
 
