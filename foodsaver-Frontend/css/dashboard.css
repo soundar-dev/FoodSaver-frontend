@@ -33,6 +33,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-size: 15px;
+  overscroll-behaviour:none;
 }
 
 /* =========================
@@ -403,11 +404,12 @@ MOBILE UI – FINAL & CLEAN
 
 
 
-  /* Push sidebar BELOW topbar on redistribution page */
-  .redistribution-topbar + .sidebar {
-    top: 56px; /* height of topbar */
+
+  .sidebar {
+    top: 56px;
     height: calc(100% - 56px);
   }
+
 
 
   
@@ -661,6 +663,7 @@ REDISTRIBUTION – MOBILE ONLY
 
 
 }
+
 
 
 
