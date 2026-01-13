@@ -100,7 +100,7 @@ function authHeaders() {
 
 /* ===== LOAD PICKUP SUMMARY ===== */
 function loadPickupSummary() {
-  fetch(`${BASE_URL}/api/dashboard/admin`, { headers: authHeaders() })
+  fetch(`${BASE_URL}/api/pickup/summary`, { headers: authHeaders() })
     .then(res => {
       if (res.status === 401) {
         localStorage.clear();
@@ -171,5 +171,6 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
