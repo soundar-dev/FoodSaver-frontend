@@ -374,6 +374,17 @@ MOBILE UI – FINAL & CLEAN
 ========================= */
 @media (max-width: 768px) {
 
+  /* 🔥 Kill ghost back arrow ONLY on redistribution page */
+  .redistribution-topbar::before,
+  .redistribution-topbar::after,
+  .redistribution-topbar h1::before,
+  .redistribution-topbar h1::after {
+    content: none !important;
+    display: none !important;
+  }
+
+
+
   /* ===== Header base ===== */
 
   /* Sidebar close button (❌) */
@@ -389,6 +400,16 @@ MOBILE UI – FINAL & CLEAN
     cursor: pointer;
     z-index: 1100;
   }
+
+
+
+  /* Push sidebar BELOW topbar on redistribution page */
+  .redistribution-topbar + .sidebar {
+    top: 56px; /* height of topbar */
+    height: calc(100% - 56px);
+  }
+
+
   
   /*.menu-btn {
     display: block;
@@ -445,7 +466,7 @@ MOBILE UI – FINAL & CLEAN
     text-align: center;
     padding:0 72px;
     transform: translateX(-45px);
-    pointer-events: none;
+    pointer-events: auto;
   }
 
   
@@ -640,6 +661,7 @@ REDISTRIBUTION – MOBILE ONLY
 
 
 }
+
 
 
 
