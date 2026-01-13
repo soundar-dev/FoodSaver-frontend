@@ -64,6 +64,24 @@ body {
   background: #0f766e;
 }
 
+/* Mobile sidebar overlay */
+.sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 999;
+  }
+
+  .sidebar-overlay.show {
+    display: block;
+  }
+}
+
 .sidebar nav a.active::before {
   content: "";
   position: absolute;
@@ -417,6 +435,14 @@ body.dark .pickup-table th {
     gap: 8px;
   }
 
+  .top-actions button {
+  flex: 1;
+}
+
+.top-actions .avatar {
+  flex: 0;
+}
+
   .top-actions input {
     width: 100%;
   }
@@ -449,11 +475,10 @@ body.dark .pickup-table th {
   }
 
   /* ---- Dashboard stat cards ---- */
-  .stats {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
+  .cards {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
   .card {
     padding: 16px;
   }
@@ -543,6 +568,7 @@ body.dark .pickup-table th {
     transform: translateY(0);
   }
 }
+
 
 
 
