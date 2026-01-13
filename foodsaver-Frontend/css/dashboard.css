@@ -169,6 +169,12 @@ AVATAR + BUTTONS
   cursor: pointer;
 }
 
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .outline-btn {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -422,6 +428,7 @@ SURPLUS PAGE – TOP RIGHT FIX
 .surplus-topbar .top-actions {
   align-items: center;
 }
+
 
 
 
