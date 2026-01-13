@@ -559,6 +559,18 @@ SURPLUS TOPBAR – MOBILE FIX
     display: none;
   }
 
+  /* Show mobile Add button */
+  .mobile-add-btn {
+    display: block;
+    margin: 16px 0 20px;
+  }
+
+  .mobile-add-btn .primary-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+  }
+
   /* =========================
 REDISTRIBUTION – MOBILE ONLY
 ========================= */
@@ -739,6 +751,7 @@ SETTINGS TOPBAR – MOBILE
 }
 
 }
+
 
 
 
