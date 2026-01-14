@@ -162,21 +162,24 @@ function enableSearch(sourceData) {
     renderAdmin(filtered);
   });
 }  
-
 function getExpiryText(createdAt, expiryHours) {
-  if (!expiryHours || !createdAt) return "";
+  if (!expiryHours) return "";
 
-  const created = new Date(createdAt + "Z"); // 🔥 FIX
-  const expiry  = new Date(created.getTime() + expiryHours * 3600000);
-  const now     = new Date();
+  // If backend sends createdAt
+  if (createdAt) {
+    const created = new Date(createdAt);
+    const expiry = new Date(created.getTime() + expiryHours * 60 * 60 * 1000);
+    const now = new Date();
 
-  const diffMs = expiry - now;
-  if (diffMs <= 0) return "❌ Expired";
+    const diffMs = expiry - now;
+    const diffHours = Math.ceil(diffMs / (1000 * 60 * 60));
 
-  const h = Math.floor(diffMs / 3600000);
-  const m = Math.floor((diffMs % 3600000) / 60000);
+    if (diffHours <= 0) return "❌ Expired";
+    return `⏱ Expires in ${diffHours} hrs`;
+  }
 
-  return `⏱ Expires in ${h}h ${m}m`;
+  // Fallback when createdAt is missing
+  return `⏱ Expires in ${expiryHours} hrs`;
 }
 /* ===== DELETE ===== */
 function deleteSurplus(id) {
@@ -268,6 +271,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
