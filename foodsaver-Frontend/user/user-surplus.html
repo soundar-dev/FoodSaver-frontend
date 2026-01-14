@@ -106,8 +106,10 @@ function loadFood() {
        const created = new Date(item.createdAt + "Z").getTime();
         const expiry  = created + item.expiryHours * 3600000;
 
-        // ✅ REMOVE IF ADMIN PICKED
-        if (item.status === "PICKED") return false;
+       if (item.status === "PICKED") return false;
+
+        // 🔥 hide ACCEPTED cards only for OTHER users
+        if (item.status === "ACCEPTED" && item.acceptedBy !== email) return false;
 
         // ✅ REMOVE IF EXPIRED
         if (expiry <= Date.now()) return false;
@@ -206,6 +208,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
