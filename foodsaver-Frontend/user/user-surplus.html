@@ -146,31 +146,20 @@ function startExpiryTimers() {
 
     const id = card.dataset.id;
     const expiryHours = Number(card.dataset.expiry);
-    const createdAt = new Date(card.dataset.created).getTime();
+    const createdAt = new Date(card.dataset.created + "Z").getTime(); // ✅ FIX
 
     if (!id || isNaN(expiryHours) || isNaN(createdAt)) {
       el.textContent = "—";
       return;
     }
 
-    // 🔐 KEY PER SURPLUS
-    const key = `expiry_at_${id}`;
-
-    // 🔒 STORE EXPIRY TIMESTAMP ONCE
-    let expiryAt = localStorage.getItem(key);
-    if (!expiryAt) {
-      expiryAt = createdAt + expiryHours * 3600000;
-      localStorage.setItem(key, expiryAt);
-    } else {
-      expiryAt = Number(expiryAt);
-    }
+    const expiryAt = createdAt + expiryHours * 3600000;
 
     const interval = setInterval(() => {
       const diff = expiryAt - Date.now();
 
       if (diff <= 0) {
         clearInterval(interval);
-        localStorage.removeItem(key);
         card.remove();
         return;
       }
@@ -205,6 +194,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
