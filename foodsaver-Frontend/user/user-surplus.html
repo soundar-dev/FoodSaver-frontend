@@ -155,27 +155,23 @@ function acceptFood(id) {
 function startExpiryTimers() {
   document.querySelectorAll(".surplus-card").forEach(card => {
     const el = card.querySelector(".expiry-time");
-    const expiry = new Date(card.dataset.expiryAt).getTime();
 
-    const update = () => {
-      const diff = expiry - Date.now();
+    const interval = setInterval(() => {
+      const created = new Date(card.dataset.created).getTime();
+      const expiry  = created + card.dataset.expiry * 3600000;
+      const diff    = expiry - Date.now();
 
       if (diff <= 0) {
-        el.textContent = "Expired";
-        card.remove();
+        clearInterval(interval);
+        card.remove(); // ✅ REMOVE AFTER EXPIRY
         return;
       }
 
-      const totalSeconds = Math.floor(diff / 1000);
-      const h = Math.floor(totalSeconds / 3600);
-      const m = Math.floor((totalSeconds % 3600) / 60);
-      const s = totalSeconds % 60;
-
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
       el.textContent = `${h}h ${m}m ${s}s`;
-    };
-
-    update();                    // immediate update → 9:59:59
-    setInterval(update, 1000);   // normal ticking
+    }, 1000);
   });
 }
 /* INIT */
@@ -197,6 +193,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
