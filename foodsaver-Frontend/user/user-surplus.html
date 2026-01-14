@@ -139,6 +139,18 @@ function enableSearch(source, renderFn) {
   });
 }
 
+function acceptFood(id) {
+  fetch(`${BASE_URL}/api/surplus/${id}/accept?email=${email}`, {
+    method: "PUT",
+    headers: authHeaders()
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Accept failed");
+    loadFood(); // refresh list
+  })
+  .catch(err => console.error("Accept error:", err));
+}  
+
 /* ================= ACCEPT ================= */
 function startExpiryTimers() {
   document.querySelectorAll(".surplus-card").forEach(card => {
@@ -194,6 +206,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
