@@ -103,7 +103,7 @@ function loadFood() {
     .then(data => {
 
       allFood = data.filter(item => {
-        const created = new Date(item.createdAt).getTime();
+       const created = new Date(item.createdAt + "Z").getTime();
         const expiry  = created + item.expiryHours * 3600000;
 
         // ✅ REMOVE IF ADMIN PICKED
@@ -194,6 +194,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
