@@ -165,18 +165,22 @@ function enableSearch(sourceData) {
 function getExpiryText(createdAt, expiryHours) {
   if (!expiryHours) return "";
 
-  // createdAt comes like: "2026-01-14 11:20:00"
-  // Convert safely to ISO
-  let created;
-
-  if (createdAt.includes("T")) {
-    created = new Date(createdAt); // already ISO
-  } else {
-    created = new Date(createdAt.replace(" ", "T") + "Z"); // 🔥 SAFE FIX
+  // 🔒 HARD GUARD — prevents crash
+  if (!createdAt || typeof createdAt !== "string") {
+    return `⏱ Expires in ${expiryHours} hrs`;
   }
 
+  let created;
+
+  // Handle ISO vs MySQL datetime safely
+  if (createdAt.includes("T")) {
+    created = new Date(createdAt);
+  } else {
+    created = new Date(createdAt.replace(" ", "T") + "Z");
+  }
+
+  // 🔒 If still invalid, fallback safely
   if (isNaN(created.getTime())) {
-    // fallback if parsing fails
     return `⏱ Expires in ${expiryHours} hrs`;
   }
 
@@ -282,6 +286,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
