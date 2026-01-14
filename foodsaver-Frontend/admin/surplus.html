@@ -163,27 +163,19 @@ function enableSearch(sourceData) {
   });
 }  
 function getExpiryText(createdAt, expiryHours) {
-  if (!expiryHours || !createdAt) return "";
+  if (!expiryHours) return "";
 
-  let created;
-
-  // ✅ ISO format (from backend UTC)
-  if (createdAt.includes("T")) {
-    created = new Date(createdAt);
-  }
-  // ✅ MySQL format fallback
-  else {
-    created = new Date(createdAt.replace(" ", "T") + "Z");
-  }
+  // createdAt from backend: "2026-01-14T07:42:31.123"
+  // Treat it explicitly as UTC
+  const created = new Date(createdAt + "Z");
 
   if (isNaN(created.getTime())) {
-    return "";
+    return `⏱ Expires in ${expiryHours} hrs`;
   }
 
-  const expiry = new Date(created.getTime() + expiryHours * 3600000);
-  const now = new Date();
+  const expiry = created.getTime() + expiryHours * 3600000;
+  const diffMs = expiry - Date.now();
 
-  const diffMs = expiry - now;
   if (diffMs <= 0) return "❌ Expired";
 
   const h = Math.floor(diffMs / 3600000);
@@ -281,6 +273,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
