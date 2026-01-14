@@ -140,58 +140,44 @@ function enableSearch(source, renderFn) {
 }
 
 /* ================= ACCEPT ================= */
-function acceptFood(id) {
-  fetch(`${BASE_URL}/api/surplus/${id}/accept?email=${email}`, {
-    method: "PUT",
-    headers: authHeaders()
-  }).then(() => {
-    const item = allFood.find(f => f.id === id);
-    if (item) item.status = "ACCEPTED";
-    render(allFood);
-  });
-}
-
-/* ================= LIVE EXPIRY TIMER ================= */
 function startExpiryTimers() {
   document.querySelectorAll(".surplus-card").forEach(card => {
     const el = card.querySelector(".expiry-time");
 
+    const id = card.dataset.id;
     const expiryHours = Number(card.dataset.expiry);
-    const surplusId = card.dataset.id;
+    const createdAt = new Date(card.dataset.created).getTime();
 
-    if (!surplusId || isNaN(expiryHours)) {
+    if (!id || isNaN(expiryHours) || isNaN(createdAt)) {
       el.textContent = "—";
       return;
     }
 
-    const STORAGE_KEY = `expiry_start_${surplusId}`;
+    // 🔐 KEY PER SURPLUS
+    const key = `expiry_at_${id}`;
 
-    // ⏱ get or set start time
-    let startTime = localStorage.getItem(STORAGE_KEY);
-
-    if (!startTime) {
-      startTime = Date.now();
-      localStorage.setItem(STORAGE_KEY, startTime);
+    // 🔒 STORE EXPIRY TIMESTAMP ONCE
+    let expiryAt = localStorage.getItem(key);
+    if (!expiryAt) {
+      expiryAt = createdAt + expiryHours * 3600000;
+      localStorage.setItem(key, expiryAt);
     } else {
-      startTime = Number(startTime);
+      expiryAt = Number(expiryAt);
     }
 
-    const expiryMs = expiryHours * 3600000;
-
     const interval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const remainingMs = expiryMs - elapsed;
+      const diff = expiryAt - Date.now();
 
-      if (remainingMs <= 0) {
+      if (diff <= 0) {
         clearInterval(interval);
-        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(key);
         card.remove();
         return;
       }
 
-      const h = Math.floor(remainingMs / 3600000);
-      const m = Math.floor((remainingMs % 3600000) / 60000);
-      const s = Math.floor((remainingMs % 60000) / 1000);
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
 
       el.textContent =
         `${String(h).padStart(2, "0")}h ` +
@@ -219,6 +205,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
