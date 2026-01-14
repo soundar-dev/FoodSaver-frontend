@@ -70,6 +70,7 @@ function render(data) {
   data.forEach(item => {
     grid.innerHTML += `
      <div class="surplus-card"
+     data-id="${item.id}"
      data-created="${item.createdAt}"
      data-expiry="${item.expiryHours}">
         <h3>${item.foodName}</h3>
@@ -156,19 +157,34 @@ function startExpiryTimers() {
     const el = card.querySelector(".expiry-time");
 
     const expiryHours = Number(card.dataset.expiry);
-    if (isNaN(expiryHours)) {
+    const surplusId = card.dataset.id;
+
+    if (!surplusId || isNaN(expiryHours)) {
       el.textContent = "—";
       return;
     }
 
-    // 🔥 START FROM NOW (not createdAt)
-    let remainingMs = expiryHours * 3600000;
+    const STORAGE_KEY = `expiry_start_${surplusId}`;
+
+    // ⏱ get or set start time
+    let startTime = localStorage.getItem(STORAGE_KEY);
+
+    if (!startTime) {
+      startTime = Date.now();
+      localStorage.setItem(STORAGE_KEY, startTime);
+    } else {
+      startTime = Number(startTime);
+    }
+
+    const expiryMs = expiryHours * 3600000;
 
     const interval = setInterval(() => {
-      remainingMs -= 1000;
+      const elapsed = Date.now() - startTime;
+      const remainingMs = expiryMs - elapsed;
 
       if (remainingMs <= 0) {
         clearInterval(interval);
+        localStorage.removeItem(STORAGE_KEY);
         card.remove();
         return;
       }
@@ -203,6 +219,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
