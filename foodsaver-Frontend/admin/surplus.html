@@ -163,10 +163,22 @@ function enableSearch(sourceData) {
   });
 }  
 function getExpiryText(createdAt, expiryHours) {
-  if (!expiryHours || !createdAt) return "";
+  if (!expiryHours) return "";
 
-  // ✅ FORCE UTC
-  const created = new Date(createdAt + "Z");
+  // createdAt comes like: "2026-01-14 11:20:00"
+  // Convert safely to ISO
+  let created;
+
+  if (createdAt.includes("T")) {
+    created = new Date(createdAt); // already ISO
+  } else {
+    created = new Date(createdAt.replace(" ", "T") + "Z"); // 🔥 SAFE FIX
+  }
+
+  if (isNaN(created.getTime())) {
+    // fallback if parsing fails
+    return `⏱ Expires in ${expiryHours} hrs`;
+  }
 
   const expiry = new Date(created.getTime() + expiryHours * 3600000);
   const now = new Date();
@@ -176,8 +188,9 @@ function getExpiryText(createdAt, expiryHours) {
 
   const h = Math.floor(diffMs / 3600000);
   const m = Math.floor((diffMs % 3600000) / 60000);
+  const s = Math.floor((diffMs % 60000) / 1000);
 
-  return `⏱ Expires in ${h}h ${m}m`;
+  return `⏱ Expires in ${h}h ${m}m ${s}s`;
 }
 /* ===== DELETE ===== */
 function deleteSurplus(id) {
@@ -269,6 +282,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
