@@ -156,21 +156,32 @@ function startExpiryTimers() {
   document.querySelectorAll(".surplus-card").forEach(card => {
     const el = card.querySelector(".expiry-time");
 
-    const interval = setInterval(() => {
-      const created = new Date(card.dataset.created).getTime();
-      const expiry  = created + card.dataset.expiry * 3600000;
-      const diff    = expiry - Date.now();
+    const expiryHours = Number(card.dataset.expiry);
+    if (isNaN(expiryHours)) {
+      el.textContent = "—";
+      return;
+    }
 
-      if (diff <= 0) {
+    // 🔥 START FROM NOW (not createdAt)
+    let remainingMs = expiryHours * 3600000;
+
+    const interval = setInterval(() => {
+      remainingMs -= 1000;
+
+      if (remainingMs <= 0) {
         clearInterval(interval);
-        card.remove(); // ✅ REMOVE AFTER EXPIRY
+        card.remove();
         return;
       }
 
-      const h = Math.floor(diff / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      el.textContent = `${h}h ${m}m ${s}s`;
+      const h = Math.floor(remainingMs / 3600000);
+      const m = Math.floor((remainingMs % 3600000) / 60000);
+      const s = Math.floor((remainingMs % 60000) / 1000);
+
+      el.textContent =
+        `${String(h).padStart(2, "0")}h ` +
+        `${String(m).padStart(2, "0")}m ` +
+        `${String(s).padStart(2, "0")}s`;
     }, 1000);
   });
 }
@@ -193,6 +204,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
