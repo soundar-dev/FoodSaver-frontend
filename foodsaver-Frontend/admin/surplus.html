@@ -165,7 +165,21 @@ function enableSearch(sourceData) {
 function getExpiryText(createdAt, expiryHours) {
   if (!expiryHours || !createdAt) return "";
 
-  const created = new Date(createdAt.replace(" ", "T") + "Z"); // UTC-safe
+  let created;
+
+  // ✅ ISO format (from backend UTC)
+  if (createdAt.includes("T")) {
+    created = new Date(createdAt);
+  }
+  // ✅ MySQL format fallback
+  else {
+    created = new Date(createdAt.replace(" ", "T") + "Z");
+  }
+
+  if (isNaN(created.getTime())) {
+    return "";
+  }
+
   const expiry = new Date(created.getTime() + expiryHours * 3600000);
   const now = new Date();
 
@@ -174,9 +188,8 @@ function getExpiryText(createdAt, expiryHours) {
 
   const h = Math.floor(diffMs / 3600000);
   const m = Math.floor((diffMs % 3600000) / 60000);
-  const s = Math.floor((diffMs % 60000) / 1000);
 
-  return `⏱ Expires in ${h}h ${m}m ${s}s`;
+  return `⏱ Expires in ${h}h ${m}m`;
 }
 /* ===== DELETE ===== */
 function deleteSurplus(id) {
@@ -268,6 +281,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
