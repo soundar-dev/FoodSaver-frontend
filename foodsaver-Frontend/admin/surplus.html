@@ -164,25 +164,20 @@ function enableSearch(sourceData) {
 }  
 
 function getExpiryText(createdAt, expiryHours) {
-  if (!expiryHours) return "";
+  if (!expiryHours || !createdAt) return "";
 
-  // If backend sends createdAt
-  if (createdAt) {
-    const created = new Date(createdAt);
-    const expiry = new Date(created.getTime() + expiryHours * 60 * 60 * 1000);
-    const now = new Date();
+  const created = new Date(createdAt + "Z"); // 🔥 FIX
+  const expiry  = new Date(created.getTime() + expiryHours * 3600000);
+  const now     = new Date();
 
-    const diffMs = expiry - now;
-    const diffHours = Math.ceil(diffMs / (1000 * 60 * 60));
+  const diffMs = expiry - now;
+  if (diffMs <= 0) return "❌ Expired";
 
-    if (diffHours <= 0) return "❌ Expired";
-    return `⏱ Expires in ${diffHours} hrs`;
-  }
+  const h = Math.floor(diffMs / 3600000);
+  const m = Math.floor((diffMs % 3600000) / 60000);
 
-  // Fallback when createdAt is missing
-  return `⏱ Expires in ${expiryHours} hrs`;
-}  
-
+  return `⏱ Expires in ${h}h ${m}m`;
+}
 /* ===== DELETE ===== */
 function deleteSurplus(id) {
   fetch(`${API_BASE}/${id}`, {
@@ -273,6 +268,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
