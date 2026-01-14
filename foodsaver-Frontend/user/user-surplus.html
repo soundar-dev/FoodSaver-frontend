@@ -70,9 +70,8 @@ function render(data) {
 
   data.forEach(item => {
     grid.innerHTML += `
-      <div class="surplus-card"
-           data-created="${item.createdAt}"
-           data-expiry="${item.expiryHours}">
+     <div class="surplus-card"
+     data-expiry-at="${item.expiryAt}">
         <h3>${item.foodName}</h3>
         <p>📍 ${item.location}</p>
         <p>👥 Serves: ${item.quantity}</p>
@@ -200,6 +199,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
