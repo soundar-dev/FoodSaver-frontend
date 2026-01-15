@@ -841,12 +841,13 @@ USER SURPLUS – MOBILE (FINAL, STABLE)
   }
 
 
-  /* .user-topbar .top-actions {
+  .user-topbar .top-actions {
     position: static !important;
-    right: auto !important; */
+    right: auto !important;
   
 }
 }
+
 
 
 
