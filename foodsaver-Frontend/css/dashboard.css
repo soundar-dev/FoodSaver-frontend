@@ -22,6 +22,10 @@ body.dark {
   --border: #334155;
 }
 
+body {
+  border: 10px solid red !important;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -850,6 +854,7 @@ USER AVAILABLE FOOD – FORCE FIX (FINAL)
 
 
 }
+
 
 
 
