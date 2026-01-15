@@ -837,13 +837,13 @@ USER SURPLUS – MOBILE FIX (TITLE KEPT)
     margin: 8px auto 0;
   }
 
-
-
   .user-topbar .top-actions {
-    position: static;   /* ⬅️ cancel global absolute */
-  }
-
+    position: static !important;
+    right: auto !important;
+  
 }
+}
+
 
 
 
