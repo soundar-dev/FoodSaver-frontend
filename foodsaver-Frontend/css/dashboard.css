@@ -663,8 +663,7 @@ REDISTRIBUTION – MOBILE ONLY
   /* =========================
 SETTINGS TOPBAR – MOBILE
 ========================= */
-
-
+ 
   .settings-topbar {
     display: flex;
     align-items: center;
@@ -673,35 +672,32 @@ SETTINGS TOPBAR – MOBILE
     padding: 14px 12px;
   }
 
-  /* LEFT GROUP: ☰ + 🌙 */
-  .settings-topbar .settings-left {
+  /* ☰ LEFT */
+  .settings-topbar .menu-btn {
     position: absolute;
     left: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .settings-topbar .menu-btn {
     font-size: 22px;
   }
 
-  #themeToggle {
-    padding: 6px 8px;
-    border-radius: 10px;
-  }
-
-  /* CENTER TITLE */
+  /* TITLE CENTER */
   .settings-topbar h1 {
     margin: 0;
     font-size: 1.4rem;
     text-align: center;
   }
 
-  /* RIGHT NGO */
-  .settings-topbar .avatar {
+  /* 🌙 + NGO RIGHT */
+  .settings-topbar .settings-right {
     position: absolute;
     right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #themeToggle {
+    padding: 6px 8px;
+    border-radius: 10px;
   }
 
 
@@ -826,6 +822,7 @@ USER AVAILABLE FOOD – MOBILE HEADER (FIXED)
     all: unset;
   }
 }
+
 
 
 
