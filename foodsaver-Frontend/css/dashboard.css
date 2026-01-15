@@ -857,13 +857,17 @@ USER SURPLUS – MOBILE FIX (TITLE KEPT)
     padding-right: 16px;
   }
 
+  /* 🎯 USER SURPLUS – right controls alignment */
+  .user-topbar .top-actions {
+    margin-right: 6px;   /* pull 🌙 + NGO slightly left */
+  }
 
-
-
-
-
+  .user-topbar .avatar {
+    margin-left: 4px;    /* breathing space from 🌙 */
+  }
 
 }
+
 
 
 
