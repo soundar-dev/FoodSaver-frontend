@@ -406,7 +406,7 @@ MOBILE UI – FINAL & CLEAN
     position: relative;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
+    justify-content: center;
     padding: 12px 0;
   }
 
@@ -449,7 +449,7 @@ MOBILE UI – FINAL & CLEAN
     font-size: 1.35rem;
     text-align: center;
     padding:0 72px;
-    /* transform: translateX(-45px); */
+    transform: translateX(-45px);
     pointer-events: auto;
   }
 
@@ -851,6 +851,7 @@ USER SURPLUS – MOBILE (FINAL, STABLE)
   
 }
 }
+
 
 
 
