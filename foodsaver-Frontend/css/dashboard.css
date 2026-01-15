@@ -721,6 +721,43 @@ SETTINGS TOPBAR – MOBILE
   gap: 18px;
 }
 
+  .settings-topbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 12px;
+  }
+
+  /* ☰ + 🌙 on LEFT */
+  .settings-topbar .menu-btn {
+    position: absolute;
+    left: 12px;
+    font-size: 22px;
+  }
+
+  .settings-topbar .settings-left {
+    position: absolute;
+    left: 52px; /* close to hamburger */
+    display: flex;
+    align-items: center;
+  }
+
+  /* Title CENTER */
+  .settings-topbar h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  /* NGO on RIGHT */
+  .settings-topbar .settings-right {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+  }
+
   /* ===== Preferences toggles ===== */
 
 .toggle {
@@ -841,6 +878,7 @@ USER AVAILABLE FOOD – MOBILE HEADER (FIXED)
     all: unset;
   }
 }
+
 
 
 
