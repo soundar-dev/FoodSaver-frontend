@@ -833,8 +833,26 @@ USER SURPLUS – MOBILE FIX (TITLE KEPT)
 
 
 
+  /* 🔍 Reduce search bar height */
+  .user-topbar input[type="search"] {
+    padding: 8px 12px;      /* was bigger */
+    font-size: 14px;
+    border-radius: 12px;
+  }
+
+  /* ☰ Move hamburger slightly up */
+  .user-topbar .menu-btn {
+    position: relative;
+    top: -4px;              /* move up gently */
+  }
+
+
+
+
+
 
 }
+
 
 
 
