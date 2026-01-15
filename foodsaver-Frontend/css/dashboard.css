@@ -663,48 +663,47 @@ REDISTRIBUTION – MOBILE ONLY
   /* =========================
 SETTINGS TOPBAR – MOBILE
 ========================= */
-/* =========================
-SETTINGS TOPBAR – MOBILE (FIXED)
-========================= */
 
 
   .settings-topbar {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     padding: 14px 12px;
   }
 
-  /* ☰ hamburger */
-  .settings-topbar .menu-btn {
+  /* LEFT GROUP: ☰ + 🌙 */
+  .settings-topbar .settings-left {
     position: absolute;
     left: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .settings-topbar .menu-btn {
     font-size: 22px;
   }
 
-  /* 🌙 near hamburger */
-  .settings-topbar #themeToggle {
-    position: absolute;
-    left: 52px;
-    background: none;
-    border: none;
-    padding: 6px;
-    font-size: 18px;
+  #themeToggle {
+    padding: 6px 8px;
+    border-radius: 10px;
   }
 
-  /* Title center */
+  /* CENTER TITLE */
   .settings-topbar h1 {
     margin: 0;
     font-size: 1.4rem;
     text-align: center;
   }
 
-  /* NGO right */
+  /* RIGHT NGO */
   .settings-topbar .avatar {
     position: absolute;
     right: 12px;
   }
+
 
 
   /* ===== Preferences toggles ===== */
@@ -827,6 +826,7 @@ USER AVAILABLE FOOD – MOBILE HEADER (FIXED)
     all: unset;
   }
 }
+
 
 
 
