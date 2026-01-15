@@ -663,64 +663,6 @@ REDISTRIBUTION – MOBILE ONLY
   /* =========================
 SETTINGS TOPBAR – MOBILE
 ========================= */
-
-.settings-topbar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 0;
-}
-
-/* Hamburger – LEFT */
-.settings-topbar .menu-btn {
-  display: block;
-  position: absolute;
-  left: 12px;
-  font-size: 22px;
-  z-index: 900;
-}
-
-/* Title – CENTER */
-.settings-topbar h1 {
-  margin: 0;
-  font-size: 1.4rem;
-  text-align: center;
-}
-
-/* Right side – theme + admin */
-.settings-topbar .top-right {
-  position: absolute;
-  right: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Hide any accidental buttons */
-.settings-topbar .primary-btn {
-  display: none;
-}
-
-  /* ===== Settings form spacing ===== */
-
-.settings-topbar + .panel label {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 6px;
-}
-
-.settings-topbar + .panel input {
-  padding: 12px 14px;
-  border-radius: 12px;
-  font-size: 15px;
-}
-
-.settings-topbar + .panel .form-grid {
-  gap: 18px;
-}
-
   .settings-topbar {
     position: relative;
     display: flex;
@@ -729,33 +671,41 @@ SETTINGS TOPBAR – MOBILE
     padding: 14px 12px;
   }
 
-  /* ☰ + 🌙 on LEFT */
+  /* ☰ hamburger */
   .settings-topbar .menu-btn {
     position: absolute;
     left: 12px;
     font-size: 22px;
   }
 
+  /* 🌙 next to hamburger */
   .settings-topbar .settings-left {
     position: absolute;
-    left: 52px; /* close to hamburger */
+    left: 52px;
     display: flex;
     align-items: center;
   }
 
-  /* Title CENTER */
+  /* title center */
   .settings-topbar h1 {
     margin: 0;
     font-size: 1.4rem;
     text-align: center;
   }
 
-  /* NGO on RIGHT */
+  /* NGO right */
   .settings-topbar .settings-right {
     position: absolute;
     right: 12px;
     display: flex;
     align-items: center;
+  }
+
+  /* remove pill look */
+  .settings-topbar #themeToggle {
+    background: none;
+    border: none;
+    padding: 6px;
   }
 
   /* ===== Preferences toggles ===== */
@@ -878,6 +828,7 @@ USER AVAILABLE FOOD – MOBILE HEADER (FIXED)
     all: unset;
   }
 }
+
 
 
 
