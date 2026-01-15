@@ -834,11 +834,15 @@ USER SURPLUS – MOBILE FIX (TITLE KEPT)
 
 
   /* 🔍 Reduce search bar height */
+
+
+  /* 🔍 Reduce search bar LENGTH (width) */
   .user-topbar input[type="search"] {
-    padding: 8px 12px;      /* was bigger */
-    font-size: 14px;
-    border-radius: 12px;
+    flex: 0.85;          /* ⬅️ key line (was flex:1) */
+    min-width: 140px;    /* safety so it won’t collapse */
   }
+
+
 
   /* ☰ Move hamburger slightly up */
   .user-topbar .menu-btn {
@@ -852,6 +856,7 @@ USER SURPLUS – MOBILE FIX (TITLE KEPT)
 
 
 }
+
 
 
 
