@@ -793,6 +793,7 @@ USER SURPLUS – MOBILE FIX (TITLE KEPT)
   /* USER SURPLUS HEADER — FINAL */
  
 
+
   .user-topbar {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -837,11 +838,13 @@ USER SURPLUS – MOBILE FIX (TITLE KEPT)
   }
 
 
+
   .user-topbar .top-actions {
     position: static;   /* ⬅️ cancel global absolute */
   }
 
 }
+
 
 
 
