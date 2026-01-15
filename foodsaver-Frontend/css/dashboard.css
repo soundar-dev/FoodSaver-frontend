@@ -793,71 +793,46 @@ SETTINGS TOPBAR – MOBILE
   /* =========================
 USER SURPLUS – MOBILE FIX (TITLE KEPT)
 ========================= */
-
-
-  /* USER SURPLUS HEADER — FINAL */
- 
-
-
-  /* =========================
-USER SURPLUS – MOBILE (FINAL, STABLE)
-========================= */
-  
-  /* =========================
-USER AVAILABLE FOOD – ALIGN LIKE DASHBOARD
-========================= */
-
-
-
   .user-topbar {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;   /* title centered */
+    justify-content: center;
     padding: 14px 0;
   }
 
-  /* ☰ hamburger – LEFT */
+  /* ☰ left */
   .user-topbar .menu-btn {
     position: absolute;
     left: 12px;
     font-size: 22px;
-    z-index: 10;
   }
 
-  /* 🌙 + NGO – RIGHT (FIXED) */
-  .user-top-actions {
+  /* 🌙 + NGO right — IMPORTANT */
+  .user-topbar .user-top-actions {
     position: absolute;
     right: 12px;
     display: flex;
     align-items: center;
     gap: 10px;
-    z-index: 10;
   }
 
-  /* TITLE – CENTER (NO TRANSFORM, NO HACKS) */
+  /* title center */
   .user-topbar h1 {
     margin: 0;
     font-size: 1.35rem;
-    text-align: center;
     white-space: nowrap;
   }
 
-  /* SEARCH BAR – BELOW HEADER */
+  /* search below */
   .user-topbar input[type="search"] {
     width: 92%;
     margin: 14px auto 0;
     display: block;
   }
 
-
-
-  .user-topbar .top-actions {
-    position: static !important;
-    right: auto !important;
-  
 }
-}
+
 
 
 
