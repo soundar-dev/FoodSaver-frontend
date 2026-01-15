@@ -41,14 +41,15 @@ if (!token || role?.toUpperCase() !== "USER") {
   <main class="content">
 
     <!-- TOP BAR -->
-    <header class="topbar settings-topbar">
-  <div class="settings-left">
-    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-  </div>
+   <header class="topbar settings-topbar">
+  <button class="menu-btn" onclick="toggleSidebar()">☰</button>
 
   <h1>Settings</h1>
-    <button id="themeToggle" class="outline-btn">🌙</button>   
-  <div class="avatar">NGO</div>
+
+  <div class="settings-right">
+    <button id="themeToggle" class="outline-btn">🌙</button>
+    <div class="avatar">NGO</div>
+  </div>
 </header>
     <!-- ORGANIZATION PROFILE -->
     <section class="panel">
@@ -171,6 +172,7 @@ logoutBtn.onclick = () => {
 
 </body>
 </html>
+
 
 
 
