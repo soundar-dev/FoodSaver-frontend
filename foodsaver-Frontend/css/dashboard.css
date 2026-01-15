@@ -801,27 +801,27 @@ USER AVAILABLE FOOD – MOBILE HEADER (FIXED)
   /* =========================
 USER AVAILABLE FOOD – MOBILE (FINAL OVERRIDE)
 ========================= */
-
-
-  /* Header container */
   .user-topbar {
-    position: relative;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
     align-items: center;
-    justify-content: center;
-    padding: 14px 12px 12px;
+    row-gap: 14px;
+    padding: 14px 12px 16px;
+    position: relative;
   }
 
   /* ☰ Hamburger – LEFT */
   .user-topbar .menu-btn {
-    position: absolute;
-    left: 12px;
+    grid-column: 1;
+    grid-row: 1;
     font-size: 22px;
-    z-index: 10;
   }
 
   /* Title – CENTER */
   .user-topbar h1 {
+    grid-column: 2;
+    grid-row: 1;
     margin: 0;
     font-size: 1.35rem;
     text-align: center;
@@ -830,25 +830,22 @@ USER AVAILABLE FOOD – MOBILE (FINAL OVERRIDE)
 
   /* 🌙 + NGO – RIGHT */
   .user-topbar .user-top-actions {
-    position: absolute;
-    right: 12px;
+    grid-column: 3;
+    grid-row: 1;
     display: flex;
     align-items: center;
     gap: 10px;
-    z-index: 10;
   }
 
-  /* 🔍 Search – BELOW title */
+  /* 🔍 Search – FULL WIDTH BELOW */
   .user-topbar input[type="search"] {
-    display: block;
-    width: calc(100% - 24px);
-    margin: 14px auto 0;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
   }
-
-
-
 
 }
+
 
 
 
