@@ -782,11 +782,12 @@ SETTINGS TOPBAR – MOBILE
     margin: 0;
     font-size: 1.35rem;
     text-align: center;
-    white-space: nowrap;
+    /* white-space: nowrap; */
   }
 
 
 }
+
 
 
 
