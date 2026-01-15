@@ -750,7 +750,44 @@ SETTINGS TOPBAR – MOBILE
   display: block;
 }
 
+ 
+
+  .dashboard-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 14px 0;
+  }
+
+  /* ☰ hamburger */
+  .dashboard-topbar .menu-btn {
+    position: absolute;
+    left: 12px;
+    font-size: 22px;
+    z-index: 900;
+  }
+
+  /* 🌙 + NGO */
+  .dashboard-topbar .top-actions {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Title stays centered */
+  .dashboard-topbar h1 {
+    margin: 0;
+    font-size: 1.35rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+
 }
+
 
 
 
