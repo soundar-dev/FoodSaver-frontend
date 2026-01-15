@@ -801,35 +801,39 @@ USER AVAILABLE FOOD – MOBILE HEADER (FIXED)
   /* =========================
 USER AVAILABLE FOOD – MOBILE (FINAL OVERRIDE)
 ========================= */
-  .user-topbar {
-    display: grid;
+  /* =========================================
+USER AVAILABLE FOOD – FORCE FIX (FINAL)
+========================================= */
+
+
+  header.user-topbar {
+    display: grid !important;
     grid-template-columns: auto 1fr auto;
     grid-template-rows: auto auto;
     align-items: center;
     row-gap: 14px;
     padding: 14px 12px 16px;
-    position: relative;
   }
 
-  /* ☰ Hamburger – LEFT */
-  .user-topbar .menu-btn {
+  header.user-topbar .menu-btn {
+    position: static !important;
     grid-column: 1;
     grid-row: 1;
     font-size: 22px;
   }
 
-  /* Title – CENTER */
-  .user-topbar h1 {
+  header.user-topbar h1 {
     grid-column: 2;
     grid-row: 1;
-    margin: 0;
+    margin: 0 !important;
     font-size: 1.35rem;
     text-align: center;
     white-space: nowrap;
+    transform: none !important;
   }
 
-  /* 🌙 + NGO – RIGHT */
-  .user-topbar .user-top-actions {
+  header.user-topbar .user-top-actions {
+    position: static !important;
     grid-column: 3;
     grid-row: 1;
     display: flex;
@@ -837,14 +841,16 @@ USER AVAILABLE FOOD – MOBILE (FINAL OVERRIDE)
     gap: 10px;
   }
 
-  /* 🔍 Search – FULL WIDTH BELOW */
-  .user-topbar input[type="search"] {
+  header.user-topbar input[type="search"] {
     grid-column: 1 / -1;
     grid-row: 2;
-    width: 100%;
+    width: 100% !important;
+    margin: 0 !important;
   }
 
+
 }
+
 
 
 
