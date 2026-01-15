@@ -833,14 +833,15 @@ USER SURPLUS – MOBILE FIX (TITLE KEPT)
 
 
 
-  /* 🔍 Reduce search bar height */
 
 
-  /* 🔍 Reduce search bar LENGTH (width) */
+  /* 🎯 USER SURPLUS: shorten search BAR LENGTH */
   .user-topbar input[type="search"] {
-    flex: 0.85;          /* ⬅️ key line (was flex:1) */
-    min-width: 140px;    /* safety so it won’t collapse */
+    max-width: 85%;        /* ⬅️ key line */
+    margin: 8px auto 0;   /* center it */
+    display: block;
   }
+
 
 
 
@@ -856,6 +857,7 @@ USER SURPLUS – MOBILE FIX (TITLE KEPT)
 
 
 }
+
 
 
 
