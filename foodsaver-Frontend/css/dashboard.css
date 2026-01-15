@@ -423,14 +423,14 @@ MOBILE UI – FINAL & CLEAN
 
 
   /* Right controls – theme + admin */
-  .top-right,
+  /* .top-right,
   .top-actions {
     position: absolute;
     right: 12px;
     display: flex;
     align-items: center;
     gap: 10px;
-  }
+  } */
 
   
 
@@ -840,6 +840,7 @@ USER SURPLUS – MOBILE FIX (TITLE KEPT)
 
 
 }
+
 
 
 
