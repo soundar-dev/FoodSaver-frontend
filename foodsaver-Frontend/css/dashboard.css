@@ -443,9 +443,9 @@ MOBILE UI – FINAL & CLEAN
     margin: 0;
     font-size: 1.35rem;
     text-align: center;
-    padding:0 72px;
-    transform: translateX(-45px);
-    pointer-events: auto;
+    padding:0 90px;
+    /* transform: translateX(-45px); */
+    white-space: nowrap;
   }
 
   
@@ -751,6 +751,7 @@ SETTINGS TOPBAR – MOBILE
 }
 
 }
+
 
 
 
