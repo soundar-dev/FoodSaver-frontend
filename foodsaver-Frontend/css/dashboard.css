@@ -651,24 +651,20 @@ ADMIN SURPLUS PAGE ONLY
     width: 100%;
 }
 
-  .admin-dashboard-title {
-    display: block;
-    text-align: center;
-    line-height: 1.25;
-    font-weight: 700;
-
-    /* allow two-line layout */
-    white-space: normal;
+  .topbar .admin-dashboard-title {
+    white-space: normal !important;
     word-break: break-word;
 
-    /* spacing safety */
-    padding-left: 40px;   /* ☰ */
-    padding-right: 180px; /* 🌙 + avatar */
+    padding-left: 40px;    /* ☰ */
+    padding-right: 200px;  /* 🌙 + avatar */
 
-    /* visual clarity */
+    text-align: center;
+    line-height: 1.3;
+    font-weight: 700;
     font-size: clamp(1.05rem, 4.5vw, 1.35rem);
   }
 }
+
 
 
 
