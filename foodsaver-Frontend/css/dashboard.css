@@ -837,13 +837,17 @@ ADMIN TOPBAR – MOBILE FIX
   }
 
   /* TITLE PERFECT CENTER */
-  .admin-topbar h1 {
-    margin: 0;
-    text-align: center;
-    font-size: 1.35rem;
-    transform: none;      /* 🔥 kills old hacks */
-    padding: 0;           /* 🔥 removes side bias */
-  }
+ .admin-topbar h1 {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.35rem;
+
+  /* 🔥 THIS FIXES THE DROP */
+  max-width: calc(100% - 140px); 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
   /* RIGHT ACTIONS */
   .admin-topbar .top-right {
@@ -859,6 +863,7 @@ ADMIN TOPBAR – MOBILE FIX
     display: none;
   }
 }
+
 
 
 
