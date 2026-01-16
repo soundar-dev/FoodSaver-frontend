@@ -652,17 +652,24 @@ ADMIN SURPLUS PAGE ONLY
 }
 
   .admin-dashboard-title {
-    white-space: normal;        /* allow wrap */
-    line-height: 1.25;
+    display: block;
     text-align: center;
+    line-height: 1.25;
+    font-weight: 700;
 
-    /* ⛔ REAL FIX */
-    padding-left: 40px;         /* ☰ */
-    padding-right: 180px;       /* 🌙 + avatar (REAL width) */
-
+    /* allow two-line layout */
+    white-space: normal;
     word-break: break-word;
+
+    /* spacing safety */
+    padding-left: 40px;   /* ☰ */
+    padding-right: 180px; /* 🌙 + avatar */
+
+    /* visual clarity */
+    font-size: clamp(1.05rem, 4.5vw, 1.35rem);
   }
 }
+
 
 
 
