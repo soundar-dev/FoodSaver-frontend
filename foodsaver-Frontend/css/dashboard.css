@@ -554,18 +554,18 @@ MOBILE UI – FINAL & CLEAN
   margin-bottom: 4px;
   display: block;
 }
-
- /* =========================
-MOBILE TOPBAR — FINAL (CLEAN)
-========================= *
-  /* ===== BASE TOPBAR ===== */
+/* =========================
+MOBILE TOPBAR — SAFE & UNIFIED
+(ONLY affects mobile topbar)
+========================= */
+  /* BASE TOPBAR */
   .topbar {
     position: relative;
     display: flex;
-    align-items: flex-start;   /* 🔑 CRITICAL */
+    align-items: center;
     justify-content: center;
-    padding: 12px 12px 8px;
-    margin-bottom: 12px;
+    padding: 14px 12px;
+    margin-bottom: 16px;
   }
 
   /* ☰ LEFT */
@@ -573,53 +573,42 @@ MOBILE TOPBAR — FINAL (CLEAN)
     display: block;
     position: absolute;
     left: 12px;
-    top: 14px;
-    font-size: 22px;
     background: none;
     border: none;
+    font-size: 22px;
     cursor: pointer;
     z-index: 2;
   }
 
+  /* TITLE — TRUE CENTER, NO COLLISION */
+  .topbar h1,
+  .topbar .top-title {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    font-size: clamp(1rem, 4.5vw, 1.35rem);
+    font-weight: 700;
+    line-height: 1.25;
+    white-space: nowrap;
+
+    /* reserve space for buttons */
+    padding-left: 40px;   /* ☰ */
+    padding-right: 120px; /* 🌙 + avatar / buttons */
+  }
+
   /* RIGHT CONTROLS */
-  .topbar .top-right {
+  .topbar .top-right,
+  .topbar .top-actions,
+  .topbar .admin-right,
+  .topbar .settings-right,
+  .topbar .user-top-actions {
     position: absolute;
     right: 12px;
-    top: 10px;
     display: flex;
     align-items: center;
     gap: 8px;
     z-index: 2;
   }
-
-  /* =========================
-ADMIN DASHBOARD TITLE ONLY
-========================= */
-  .topbar .admin-dashboard-title {
-    margin: 0;
-    text-align: center;
-    font-weight: 700;
-
-    /* ✅ EXACT BEHAVIOR YOU WANT */
-    white-space: normal;      /* allow wrap */
-    word-break: keep-all;     /* 🚫 no character breaks */
-    overflow-wrap: normal;    /* 🚫 no forced wrap */
-
-    line-height: 1.25;        /* tight spacing */
-    max-width: 100%;
-
-    /* reserve space */
-    padding-left: 40px;       /* ☰ */
-    padding-right: 160px;     /* 🌙 + avatar */
-
-    font-size: clamp(1.05rem, 4.5vw, 1.35rem);
-  }
-
-  /* Hide desktop add button in header */
-  .topbar .primary-btn {
-    display: none;
-  }
-  
 
   /* =========================
 ADMIN SURPLUS PAGE ONLY
@@ -662,13 +651,18 @@ ADMIN SURPLUS PAGE ONLY
     width: 100%;
 }
 
- 
+  .topbar .admin-dashboard-title {
+    white-space: normal;          /* allow wrapping */
+    word-break: keep-all;         /* 🚫 NO character breaking */
+    overflow-wrap: normal;        /* 🚫 NO forced wrapping */
+
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.3;
+
+    padding-left: 40px;           /* ☰ */
+    padding-right: 180px;         /* 🌙 + avatar */
+
+    font-size: clamp(1.05rem, 4.5vw, 1.35rem);
+  }
 }
-
-
-
-
-
-
-
-
