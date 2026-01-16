@@ -658,6 +658,8 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+     margin-bottom: 8px;   
+    padding-bottom: 6px;
 
     text-align: center;
     font-weight: 700;
@@ -670,12 +672,8 @@ ADMIN DASHBOARD TITLE — FINAL FIX
 
     pointer-events: none; /* title won’t block buttons */
   }
-
-  .topbar:has(.admin-dashboard-title) {
-    margin-bottom: 8px;   /* reduce gap below title */
-    padding-bottom: 6px;  /* tighten vertical spacing */
-  }
 }
+
 
 
 
