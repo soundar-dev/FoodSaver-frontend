@@ -785,7 +785,7 @@ ADMIN SURPLUS – MOBILE FIX
 ========================= */
   body.admin-surplus-page .admin-topbar {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto  minmax(0, 1fr) auto;
     grid-template-rows: auto auto;
     gap: 12px;
     padding: 14px 12px;
@@ -800,24 +800,23 @@ ADMIN SURPLUS – MOBILE FIX
     font-size: 22px;
   }
 
-  /* TITLE CENTER */
-  body.admin-surplus-page .admin-topbar h1 {
-    grid-column: 2;
-    grid-row: 1;
-    margin: 0;
-    text-align: center;
-    font-size: 1.35rem;
-    font-weight: 700;
-    line-height: 1.25;
-  }
-
-  /* ✅ ADMIN SURPLUS — FORCE TITLE SINGLE LINE */
+ 
+/* ✅ ADMIN SURPLUS — TITLE (SINGLE LINE, SAFE) */
 body.admin-surplus-page .admin-topbar h1 {
-  white-space: nowrap;       /* ❗ prevent line break */
-  overflow: hidden;
-  text-overflow: ellipsis;   /* safe if screen is very small */
-}
+  grid-column: 2;
+  grid-row: 1;
 
+  margin: 0;
+  text-align: center;
+
+  font-size: 1.2rem;        /* slightly reduced to fit */
+  font-weight: 700;
+  line-height: 1.25;
+
+  white-space: nowrap;      /* force single line */
+  overflow: hidden;         /* required for ellipsis */
+  text-overflow: ellipsis;  /* only if screen is too small */
+}
   /* 🌙 + ADMIN RIGHT */
   body.admin-surplus-page .admin-right {
     grid-column: 3;
@@ -838,6 +837,7 @@ body.admin-surplus-page .admin-topbar h1 {
     width: 100%;
   }
 }
+
 
 
 
