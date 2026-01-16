@@ -639,47 +639,48 @@ SETTINGS TOPBAR – MOBILE
 
  
 
-  .dashboard-topbar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 14px 0;
-  }
-
-  /* ☰ hamburger */
-  .dashboard-topbar .menu-btn {
-    position: absolute;
-    left: 12px;
-    font-size: 22px;
-    z-index: 900;
-  }
-
-  /* 🌙 + NGO */
-  .dashboard-topbar .top-actions {
-    position: absolute;
-    right: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  /* =========================
-ADMIN DASHBOARD — FINAL FIX (ONLY DASHBOARD)
+ /* =========================
+ADMIN DASHBOARD — FINAL STABLE FIX
+(Affects ONLY dashboard)
 ========================= */
+  .dashboard-topbar {
+    position: relative;
+  }
 
   .dashboard-topbar .top-title {
-    white-space: nowrap;        /* stay in one line */
-    overflow: visible;          /* no clipping */
-    text-overflow: unset;       /* no dots */
+    white-space: nowrap;     /* single line */
+    overflow: visible;       /* no clipping */
+    text-overflow: unset;    /* no dots */
 
     font-size: clamp(1rem, 4.5vw, 1.35rem);
     font-weight: 700;
     line-height: 1.25;
 
-    max-width: calc(100% - 140px); /* space for ☰ + 🌙 + MKM */
-    margin: 0 auto;
+    /* 🔑 REAL FIX */
+    padding-left: 48px;   /* space for ☰ */
+    padding-right: 140px; /* space for +Add + 🌙 + avatar */
+
+    margin: 0;
     text-align: center;
   }
+
+  /* lock positions */
+  .dashboard-topbar .menu-btn {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  .dashboard-topbar .top-right {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
 
 
  /* =========================
@@ -826,6 +827,7 @@ body.admin-surplus-page .admin-topbar h1 {
     width: 100%;
   }
 }
+
 
 
 
