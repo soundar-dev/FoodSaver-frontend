@@ -666,7 +666,7 @@ SETTINGS TOPBAR – MOBILE
   /* =========================
 ADMIN DASHBOARD — FINAL FIX (ONLY DASHBOARD)
 ========================= */
-@media (max-width: 768px) {
+
   .dashboard-topbar .top-title {
     white-space: nowrap;        /* stay in one line */
     overflow: visible;          /* no clipping */
@@ -680,7 +680,7 @@ ADMIN DASHBOARD — FINAL FIX (ONLY DASHBOARD)
     margin: 0 auto;
     text-align: center;
   }
-}
+
 
  /* =========================
 USER AVAILABLE FOOD – MOBILE HEADER (FIXED)
@@ -826,6 +826,7 @@ body.admin-surplus-page .admin-topbar h1 {
     width: 100%;
   }
 }
+
 
 
 
