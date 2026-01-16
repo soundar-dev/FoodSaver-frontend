@@ -663,28 +663,25 @@ SETTINGS TOPBAR – MOBILE
     align-items: center;
     gap: 10px;
   }
-
-  /* Title stays centered */
   /* =========================
-ADMIN DASHBOARD — TITLE (NO DOTS, SINGLE LINE)
+ADMIN DASHBOARD — FINAL FIX (ONLY DASHBOARD)
 ========================= */
-  .dashboard-topbar h1 {
-    white-space: nowrap;     /* never go to next line */
-    overflow: visible;       /* ❌ NO hiding */
-    text-overflow: unset;    /* ❌ NO ellipsis */
+@media (max-width: 768px) {
+  .dashboard-topbar .top-title {
+    white-space: nowrap;        /* stay in one line */
+    overflow: visible;          /* no clipping */
+    text-overflow: unset;       /* no dots */
 
-    font-size: clamp(0.95rem, 4.2vw, 1.35rem);
+    font-size: clamp(1rem, 4.5vw, 1.35rem);
     font-weight: 700;
     line-height: 1.25;
 
-    max-width: calc(100% - 120px); /* space for ☰ + 🌙 + badge */
+    max-width: calc(100% - 140px); /* space for ☰ + 🌙 + MKM */
     margin: 0 auto;
     text-align: center;
   }
+}
 
-  /* =========================
-USER SURPLUS – MOBILE FIX (TITLE KEPT)
-========================= */
  /* =========================
 USER AVAILABLE FOOD – MOBILE HEADER (FIXED)
 ========================= */
@@ -751,25 +748,7 @@ ADMIN TOPBAR – MOBILE FIX
   }
 
  /* ===== ADMIN TOPBAR TITLE – FINAL FIX ===== */
-.admin-topbar h1,
-.topbar .top-title {
-  margin: 0;
-  padding: 0;
 
-  text-align: center;
-  font-size: 1.35rem;
-
-  font-weight: 700;          /* 🔥 makes it bold & strong */
-  color: #0f172a;            /* 🔥 darker text (light mode) */
-
-  line-height: 1.3;
-  max-width: 65%;
-  margin-inline: auto;
-
-  white-space: normal;
-  word-break: keep-all;
-  overflow-wrap: break-word;
-}
 
 /* Dark mode fix */
 body.dark .admin-topbar h1,
@@ -847,6 +826,7 @@ body.admin-surplus-page .admin-topbar h1 {
     width: 100%;
   }
 }
+
 
 
 
