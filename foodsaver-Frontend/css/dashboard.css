@@ -654,33 +654,23 @@ ADMIN SURPLUS PAGE ONLY
 ADMIN DASHBOARD TITLE — FINAL FIX
 (ONLY this page)
 ========================= */
-  .topbar .admin-dashboard-title {
-     position: absolute; 
-     left: 50%; 
-     transform: translateX(-50%); 
-     margin-bottom: 8px;   
-    margin-top: 8px;   
-    padding-bottom: 20px;
-     padding-top: 20px;
+  body.admin-dashboard-page .topbar .admin-dashboard-title {
+    position: static;        /* 🔑 put it back into flow */
+    transform: none;
+    margin: 0 auto 16px;     /* spacing below title */
+    padding: 0;
 
-    text-align: center;
-    font-weight: 700;
-    line-height: 1.25;
-
-    white-space: normal;
-    word-break: normal;
-
-    font-size: clamp(1.1rem, 4.8vw, 1.4rem);
-
-    pointer-events: none; /* title won’t block buttons */
+    pointer-events: none;
   }
   body.admin-dashboard-page .content {
-    padding-top: 100px;
+    padding-top: 24px;   /* same as other pages */
   }
+
   body.admin-dashboard-page .topbar {
-    margin-bottom: 100px;
+    margin-bottom: 24px; /* consistent spacing */
   }
 }
+
 
 
 
