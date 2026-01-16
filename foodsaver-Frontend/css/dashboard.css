@@ -408,7 +408,7 @@ MOBILE UI – FINAL & CLEAN
   } */
 
   /* Hamburger – left */
-  .menu-btn {
+  /* .menu-btn {
   display: block;
   position: absolute;
   left: 12px;
@@ -416,8 +416,8 @@ MOBILE UI – FINAL & CLEAN
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 900; /* LOWER than sidebar */
-}
+  z-index: 900; /* LOWER than sidebar 
+} */
 
   /* .topbar .primary-btn {
     display: none;
@@ -441,14 +441,14 @@ MOBILE UI – FINAL & CLEAN
 }
 
   /* Title – center */
-  .topbar h1 {
+  /* .topbar h1 {
     margin: 0;
     font-size: 1.35rem;
     text-align: center;
     padding:0 72px;
     transform: translateX(-45px);
     pointer-events: auto;
-  }
+  } */
 
   
 
@@ -928,6 +928,7 @@ ADMIN SURPLUS – MOBILE FIX
     width: 100%;
   
 }
+
 
 
 
