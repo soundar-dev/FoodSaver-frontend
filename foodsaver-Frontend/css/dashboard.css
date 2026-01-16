@@ -376,28 +376,44 @@ GLOBAL DESKTOP RESET (SAFE)
 
  /* =========================
 
-/* =========================
-ADMIN SURPLUS — DESKTOP RIGHT ORDER (LOCKED)
-[ Search ] → [ 🌙 ] → [ ADMIN ]
-========================= */
-  body.admin-surplus-page .topbar .top-actions {
+/* ==================================================
+ADMIN SURPLUS — DESKTOP TOPBAR FIX (CSS ONLY)
+No HTML change | No side effects
+================================================== */
+  body.admin-surplus-page .topbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    column-gap: 16px;
+  }
+
+  /* ☰ menu */
+  body.admin-surplus-page .menu-btn {
+    grid-column: 1;
+  }
+
+  /* TITLE */
+  body.admin-surplus-page .top-title {
+    grid-column: 2;
+    justify-self: start;
+    margin: 0;
+  }
+
+  /* 🔍 SEARCH — FIRST ON RIGHT */
+  body.admin-surplus-page .admin-search {
+    grid-column: 3;
+  }
+
+  body.admin-surplus-page .admin-search input {
+    min-width: 220px;
+  }
+
+  /* 🌙 + ADMIN — LAST */
+  body.admin-surplus-page .top-right {
+    grid-column: 4;
     display: flex;
     align-items: center;
-  }
-
-  body.admin-surplus-page .topbar input[type="search"] {
-    order: 1;
-    margin-right: 12px;
-  }
-
-  body.admin-surplus-page #themeToggle {
-    order: 2;
-    margin-right: 12px;
-  }
-
-  body.admin-surplus-page .avatar {
-    order: 3;
-    margin-left: auto;
+    gap: 12px;
   }
 }
 
@@ -700,6 +716,7 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     margin-bottom: 24px; /* consistent spacing */
   }
 }
+
 
 
 
