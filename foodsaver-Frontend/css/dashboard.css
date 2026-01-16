@@ -364,10 +364,20 @@ CARD & PANEL HOVER EFFECTS
     justify-content: space-between;
   }
 
+  /* =========================
+GLOBAL DESKTOP RESET (SAFE)
+========================= */
+  .topbar input[type="search"],
+  #themeToggle,
+  .avatar {
+    order: initial;
+    margin: 0;
+  }
+
  /* =========================
 
-DESKTOP — SURPLUS PAGE ONLY
-Right side order fix
+/* =========================
+ADMIN SURPLUS — DESKTOP RIGHT ORDER (LOCKED)
 [ Search ] → [ 🌙 ] → [ ADMIN ]
 ========================= */
   body.admin-surplus-page .topbar .top-actions {
@@ -690,6 +700,7 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     margin-bottom: 24px; /* consistent spacing */
   }
 }
+
 
 
 
