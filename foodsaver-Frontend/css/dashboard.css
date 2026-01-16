@@ -655,13 +655,12 @@ ADMIN DASHBOARD TITLE — FINAL FIX
 (ONLY this page)
 ========================= */
   .topbar .admin-dashboard-title {
-    /* position: absolute; */
-    /* left: 50%; */
-    /* transform: translateX(-50%); */
+     position: absolute; 
+     left: 50%; 
+     transform: translateX(-50%); 
      margin-bottom: 8px;   
     padding-bottom: 20px;
      padding-top: 20px;
-    max-width: calc(100% - 160px);
 
     text-align: center;
     font-weight: 700;
@@ -675,6 +674,7 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     pointer-events: none; /* title won’t block buttons */
   }
 }
+
 
 
 
