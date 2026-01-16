@@ -399,13 +399,13 @@ MOBILE UI – FINAL & CLEAN
     z-index:900;
   }*/
 
-  .topbar {
+  /* .topbar {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 12px 0;
-  }
+  } */
 
   /* Hamburger – left */
   .menu-btn {
@@ -419,9 +419,9 @@ MOBILE UI – FINAL & CLEAN
   z-index: 900; /* LOWER than sidebar */
 }
 
-  .topbar .primary-btn {
+  /* .topbar .primary-btn {
     display: none;
-  }
+  } */
 
 
   /* Right controls – theme + admin */
@@ -928,6 +928,7 @@ ADMIN SURPLUS – MOBILE FIX
     width: 100%;
   
 }
+
 
 
 
