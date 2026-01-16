@@ -354,33 +354,12 @@ CARD & PANEL HOVER EFFECTS
 } */
 
 @media (min-width: 769px) {
-  /* .topbar h1,
-  .topbar .top-title {
-    width: auto;        
-    text-align: left;   
-    margin: 0;
-  }
-  .topbar {
-    justify-content: space-between;
-  }
-
-  /* =========================
-GLOBAL DESKTOP RESET (SAFE)
-========================= */
-  /* .topbar input[type="search"],
-  #themeToggle,
-  .avatar {
-    order: initial;
-    margin: 0;
-  } */ 
-
- /* =========================
-
-/* ==================================================
+ /* ==================================================
 ADMIN SURPLUS — DESKTOP TOPBAR FIX (CSS ONLY)
-No HTML change | No side effects
+Scoped by .admin-search (no HTML changes)
 ================================================== */
-  body.admin-surplus-page .topbar {
+  /* Activate grid ONLY when admin-search exists */
+  .topbar:has(.admin-search) {
     display: grid;
     grid-template-columns: auto 1fr auto auto;
     align-items: center;
@@ -388,28 +367,28 @@ No HTML change | No side effects
   }
 
   /* ☰ menu */
-  body.admin-surplus-page .menu-btn {
+  .topbar:has(.admin-search) .menu-btn {
     grid-column: 1;
   }
 
   /* TITLE */
-  body.admin-surplus-page .top-title {
+  .topbar:has(.admin-search) .top-title {
     grid-column: 2;
     justify-self: start;
     margin: 0;
   }
 
   /* 🔍 SEARCH — FIRST ON RIGHT */
-  body.admin-surplus-page .admin-search {
+  .topbar:has(.admin-search) .admin-search {
     grid-column: 3;
   }
 
-  body.admin-surplus-page .admin-search input {
+  .topbar:has(.admin-search) .admin-search input {
     min-width: 220px;
   }
 
-  /* 🌙 + ADMIN — LAST */
-  body.admin-surplus-page .top-right {
+  /* 🌙 THEME + ADMIN — LAST */
+  .topbar:has(.admin-search) .top-right {
     grid-column: 4;
     display: flex;
     align-items: center;
@@ -716,6 +695,7 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     margin-bottom: 24px; /* consistent spacing */
   }
 }
+
 
 
 
