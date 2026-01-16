@@ -813,15 +813,53 @@ USER AVAILABLE FOOD – MOBILE HEADER (FIXED)
     width: 100%;
   }
 
-
-  
-
   .user-available-page .topbar,
   .user-available-page .topbar h1,
   .user-available-page .top-actions {
     all: unset;
   }
+
+  /* =========================
+ADMIN TOPBAR – MOBILE FIX
+========================= */
+  .admin-topbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ☰ LEFT */
+  .admin-topbar .menu-btn {
+    position: absolute;
+    left: 12px;
+    font-size: 22px;
+  }
+
+  /* TITLE PERFECT CENTER */
+  .admin-topbar h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 1.35rem;
+    transform: none;      /* 🔥 kills old hacks */
+    padding: 0;           /* 🔥 removes side bias */
+  }
+
+  /* RIGHT ACTIONS */
+  .admin-topbar .top-right {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Hide Add Surplus in header on mobile (optional but clean) */
+  .admin-topbar .primary-btn {
+    display: none;
+  }
 }
+
 
 
 
