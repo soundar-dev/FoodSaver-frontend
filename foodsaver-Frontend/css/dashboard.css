@@ -674,7 +674,11 @@ ADMIN DASHBOARD TITLE — FINAL FIX
 
     pointer-events: none; /* title won’t block buttons */
   }
+  body.admin-dashboard-page .content {
+    padding-top: 36px;
+  }
 }
+
 
 
 
