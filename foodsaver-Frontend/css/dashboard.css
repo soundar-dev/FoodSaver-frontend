@@ -677,7 +677,11 @@ ADMIN DASHBOARD TITLE — FINAL FIX
   body.admin-dashboard-page .content {
     padding-top: 100px;
   }
+  body.admin-dashboard-page .topbar {
+    margin-bottom: 28px;
+  }
 }
+
 
 
 
