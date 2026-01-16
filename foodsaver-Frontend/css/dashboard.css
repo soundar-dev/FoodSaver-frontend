@@ -382,9 +382,33 @@ CARD & PANEL HOVER EFFECTS
     justify-content: space-between;
   }
 
+ /* =========================
+DESKTOP TOPBAR — RIGHT ORDER (FINAL)
+[ Search ] → [ Theme ] → [ ADMIN ]
+CSS ONLY — NO HTML CHANGES
+========================= */
   .topbar .top-right,
   .topbar .top-actions {
-    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  /* 🔍 Search — FIRST */
+  .topbar input[type="search"] {
+    order: 1;
+    margin-right: 12px;
+  }
+
+  /* 🌙 Theme — SECOND */
+  #themeToggle {
+    order: 2;
+    margin-right: 12px;
+  }
+
+  /* 👤 ADMIN — LAST (hard right) */
+  .topbar .avatar {
+    order: 3;
+    margin-left: auto; /* pushes to extreme right */
   }
 }
 
@@ -687,6 +711,7 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     margin-bottom: 24px; /* consistent spacing */
   }
 }
+
 
 
 
