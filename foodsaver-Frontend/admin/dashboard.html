@@ -133,8 +133,8 @@ if (email) {
 
       adminAvatar.textContent =
         data.organizationName.substring(0, 3).toUpperCase();
-      welcomeText.textContent =
-        `Welcome, ${data.organizationName}`;
+      welcomeText.innerHTML =
+        `Welcome<br> ${data.organizationName}`;
     });
 }
 </script>
@@ -156,6 +156,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
