@@ -811,6 +811,13 @@ ADMIN SURPLUS – MOBILE FIX
     line-height: 1.25;
   }
 
+  /* ✅ ADMIN SURPLUS — FORCE TITLE SINGLE LINE */
+body.admin-surplus-page .admin-topbar h1 {
+  white-space: nowrap;       /* ❗ prevent line break */
+  overflow: hidden;
+  text-overflow: ellipsis;   /* safe if screen is very small */
+}
+
   /* 🌙 + ADMIN RIGHT */
   body.admin-surplus-page .admin-right {
     grid-column: 3;
@@ -831,6 +838,7 @@ ADMIN SURPLUS – MOBILE FIX
     width: 100%;
   }
 }
+
 
 
 
