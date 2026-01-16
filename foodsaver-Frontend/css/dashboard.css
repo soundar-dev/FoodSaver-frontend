@@ -409,6 +409,10 @@ MOBILE UI – FINAL & CLEAN
     font-size: 16px;
   }
 
+  .topbar .primary-btn{
+    display: none;
+  }
+
   /* ===== Cards ===== */
   .cards,
   .surplus-grid {
@@ -646,4 +650,5 @@ ADMIN SURPLUS PAGE ONLY
   body.admin-surplus-page .admin-search input {
     width: 100%;
 }
+
 
