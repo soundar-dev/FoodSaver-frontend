@@ -838,17 +838,23 @@ ADMIN TOPBAR – MOBILE FIX
 
   /* TITLE PERFECT CENTER */
 
-  .admin-topbar h1 {
-    margin: 0 auto;
-    text-align: center;
-    font-size: 1.3rem;
-    line-height: 1.25;
+  /* ===== ADMIN TITLE – AUTO ALIGN ===== */
+.top-title {
+  display: flex;
+  flex-direction: column;   /* stack lines */
+  align-items: center;      /* center horizontally */
+  justify-content: center;
+  text-align: center;
 
-    /* KEY FIX */
-    max-width: calc(100% - 140px); /* space for ☰ + 🌙 + avatar */
-    white-space: normal;           /* allow wrap */
-    word-break: break-word;        /* prevent overflow */
-  }
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.25;
+
+  max-width: 70%;           /* prevents clash with buttons */
+  margin: 0 auto;
+  white-space: normal;      /* allow wrapping */
+  word-break: break-word;  /* safe for long names */
+}
 
   /* RIGHT ACTIONS */
   .admin-topbar .top-right {
@@ -864,6 +870,7 @@ ADMIN TOPBAR – MOBILE FIX
     display: none;
   }
 }
+
 
 
 
