@@ -114,7 +114,7 @@ TOPBAR – DESKTOP (LOCKED)
 
 
 /* Center title properly */
-.topbar h1 {
+.topbar  .top-title{
   text-align: center;
   font-size: 24px;
 }
@@ -674,6 +674,7 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     pointer-events: none; /* title won’t block buttons */
   }
 }
+
 
 
 
