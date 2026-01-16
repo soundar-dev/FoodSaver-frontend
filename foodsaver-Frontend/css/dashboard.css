@@ -354,10 +354,10 @@ CARD & PANEL HOVER EFFECTS
 }
 
 @media (min-width: 769px) {
-  .topbar h1,
+  /* .topbar h1,
   .topbar .top-title {
-    width: auto;        /* 🔑 critical */
-    text-align: left;   /* restore flex logic */
+    width: auto;        
+    text-align: left;   
     margin: 0;
   }
   .topbar {
@@ -367,12 +367,12 @@ CARD & PANEL HOVER EFFECTS
   /* =========================
 GLOBAL DESKTOP RESET (SAFE)
 ========================= */
-  .topbar input[type="search"],
+  /* .topbar input[type="search"],
   #themeToggle,
   .avatar {
     order: initial;
     margin: 0;
-  }
+  } */ */
 
  /* =========================
 
@@ -716,6 +716,7 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     margin-bottom: 24px; /* consistent spacing */
   }
 }
+
 
 
 
