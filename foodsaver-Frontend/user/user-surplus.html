@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
-<body class="user-available-page">
+<body>
 
 <script>
 /* 🔐 USER ACCESS GUARD */
@@ -34,14 +34,17 @@ if (!token || role?.toUpperCase() !== "USER") {
   </aside>
 
   <main class="content">
-    <header class="user-topbar">
+    <header class="topbar">
       <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-      <h1>Available Food</h1>
-      <div class="user-top-actions">
+      <h1 class="top-title">Available Food</h1>
+      <div class="top-right">
         <button id="themeToggle" class="outline-btn">🌙</button>
         <div class="avatar">NGO</div>
       </div>
+
+      <div class="admin-search">
        <input type="search" id="searchInput" placeholder="Search food / location / hall" />
+      </div> 
     </header>
 
     <section class="surplus-grid" id="grid"></section>
@@ -210,6 +213,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
