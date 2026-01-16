@@ -660,6 +660,7 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     transform: translateX(-50%);
      margin-bottom: 8px;   
     padding-bottom: 6px;
+     padding-top: 6px;
 
     text-align: center;
     font-weight: 700;
@@ -673,6 +674,7 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     pointer-events: none; /* title won’t block buttons */
   }
 }
+
 
 
 
