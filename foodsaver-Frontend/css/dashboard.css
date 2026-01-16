@@ -387,28 +387,29 @@ DESKTOP TOPBAR — RIGHT ORDER (FINAL)
 [ Search ] → [ Theme ] → [ ADMIN ]
 CSS ONLY — NO HTML CHANGES
 ========================= */
-  .topbar .top-right,
-  .topbar .top-actions {
+  /* =========================
+DESKTOP — SURPLUS PAGE ONLY
+Right side order fix
+[ Search ] → [ 🌙 ] → [ ADMIN ]
+========================= */
+  body.admin-surplus-page .topbar .top-actions {
     display: flex;
     align-items: center;
   }
 
-  /* 🔍 Search — FIRST */
-  .topbar input[type="search"] {
+  body.admin-surplus-page .topbar input[type="search"] {
     order: 1;
     margin-right: 12px;
   }
 
-  /* 🌙 Theme — SECOND */
-  #themeToggle {
+  body.admin-surplus-page #themeToggle {
     order: 2;
     margin-right: 12px;
   }
 
-  /* 👤 ADMIN — LAST (hard right) */
-  .topbar .avatar {
+  body.admin-surplus-page .avatar {
     order: 3;
-    margin-left: auto; /* pushes to extreme right */
+    margin-left: auto;
   }
 }
 
@@ -711,6 +712,7 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     margin-bottom: 24px; /* consistent spacing */
   }
 }
+
 
 
 
