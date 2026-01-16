@@ -655,19 +655,19 @@ ADMIN DASHBOARD TITLE — FINAL FIX
 (ONLY this page)
 ========================= */
   .topbar .admin-dashboard-title {
-    display: block;
-    max-width: 65%;          /* 🔑 THIS IS THE KEY */
-    margin: 0 auto;
-
     text-align: center;
     font-weight: 700;
     line-height: 1.25;
 
-    white-space: normal;     /* allow wrap */
-    word-break: normal;      /* no character split */
-    overflow-wrap: normal;   /* no forced breaks */
+    white-space: normal;
+    word-break: normal;
+
+    max-width: 70%;
+    margin: 0 auto;
 
     font-size: clamp(1.1rem, 4.8vw, 1.4rem);
   }
+
 }
+
 
