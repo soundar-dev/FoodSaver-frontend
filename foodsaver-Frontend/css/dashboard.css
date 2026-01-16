@@ -665,11 +665,21 @@ SETTINGS TOPBAR – MOBILE
   }
 
   /* Title stays centered */
+  /* =========================
+ADMIN DASHBOARD — TITLE (NO DOTS, SINGLE LINE)
+========================= */
   .dashboard-topbar h1 {
-    margin: 0;
-    font-size: 1.35rem;
+    white-space: nowrap;     /* never go to next line */
+    overflow: visible;       /* ❌ NO hiding */
+    text-overflow: unset;    /* ❌ NO ellipsis */
+
+    font-size: clamp(0.95rem, 4.2vw, 1.35rem);
+    font-weight: 700;
+    line-height: 1.25;
+
+    max-width: calc(100% - 120px); /* space for ☰ + 🌙 + badge */
+    margin: 0 auto;
     text-align: center;
-    /* white-space: nowrap; */
   }
 
   /* =========================
@@ -837,6 +847,7 @@ body.admin-surplus-page .admin-topbar h1 {
     width: 100%;
   }
 }
+
 
 
 
