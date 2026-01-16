@@ -651,4 +651,17 @@ ADMIN SURPLUS PAGE ONLY
     width: 100%;
 }
 
+  
+  .admin-dashboard-title {
+    white-space: normal;        /* allow wrapping */
+    line-height: 1.25;
+    text-align: center;
+
+    /* still respect header layout */
+    padding-left: 40px;
+    padding-right: 120px;
+  }
+}
+
+
 
