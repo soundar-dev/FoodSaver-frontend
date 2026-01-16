@@ -396,7 +396,8 @@ MOBILE UI – FINAL & CLEAN
   /* Hamburger – left */
 .dashboard-topbar .menu-btn,
 .settings-topbar .menu-btn,
-.admin-topbar .menu-btn {
+.admin-topbar .menu-btn
+.user-topbar .menu-btn  {
   display: block;
 }
   
@@ -836,6 +837,7 @@ body.admin-surplus-page .admin-topbar h1 {
     width: 100%;
   }
 }
+
 
 
 
