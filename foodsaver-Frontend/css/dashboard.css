@@ -653,11 +653,13 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     margin-bottom: 24px; /* consistent spacing */
   }
 }
+}
 
 /* ==================================================
 FORCE DESKTOP SURPLUS TOPBAR — FINAL OVERRIDE
 (ONLY surplus page, ONLY desktop)
 ================================================== */
+@media (max-width: 769px) {
   body.admin-surplus-page header.topbar {
     display: grid !important;
     grid-template-columns: auto max-content 1fr max-content max-content !important;
@@ -690,7 +692,7 @@ FORCE DESKTOP SURPLUS TOPBAR — FINAL OVERRIDE
     align-items: center;
     gap: 12px;
   }
-}
+
 
 
 
