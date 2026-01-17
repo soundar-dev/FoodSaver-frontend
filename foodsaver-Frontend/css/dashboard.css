@@ -653,7 +653,6 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     margin-bottom: 24px; /* consistent spacing */
   }
 }
-}
 
 /* ==================================================
 FORCE DESKTOP SURPLUS TOPBAR — FINAL OVERRIDE
@@ -692,6 +691,8 @@ FORCE DESKTOP SURPLUS TOPBAR — FINAL OVERRIDE
     align-items: center;
     gap: 12px;
   }
+} 
+
 
 
 
