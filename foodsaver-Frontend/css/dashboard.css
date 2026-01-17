@@ -657,35 +657,35 @@ ADMIN DASHBOARD TITLE — FINAL FIX
 /* ==================================================
 FORCE DESKTOP SURPLUS TOPBAR — FINAL OVERRIDE
 (ONLY surplus page, ONLY desktop)
-================================================== */
-/* ===== DESKTOP SURPLUS TOPBAR — FINAL SAFE FIX ===== */
+/* ===== DESKTOP SURPLUS TOPBAR — FINAL ORDER FIX ===== */
 @media (min-width: 769px) {
 
   body.admin-surplus-page .topbar {
-    display: flex;              /* 🔑 restore flex */
+    display: flex;
     align-items: center;
-    justify-content: space-between;
   }
 
-  /* ❌ no hamburger on desktop */
+  /* ❌ remove hamburger on desktop */
   body.admin-surplus-page .menu-btn {
     display: none;
   }
 
-  /* Title spacing */
+  /* Title on the left */
   body.admin-surplus-page .top-title {
-    margin-left: 0;
+    order: 1;
+    margin-right: auto;   /* push everything else to right */
     text-align: left;
   }
 
-  /* Search positioning */
+  /* 🔍 Search — first on right */
   body.admin-surplus-page .admin-search {
-    margin-left: auto;
+    order: 2;
     margin-right: 16px;
   }
 
-  /* Theme + Admin */
+  /* 🌙 + ADMIN — pinned to right */
   body.admin-surplus-page .top-right {
+    order: 3;
     display: flex;
     align-items: center;
     gap: 12px;
