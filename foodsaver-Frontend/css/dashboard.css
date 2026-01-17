@@ -685,7 +685,7 @@ FORCE DESKTOP SURPLUS TOPBAR — FINAL OVERRIDE
 
   /* 🌙 + ADMIN — pinned to right */
   body.admin-surplus-page .top-right {
-    order: 3;
+    order: 4;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -698,6 +698,7 @@ body.admin-surplus-page .desktop-add-btn {
 }
 
 }
+
 
 
 
