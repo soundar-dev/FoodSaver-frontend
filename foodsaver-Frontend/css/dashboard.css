@@ -679,7 +679,7 @@ FORCE DESKTOP SURPLUS TOPBAR — FINAL OVERRIDE
 
   /* 🔍 Search — first on right */
   body.admin-surplus-page .admin-search {
-    order: 2;
+    order: 3;
     margin-right: 16px;
   }
 
@@ -690,7 +690,15 @@ FORCE DESKTOP SURPLUS TOPBAR — FINAL OVERRIDE
     align-items: center;
     gap: 12px;
   }
+
+  /* show desktop add button */
+body.admin-surplus-page .desktop-add-btn {
+  order: 2;              /* before search */
+  margin-right: 12px;
 }
+
+}
+
 
 
 
