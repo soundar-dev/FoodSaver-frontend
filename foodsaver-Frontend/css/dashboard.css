@@ -645,52 +645,42 @@ MOBILE TOPBAR — SAFE & UNIFIED
 ADMIN SURPLUS PAGE ONLY
 (Search below title)
 ========================= */
-/* ==================================================
-SURPLUS PAGE — DESKTOP TOPBAR (ISOLATED FIX)
-No HTML change | No global impact
-================================================== */
   body.admin-surplus-page .topbar {
     display: grid;
-    grid-template-columns: auto max-content 1fr max-content max-content;
-    align-items: center;
-    column-gap: 16px;
-
-    /* kill flex behavior ONLY here */
-    justify-content: unset;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    row-gap: 12px;
   }
 
-  /* ☰ menu */
   body.admin-surplus-page .menu-btn {
-    display: block;
     grid-column: 1;
+    grid-row: 1;
+    position: static;
   }
 
-  /* TITLE */
+  body.admin-surplus-page h1,
   body.admin-surplus-page .top-title {
     grid-column: 2;
-    margin-left: 12px;
-    text-align: left;
-
-    /* override global centering */
-    width: auto;
+    grid-row: 1;
+    padding: 0;
   }
 
-  /* SEARCH */
+  body.admin-surplus-page .top-right,
+  body.admin-surplus-page .admin-right {
+    grid-column: 3;
+    grid-row: 1;
+    position: static;
+    justify-self: end;
+  }
+
   body.admin-surplus-page .admin-search {
-    grid-column: 4;
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 
   body.admin-surplus-page .admin-search input {
-    min-width: 220px;
-  }
-
-  /* 🌙 + ADMIN (keep flex ONLY here) */
-  body.admin-surplus-page .top-right {
-    grid-column: 5;
-    display: flex;          /* 👈 explicit override */
-    align-items: center;
-    gap: 12px;
-  }
+    width: 100%;
+}
 
   /* =========================
 ADMIN DASHBOARD TITLE — FINAL FIX
@@ -712,33 +702,3 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     margin-bottom: 24px; /* consistent spacing */
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
