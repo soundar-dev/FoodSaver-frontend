@@ -355,20 +355,24 @@ CARD & PANEL HOVER EFFECTS
 
 @media (min-width: 769px) {
 /* ==================================================
-ADMIN SURPLUS — DESKTOP TOPBAR (WORKING FIX)
-NO HTML CHANGE | NO SIDE EFFECTS
+SURPLUS PAGE — DESKTOP TOPBAR (ISOLATED FIX)
+No HTML change | No global impact
 ================================================== */
+
   body.admin-surplus-page .topbar {
     display: grid;
     grid-template-columns: auto max-content 1fr max-content max-content;
     align-items: center;
     column-gap: 16px;
+
+    /* kill flex behavior ONLY here */
+    justify-content: unset;
   }
 
   /* ☰ menu */
   body.admin-surplus-page .menu-btn {
-    grid-column: 1;
     display: block;
+    grid-column: 1;
   }
 
   /* TITLE */
@@ -376,16 +380,12 @@ NO HTML CHANGE | NO SIDE EFFECTS
     grid-column: 2;
     margin-left: 12px;
     text-align: left;
-    white-space: nowrap;
+
+    /* override global centering */
+    width: auto;
   }
 
-  /* spacer */
-  body.admin-surplus-page .topbar::after {
-    content: "";
-    grid-column: 3;
-  }
-
-  /* 🔍 Search */
+  /* SEARCH */
   body.admin-surplus-page .admin-search {
     grid-column: 4;
   }
@@ -394,10 +394,10 @@ NO HTML CHANGE | NO SIDE EFFECTS
     min-width: 220px;
   }
 
-  /* 🌙 + ADMIN */
+  /* 🌙 + ADMIN (keep flex ONLY here) */
   body.admin-surplus-page .top-right {
     grid-column: 5;
-    display: flex;
+    display: flex;          /* 👈 explicit override */
     align-items: center;
     gap: 12px;
   }
@@ -702,3 +702,4 @@ ADMIN DASHBOARD TITLE — FINAL FIX
     margin-bottom: 24px; /* consistent spacing */
   }
 }
+
