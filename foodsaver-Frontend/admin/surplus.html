@@ -10,7 +10,7 @@
 <body class="admin-surplus-page">
 
 <script>
-/* 🔐 ADMIN GUARD */
+/*  ADMIN GUARD */
 const token = localStorage.getItem("token");
 const role  = localStorage.getItem("role");
 
@@ -63,7 +63,7 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
           <button class="primary-btn" type="button" onclick="toggleForm()">+ Add Surplus</button>
       </div>
 
-    <!-- ✅ ADD SURPLUS FORM -->
+    <!--  ADD SURPLUS FORM -->
     <section id="surplusForm" class="panel hidden">
       <h3>Add Surplus Food</h3>
 
@@ -81,7 +81,7 @@ if (!token || role?.toUpperCase() !== "ADMIN") {
       </div>
     </section>
 
-    <!-- ✅ SURPLUS CARDS -->
+    <!--  SURPLUS CARDS -->
     <section class="surplus-grid" id="adminGrid"></section>
 
   </main>
@@ -126,17 +126,17 @@ function submitSurplus() {
   .then(res => {
     if (!res.ok) throw new Error("Add failed");
 
-    // ✅ CLEAR INPUTS
+    // CLEAR INPUTS
     foodNameEl.value = "";
     locationEl.value = "";
     quantityEl.value = "";
     expiryEl.value = "";
     mobileEl.value = "";
 
-    // ✅ HIDE FORM
+    // HIDE FORM
     document.getElementById("surplusForm").classList.add("hidden");
 
-    // ✅ REFRESH CARDS
+    // REFRESH CARDS
     loadSurplus();
   })
   .catch(err => console.error("Add surplus error:", err));
@@ -150,7 +150,7 @@ function loadSurplus() {
     .then(data => {
       adminData = data;
       renderAdmin(adminData);
-      enableSearch(adminData); // ✅ attach search once
+      enableSearch(adminData); //  attach search once
     })
     .catch(err => console.error("Load error:", err));
 }
@@ -171,8 +171,8 @@ function enableSearch(sourceData) {
   item.foodName?.toLowerCase().includes(q) ||
   item.location?.toLowerCase().includes(q) ||
   item.status?.toLowerCase().includes(q) ||
-  item.postedBy?.toLowerCase().includes(q) ||      // 🏢 who posted
-  item.acceptedByOrg?.toLowerCase().includes(q)       // 🤝 who accepted
+  item.postedBy?.toLowerCase().includes(q) ||      //  who posted
+  item.acceptedByOrg?.toLowerCase().includes(q)       //  who accepted
 );
 
     renderAdmin(filtered);
@@ -290,6 +290,7 @@ function toggleSidebar() {
 <script src="../js/app.js"></script>
 </body>
 </html>
+
 
 
 
